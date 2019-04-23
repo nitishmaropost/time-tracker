@@ -28,6 +28,7 @@ class SplashFragment : MPBaseFragment() {
         showToolbar(false)
         //setupTransitionAnimation()
         launchView()
+
     }
 
     /**
