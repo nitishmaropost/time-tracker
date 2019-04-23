@@ -51,6 +51,14 @@ open class MPBaseFragment : Fragment() {
         }
     }
 
+
+    /**
+     * Pop all fragments from stack
+     */
+    fun popAllFragments() {
+        (activity as MPBaseActivity).popAllFragments()
+    }
+
     /**
      * Remove fragment with tag in back stack
      */

@@ -5,15 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.maropost.timetracker.R
-import kotlinx.android.synthetic.main.register_fragment.*
+import kotlinx.android.synthetic.main.login_fragment.*
 
-class RegisterFragment : MPBaseFragment() {
+class LoginFragment : MPBaseFragment() {
 
     private var mView : View?= null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if(mView == null)
-            mView = inflater.inflate(R.layout.register_fragment, container, false)
+            mView = inflater.inflate(R.layout.login_fragment, container, false)
         return mView
     }
 
@@ -25,12 +25,10 @@ class RegisterFragment : MPBaseFragment() {
     }
 
     private fun initialiseListeners() {
-        txtLogin.setOnClickListener{
-            popCurrentFragment()
+        txtRegister.setOnClickListener{
+            replaceFragment(RegisterFragment(),true)
         }
         relDone.setOnClickListener{
-            popAllFragments()
-            replaceFragment(SplashFragment(),true)
         }
     }
 }
