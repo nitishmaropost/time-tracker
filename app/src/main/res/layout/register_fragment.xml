@@ -6,6 +6,7 @@
         android:background="@color/user_profile_grey">
 
     <ImageView
+            android:id="@+id/ivTopOrange"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/orange_circle"
@@ -35,6 +36,7 @@
             android:layout_marginBottom="@dimen/dp_105_negative"/>
 
     <LinearLayout
+            android:id="@+id/lnrCredentials"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -45,27 +47,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_55"
                 android:background="@drawable/rect_right_upper_corner_round"
-                android:drawablePadding="@dimen/dp_5"
+                android:drawablePadding="@dimen/dp_10"
+                android:drawableStart="@drawable/ic_person_24dp"
                 android:layout_gravity="center_vertical"
                 android:textSize="@dimen/sp_15"
                 android:textColor="@color/colorBlack"
                 android:singleLine="true"
                 android:maxLength="30"
                 android:textColorHint="@color/colorBlack"
-                android:paddingStart="@dimen/dp_80"
+                android:paddingStart="@dimen/dp_20"
                 android:paddingEnd="@dimen/dp_20"
                 android:hint="@string/username"/>
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_55"
                 android:background="@drawable/rectangle"
-                android:drawablePadding="@dimen/dp_5"
+                android:drawablePadding="@dimen/dp_10"
+                android:drawableStart="@drawable/ic_lock_24dp"
                 android:layout_gravity="center_vertical"
                 android:textSize="@dimen/sp_15"
                 android:maxLength="30"
                 android:textColor="@color/colorBlack"
                 android:textColorHint="@color/colorBlack"
-                android:paddingStart="@dimen/dp_80"
+                android:paddingStart="@dimen/dp_20"
                 android:paddingEnd="@dimen/dp_20"
                 android:inputType="textPassword"
                 android:singleLine="true"
@@ -74,13 +78,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_55"
                 android:background="@drawable/rect_right_bottom_corner_round"
-                android:drawablePadding="@dimen/dp_5"
+                android:drawablePadding="@dimen/dp_10"
+                android:drawableStart="@drawable/ic_mail_black_24dp"
                 android:maxLength="30"
                 android:textColor="@color/colorBlack"
                 android:textColorHint="@color/colorBlack"
                 android:layout_gravity="center_vertical"
                 android:textSize="@dimen/sp_15"
-                android:paddingStart="@dimen/dp_80"
+                android:paddingStart="@dimen/dp_20"
                 android:paddingEnd="@dimen/dp_20"
                 android:singleLine="true"
                 android:hint="@string/email_address"/>
@@ -99,5 +104,32 @@
                 android:layout_centerInParent="true"
                 android:src="@drawable/ic_check_24dp"/>
     </RelativeLayout>
+
+    <TextView
+            android:id="@+id/txtRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvLogin"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/dp_40"
+            android:text="@string/register"
+            android:textSize="@dimen/sp_32"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"/>
+
+    <TextView
+            android:id="@+id/tvLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivTopOrange"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:layout_alignParentEnd="true"
+            android:text="@string/login"
+            android:paddingTop="@dimen/dp_12"
+            android:paddingBottom="@dimen/dp_12"
+            android:paddingStart="@dimen/dp_25"
+            android:paddingEnd="@dimen/dp_15"
+            android:textColor="@color/colorBlack"
+            android:background="@drawable/semicircle"/>
 
 </RelativeLayout>
