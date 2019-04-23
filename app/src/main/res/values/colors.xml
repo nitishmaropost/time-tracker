@@ -3,4 +3,43 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="colorLightGrey">#20656565</color>
+
+
+    <!-- 1st Gradient color -->
+    <color name="colorPurple_A400">#D500F9</color>
+    <color name="colorPurple_900">#4A148C</color>
+
+    <!-- 2nd Gradient color -->
+    <color name="colorAmber_A400">#FFC400</color>
+    <color name="colorAmber_900">#FF6F00</color>
+
+    <!-- 3rd Gradient color -->
+    <color name="colorGreen_A400">#00E676</color>
+    <color name="colorGreen_900">#1B5E20</color>
+
+    <!-- 4th Gradient color -->
+    <color name="colorRed_A400">#FF1744</color>
+    <color name="colorRed_900">#B71C1C</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="toolbar_blue">#00C0F8</color>
+
+    <!-- Shades of gray -->
+    <color name="light_gray">#959595</color>
+    <color name="gray_font">#B5B5B5</color>
+    <color name="gray_font_header">#797979</color>
+    <color name="dark_gray">#515862</color>
+    <color name="greyish_black">#353535</color>
+    <color name="divider_line">#D8D8D8</color>
+    <color name="recycler_row">#F7F7F7</color>
+    <color name="tab_selected">#8C8C8C</color>
+    <color name="tab_unselected">#F3F3F3</color>
+    <color name="switch_track">#F0F0F0</color>
+    <color name="switch_thumb">#D7D7D7</color>
+    <color name="user_profile_grey">#FAFAFA</color>
+    <color name="navigation_gray">#E4E4E4</color>
+    <color name="bottom_navigation_gray">#55585E</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#FFFFFF</color>
 </resources>
