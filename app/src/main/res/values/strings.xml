@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">TimeTracker</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_calendar">Calendar View</string>
+    <string name="nav_create_pin">Create Pin</string>
+    <string name="nav_logout">Logout</string>
+    <string name="simple_fragment_transition">simple_fragment_transition</string>
 </resources>
