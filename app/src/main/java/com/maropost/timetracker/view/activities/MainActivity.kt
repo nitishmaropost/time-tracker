@@ -1,6 +1,7 @@
 package com.maropost.timetracker.view.activities
 
 import android.os.Bundle
+import com.maropost.timetracker.view.fragments.RegisterFragment
 import com.maropost.timetracker.view.fragments.SplashFragment
 
 class MainActivity : MPBaseActivity() {
@@ -14,7 +15,8 @@ class MainActivity : MPBaseActivity() {
      * Display the initial splash view
      */
     private fun launchInitialView() {
-        replaceFragment(SplashFragment(),false)
+        //replaceFragment(SplashFragment(),false)
+        replaceFragment(RegisterFragment(),true)
     }
 }
 
