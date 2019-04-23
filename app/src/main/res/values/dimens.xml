@@ -3,6 +3,8 @@
     <!--Dimensions in dp-->
     <dimen name="dp_0">0dp</dimen>
     <dimen name="dp_1">1dp</dimen>
+    <dimen name="dp_2">2dp</dimen>
+    <dimen name="dp_3">3dp</dimen>
     <dimen name="dp_4">4dp</dimen>
     <dimen name="dp_5">5dp</dimen>
     <dimen name="dp_8">8dp</dimen>
@@ -14,12 +16,22 @@
     <dimen name="dp_18">18dp</dimen>
     <dimen name="dp_20">20dp</dimen>
     <dimen name="dp_30">30dp</dimen>
+    <dimen name="dp_30_negative">-30dp</dimen>
     <dimen name="dp_32">32dp</dimen>
     <dimen name="dp_36">36dp</dimen>
+    <dimen name="dp_38">38dp</dimen>
     <dimen name="dp_40">40dp</dimen>
+    <dimen name="dp_40_negative">-40dp</dimen>
     <dimen name="dp_50">50dp</dimen>
+    <dimen name="dp_55">55dp</dimen>
+    <dimen name="dp_57">57dp</dimen>
+    <dimen name="dp_70_negative">-70dp</dimen>
     <dimen name="dp_80">80dp</dimen>
+    <dimen name="dp_105_negative">-105dp</dimen>
+    <dimen name="dp_100_negative">-100dp</dimen>
     <dimen name="dp_170">170dp</dimen>
+    <dimen name="dp_180">180dp</dimen>
+    <dimen name="dp_190">190dp</dimen>
     <dimen name="speech_bubble_corners">10dp</dimen>
     <dimen name="speech_bubble_corners_plus_tail">15dp</dimen>
     <dimen name="speech_bubble_spacing">5dp</dimen>

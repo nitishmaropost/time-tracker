@@ -14,7 +14,7 @@ class MainActivity : MPBaseActivity() {
      * Display the initial splash view
      */
     private fun launchInitialView() {
-        //replaceFragment(LoginFragment(),false)
+        replaceFragment(SplashFragment(),false)
     }
 }
 

@@ -3,106 +3,101 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#fafafa">
+        android:background="@color/user_profile_grey">
 
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/orange_circle"
-            android:layout_marginStart="-70dp"
-            android:layout_marginTop="-40dp"/>
-
+            android:layout_marginStart="@dimen/dp_70_negative"
+            android:layout_marginTop="@dimen/dp_40_negative"/>
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/red_circle"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="-105dp"/>
-
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_105_negative"/>
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/orange_circle"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="-100dp"
-            android:layout_marginBottom="-30dp"/>
-
+            android:layout_marginEnd="@dimen/dp_100_negative"
+            android:layout_marginBottom="@dimen/dp_30_negative"/>
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/red_circle"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="-105dp"/>
-
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_105_negative"/>
 
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true"
-            android:layout_marginEnd="36dp"
+            android:layout_marginEnd="@dimen/dp_36"
             android:orientation="vertical">
         <EditText
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/dp_55"
                 android:background="@drawable/rect_right_upper_corner_round"
-                android:drawablePadding="5dp"
+                android:drawablePadding="@dimen/dp_5"
                 android:layout_gravity="center_vertical"
-                android:textSize="15sp"
-                android:textColor="#000000"
+                android:textSize="@dimen/sp_15"
+                android:textColor="@color/colorBlack"
                 android:singleLine="true"
-                android:textColorHint="#000000"
-                android:paddingLeft="80dp"
-                android:hint="Username"/>
-
+                android:maxLength="30"
+                android:textColorHint="@color/colorBlack"
+                android:paddingStart="@dimen/dp_80"
+                android:paddingEnd="@dimen/dp_20"
+                android:hint="@string/username"/>
         <EditText
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/dp_55"
                 android:background="@drawable/rectangle"
-                android:drawablePadding="5dp"
+                android:drawablePadding="@dimen/dp_5"
                 android:layout_gravity="center_vertical"
-                android:textSize="15sp"
-                android:textColor="#000000"
-                android:textColorHint="#000000"
-                android:paddingLeft="80dp"
-                android:hint="Password"/>
-
+                android:textSize="@dimen/sp_15"
+                android:maxLength="30"
+                android:textColor="@color/colorBlack"
+                android:textColorHint="@color/colorBlack"
+                android:paddingStart="@dimen/dp_80"
+                android:paddingEnd="@dimen/dp_20"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:hint="@string/password"/>
         <EditText
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/dp_55"
                 android:background="@drawable/rect_right_bottom_corner_round"
-                android:drawablePadding="5dp"
-                android:textColor="#000000"
-                android:textColorHint="#000000"
+                android:drawablePadding="@dimen/dp_5"
+                android:maxLength="30"
+                android:textColor="@color/colorBlack"
+                android:textColorHint="@color/colorBlack"
                 android:layout_gravity="center_vertical"
-                android:textSize="15sp"
-                android:paddingLeft="80dp"
-                android:hint="Email Address"/>
-
+                android:textSize="@dimen/sp_15"
+                android:paddingStart="@dimen/dp_80"
+                android:paddingEnd="@dimen/dp_20"
+                android:singleLine="true"
+                android:hint="@string/email_address"/>
     </LinearLayout>
 
-
     <RelativeLayout
-            android:layout_width="52dp"
-            android:layout_height="52dp"
+            android:layout_width="@dimen/dp_57"
+            android:layout_height="@dimen/dp_57"
             android:background="@drawable/circle"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="@dimen/dp_12"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true">
-
-
         <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
                 android:layout_centerInParent="true"
                 android:src="@drawable/ic_check_24dp"/>
-
     </RelativeLayout>
-
-
-
 
 </RelativeLayout>

@@ -41,5 +41,10 @@
     <color name="navigation_gray">#E4E4E4</color>
     <color name="bottom_navigation_gray">#55585E</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorShadow">#80DCDCDC</color>
+    <color name="colorOrange">#ff530e</color>
+    <color name="colorBlue">#02c0f4</color>
+    <color name="colorRed">#e92c0c</color>
+
     <color name="colorWhite">#FFFFFF</color>
 </resources>
