@@ -36,7 +36,7 @@
     <color name="tab_selected">#8C8C8C</color>
     <color name="tab_unselected">#F3F3F3</color>
     <color name="switch_track">#F0F0F0</color>
-    <color name="switch_thumb">#D7D7D7</color>
+    <color name="forgot_password">#D7D7D7</color>
     <color name="user_profile_grey">#FAFAFA</color>
     <color name="navigation_gray">#E4E4E4</color>
     <color name="bottom_navigation_gray">#55585E</color>

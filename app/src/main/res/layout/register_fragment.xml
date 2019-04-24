@@ -132,7 +132,7 @@
             android:paddingBottom="@dimen/dp_12"
             android:paddingStart="@dimen/dp_25"
             android:paddingEnd="@dimen/dp_15"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorWhite"
             android:background="@drawable/semicircle"
     />
 
