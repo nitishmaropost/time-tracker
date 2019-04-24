@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
-import com.maropost.enterprise.pojomodels.MenuChildModel
-import com.maropost.enterprise.pojomodels.MenuModel
+import com.maropost.timetracker.pojomodels.MenuChildModel
+import com.maropost.timetracker.pojomodels.MenuModel
 import com.maropost.timetracker.R
 import kotlinx.android.synthetic.main.list_group_child.view.*
 import kotlinx.android.synthetic.main.list_group_header.view.*

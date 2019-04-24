@@ -15,8 +15,8 @@ import android.view.Gravity
 import android.view.Menu
 import android.view.View
 import android.widget.Button
-import com.maropost.enterprise.pojomodels.MenuChildModel
-import com.maropost.enterprise.pojomodels.MenuModel
+import com.maropost.timetracker.pojomodels.MenuChildModel
+import com.maropost.timetracker.pojomodels.MenuModel
 import com.maropost.timetracker.R
 import com.maropost.timetracker.view.adapters.ExpandableListAdapter
 import com.miguelcatalan.materialsearchview.MaterialSearchView

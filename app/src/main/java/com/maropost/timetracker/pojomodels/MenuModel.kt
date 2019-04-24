@@ -1,4 +1,4 @@
-package com.maropost.enterprise.pojomodels
+package com.maropost.timetracker.pojomodels
 
 class MenuModel{
 
