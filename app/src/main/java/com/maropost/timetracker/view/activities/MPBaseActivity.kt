@@ -273,12 +273,7 @@ open class MPBaseActivity : AppCompatActivity(),DuoMenuView.OnMenuClickListener 
         toolbarTitle.text = title
     }
 
-    /**
-     * Set Toolbar left icon
-     */
-    fun setToolbarLeftIcon(resId: Int) {
-        imgToolbarLeftIcon.setImageResource(resId)
-    }
+
 
     /**
      * Set Toolbar right icon
@@ -287,12 +282,7 @@ open class MPBaseActivity : AppCompatActivity(),DuoMenuView.OnMenuClickListener 
         imgToolbarRightIcon.setImageResource(resId)
     }
 
-    /**
-     * Set Toolbar filter icon
-     */
-    fun setToolbarFilterIcon(resId: Int) {
-        imgToolbarFilterIcon.setImageResource(resId)
-    }
+
 
     /**
      * Control navigation drawer visibility

@@ -78,12 +78,7 @@ open class MPBaseFragment : Fragment() {
         (activity as MPBaseActivity).toolbarTitle.text = title
     }
 
-    /**
-     * Set Toolbar left icon
-     */
-    fun setToolbarLeftIcon(resId: Int){
-        (activity as MPBaseActivity).setToolbarLeftIcon(resId)
-    }
+
 
     /**
      * Set Toolbar right icon
@@ -92,12 +87,7 @@ open class MPBaseFragment : Fragment() {
         (activity as MPBaseActivity).setToolbarRightIcon(resId)
     }
 
-    /**
-     * Set Toolbar filter icon
-     */
-    fun setToolbarFilterIcon(resId: Int){
-        (activity as MPBaseActivity).setToolbarFilterIcon(resId)
-    }
+
 
     /**
      * Control navigation drawer visibility
