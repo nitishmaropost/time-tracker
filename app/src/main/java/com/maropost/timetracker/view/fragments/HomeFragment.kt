@@ -30,6 +30,7 @@ class HomeFragment : MPBaseFragment() {
         showNavigationDrawer(true)
         showToolbar(true)
         setToolbarRightIcon(R.drawable.ic_calendar)
+        setTitle(resources.getString(R.string.app_name))
         setCalendarListener()
         demoBarChart()
     }
@@ -74,5 +75,6 @@ class HomeFragment : MPBaseFragment() {
         bardataset.setColors(ColorTemplate.LIBERTY_COLORS)
         barchart.setData(data)
         barchart.setDrawGridBackground(false)
+
     }
 }

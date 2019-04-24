@@ -15,7 +15,7 @@
           android:bottom="@dimen/dp_3">
         <shape
                 android:shape="rectangle">
-            <solid android:color="@android:color/white"/>
+            <solid android:color="@color/colorOrange"/>
             <corners android:bottomLeftRadius="@dimen/dp_38"
                      android:topLeftRadius="@dimen/dp_38"/>
         </shape>

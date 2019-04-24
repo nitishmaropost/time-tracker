@@ -4,52 +4,107 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
-import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.content.ContextCompat
-import android.support.v4.view.ViewCompat
-import android.support.v4.widget.DrawerLayout
-import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
 import android.view.Menu
 import android.view.View
 import android.widget.Button
-import com.maropost.enterprise.pojomodels.MenuChildModel
-import com.maropost.enterprise.pojomodels.MenuModel
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import com.google.android.material.snackbar.Snackbar
 import com.maropost.timetracker.R
-import com.maropost.timetracker.view.adapters.ExpandableListAdapter
+import com.maropost.timetracker.view.adapters.MenuAdapter
+import com.miguelcatalan.materialsearchview.MaterialSearchView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout
+import nl.psdcompany.duonavigationdrawer.views.DuoMenuView
+import nl.psdcompany.duonavigationdrawer.widgets.DuoDrawerToggle
+import java.util.*
 
 
-open class MPBaseActivity : AppCompatActivity() {
-    private var expandableListAdapter: ExpandableListAdapter? = null
-    private var listDataHeader = ArrayList<MenuModel>()
-    private var listDataChild = HashMap<String, ArrayList<MenuChildModel>>()
-    private var listChild = ArrayList<MenuChildModel>()
+open class MPBaseActivity : AppCompatActivity(),DuoMenuView.OnMenuClickListener {
+
+    private var mMenuAdapter: MenuAdapter? = null
+    private var mTitles = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        mTitles = ArrayList(Arrays.asList(*resources.getStringArray(R.array.menuOptions)))
         setSupportActionBar(toolbar)
-        setupNavigationView()
+        setSearchListener()
+        // Handle menu actions
+        handleMenu()
+        // Handle drawer actions
+        handleDrawer()
+    }
+
+    /**
+     * Navigation menu items
+     */
+    private fun handleMenu() {
+        mMenuAdapter = MenuAdapter(mTitles)
+        mDuoMenuView.setOnMenuClickListener(this)
+        mDuoMenuView.adapter = mMenuAdapter
     }
 
     /**
      * Navigation settings and data placement
      */
-    private fun setupNavigationView() {
-        mDrawerLayout.setStatusBarBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary))
-        prepareMenuData()
-        populateExpandableList()
-        initialiseNavigationItemItemListeners()
-        imgToolbarLeftIcon.setOnClickListener { mDrawerLayout.openDrawer(Gravity.START) }
+    private fun handleDrawer() {
+        val duoDrawerToggle = DuoDrawerToggle(
+            this,
+            mDrawerLayout,
+            toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
+        mDrawerLayout.setDrawerListener(duoDrawerToggle)
+        duoDrawerToggle.syncState()
     }
 
+    /**
+     * Listen to search events
+     */
+    private fun setSearchListener() {
+        search_view.setVoiceSearch(false)
 
+        /**
+         * Detect on text changed for search view
+         */
+        search_view.setOnQueryTextListener(object : MaterialSearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
+            }
+        })
+
+        /**
+         * Detect search view opened or closed
+         */
+        search_view.setOnSearchViewListener(object : MaterialSearchView.SearchViewListener {
+            override fun onSearchViewShown() {
+            }
+
+            override fun onSearchViewClosed() {
+            }
+        })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        val item = menu!!.findItem(R.id.action_search)
+        search_view.setMenuItem(item)
+        return true
+    }
 
     enum class TransactionType {
         REPLACE, ADD
@@ -65,7 +120,17 @@ open class MPBaseActivity : AppCompatActivity() {
             toolbarFrame.visibility = View.GONE
     }
 
-
+    /**
+     * Intercept on back click
+     */
+    override fun onBackPressed() {
+        if (getFragmentCount() == 1 && !search_view.isSearchOpen)
+            finish()
+        else if (search_view.isSearchOpen)
+            search_view.closeSearch()
+        else
+            super.onBackPressed()
+    }
 
     /**
      * Get back stack fragment count
@@ -96,7 +161,7 @@ open class MPBaseActivity : AppCompatActivity() {
      * Display permission denied alert
      */
     fun showPermissionSnackAlert() {
-        val snackBar = Snackbar.make(mainContainer, "Access denied!!", Snackbar.LENGTH_SHORT)
+     /*   val snackBar = Snackbar.make(mainContainer, "Access denied!!", Snackbar.LENGTH_SHORT)
                 .setAction("t") {
                     val i = Intent()
                     i.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
@@ -109,8 +174,8 @@ open class MPBaseActivity : AppCompatActivity() {
                 }
         snackBar.show()
         val snackView = snackBar.view
-        val action = snackView.findViewById(android.support.design.R.id.snackbar_action) as Button
-        action.text = ""
+        val action = snackView.findViewById(R.id.snackbar_action) as Button
+        action.text = ""*/
     }
 
     /**
@@ -229,15 +294,14 @@ open class MPBaseActivity : AppCompatActivity() {
         imgToolbarFilterIcon.setImageResource(resId)
     }
 
-
     /**
      * Control navigation drawer visibility
      */
     fun showNavigationDrawer(allow: Boolean) {
         if (allow)
-            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+            mDrawerLayout.setDrawerLockMode(DuoDrawerLayout.LOCK_MODE_UNLOCKED)
         else
-            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+            mDrawerLayout.setDrawerLockMode(DuoDrawerLayout.LOCK_MODE_LOCKED_CLOSED)
     }
 
     /**
@@ -249,82 +313,15 @@ open class MPBaseActivity : AppCompatActivity() {
         else progressBar.visibility = View.GONE
     }
 
-    /*
-    * Expandable List menu */
-    private fun prepareMenuData() {
-        // Adding Group data
-        val groupMenuFirst = MenuModel()
-        groupMenuFirst.groupName = getString(R.string.nav_home)
-        groupMenuFirst.groupIcon = R.drawable.ic_home
-        groupMenuFirst.groupArrowStatus = MenuModel.GroupStatus.COLLAPSED
-        listDataHeader.add(groupMenuFirst)
+  override fun onOptionClicked(position: Int, objectClicked: Any?) {
+      mMenuAdapter?.setViewSelected(position, true)
+      mDrawerLayout.closeDrawer()
+  }
 
-        val groupMenuSecond = MenuModel()
-        groupMenuSecond.groupName = getString(R.string.nav_calendar)
-        groupMenuSecond.groupIcon = R.drawable.ic_calendar_o
-        groupMenuSecond.groupArrowStatus = MenuModel.GroupStatus.COLLAPSED
-        listDataHeader.add(groupMenuSecond)
-
-        val groupMenuThird = MenuModel()
-        groupMenuThird.groupName = getString(R.string.nav_logout)
-        groupMenuThird.groupIcon = R.drawable.ic_sign_out
-        groupMenuThird.groupArrowStatus = MenuModel.GroupStatus.COLLAPSED
-        listDataHeader.add(groupMenuThird)
+    override fun onHeaderClicked() {
     }
 
-    /**
-     * Populate list items in Navigation expandable list view
-     */
-    private fun populateExpandableList() {
-        expandableListAdapter = ExpandableListAdapter(this, listDataHeader, listDataChild)
-        expandableListView?.setAdapter(expandableListAdapter)
-    }
-
-    /**
-     * Navigation item group click events
-     */
-    private fun initialiseNavigationItemItemListeners() {
-        // List view Group click listener
-        expandableListView.setOnGroupClickListener { parent, view, groupPosition, id ->
-            false
-        }
-
-        // List view Group expanded listener
-        expandableListView.setOnGroupExpandListener { groupPosition ->
-
-            val menuModel = listDataHeader[groupPosition]
-            menuModel.groupArrowStatus = MenuModel.GroupStatus.EXPANDED
-            listDataHeader[groupPosition] = menuModel
-            expandableListAdapter?.notifyDataSetChanged()
-        }
-
-        // List view Group collapsed listener
-        expandableListView.setOnGroupCollapseListener { groupPosition ->
-
-            val menuModel = listDataHeader[groupPosition]
-            menuModel.groupArrowStatus = MenuModel.GroupStatus.COLLAPSED
-            listDataHeader[groupPosition] = menuModel
-            expandableListAdapter?.notifyDataSetChanged()
-        }
-
-        //ListView on group click listener
-        expandableListView.setOnGroupClickListener { parent, v, groupPosition, id ->
-            when (listDataHeader[groupPosition].groupName!!) {
-                /*resources.getString(R.string.nav_home) -> {
-                    SharedPreferenceHelper.getInstance()
-                            .getSharedPreference(MaropostApplication.getInstance(),
-                                    "PREF")
-                    replaceFragment(LoginFragment(), false)
-                }
-                resources.getString(R.string.nav_calendar) -> {
-                    mDrawerLayout.closeDrawer(Gravity.START)
-                    replaceFragment(HomeFragment(), true)
-                }
-                resources.getString(R.string.nav_logout) -> {
-                }*/
-            }
-            false
-        }
+    override fun onFooterClicked() {
     }
 }
 
