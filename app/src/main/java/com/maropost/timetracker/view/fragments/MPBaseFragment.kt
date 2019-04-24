@@ -1,7 +1,7 @@
 package com.maropost.timetracker.view.fragments
 
-import android.support.v4.app.Fragment
 import android.view.View
+import androidx.fragment.app.Fragment
 import com.maropost.timetracker.view.activities.MPBaseActivity
 import kotlinx.android.synthetic.main.app_bar_main.*
 

@@ -20,5 +20,6 @@ class HomeFragment : MPBaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         showNavigationDrawer(true)
         showToolbar(true)
+        setTitle(resources.getString(R.string.app_name))
     }
 }
