@@ -19,7 +19,6 @@ import com.maropost.enterprise.pojomodels.MenuChildModel
 import com.maropost.enterprise.pojomodels.MenuModel
 import com.maropost.timetracker.R
 import com.maropost.timetracker.view.adapters.ExpandableListAdapter
-import com.miguelcatalan.materialsearchview.MaterialSearchView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -36,7 +35,6 @@ open class MPBaseActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setSupportActionBar(toolbar)
-        setSearchListener()
         setupNavigationView()
     }
 
@@ -51,43 +49,7 @@ open class MPBaseActivity : AppCompatActivity() {
         imgToolbarLeftIcon.setOnClickListener { mDrawerLayout.openDrawer(Gravity.START) }
     }
 
-    /**
-     * Listen to search events
-     */
-    private fun setSearchListener() {
-        search_view.setVoiceSearch(false)
 
-        /**
-         * Detect on text changed for search view
-         */
-        search_view.setOnQueryTextListener(object : MaterialSearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String): Boolean {
-                return false
-            }
-        })
-
-        /**
-         * Detect search view opened or closed
-         */
-        search_view.setOnSearchViewListener(object : MaterialSearchView.SearchViewListener {
-            override fun onSearchViewShown() {
-            }
-
-            override fun onSearchViewClosed() {
-            }
-        })
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        val item = menu!!.findItem(R.id.action_search)
-        search_view.setMenuItem(item)
-        return true
-    }
 
     enum class TransactionType {
         REPLACE, ADD
@@ -103,17 +65,7 @@ open class MPBaseActivity : AppCompatActivity() {
             toolbarFrame.visibility = View.GONE
     }
 
-    /**
-     * Intercept on back click
-     */
-    override fun onBackPressed() {
-        if (getFragmentCount() == 1 && !search_view.isSearchOpen)
-            finish()
-        else if (search_view.isSearchOpen)
-            search_view.closeSearch()
-        else
-            super.onBackPressed()
-    }
+
 
     /**
      * Get back stack fragment count

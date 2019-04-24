@@ -3,7 +3,6 @@ package com.maropost.timetracker.view.fragments
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.os.Handler
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

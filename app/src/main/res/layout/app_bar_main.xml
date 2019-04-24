@@ -68,15 +68,16 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.5"
+                            android:padding="@dimen/dp_10"
                             android:layout_marginEnd="@dimen/dp_5"
                             android:layout_marginRight="@dimen/dp_5"/>
                 </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.Toolbar>
-        <com.miguelcatalan.materialsearchview.MaterialSearchView
+        <!--<com.miguelcatalan.materialsearchview.MaterialSearchView
             android:id="@+id/search_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>-->
     </FrameLayout>
     <!--Container to inflate fragments-->
     <include layout="@layout/content_main" />
