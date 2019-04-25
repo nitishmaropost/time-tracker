@@ -57,11 +57,11 @@ class HomeFragment : MPBaseFragment() {
 
     fun demoBarChart() {
         val labels = ArrayList<String>()
-        labels.add("Friday")
-        labels.add("Thursday")
-        labels.add("Wednesday")
-        labels.add("Tuesday")
-        labels.add("Monday")
+        labels.add("Fri")
+        labels.add("Thu")
+        labels.add("Wed")
+        labels.add("Tue")
+        labels.add("Mon")
 
         var arrayList = ArrayList<BarEntry>()
         arrayList.add(BarEntry(9f, 0))
