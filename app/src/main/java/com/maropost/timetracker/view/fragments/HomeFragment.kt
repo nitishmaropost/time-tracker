@@ -4,8 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.utils.ColorTemplate
 import com.maropost.timetracker.R
 import kotlinx.android.synthetic.main.home_fragment.*
+import java.util.ArrayList
 
 class HomeFragment : MPBaseFragment() {
 
@@ -33,12 +38,12 @@ class HomeFragment : MPBaseFragment() {
     }
 
     fun demoBarChart() {
-   /*     val labels = ArrayList<String>()
-        labels.add("Friday")
-        labels.add("Thursday")
-        labels.add("Wednesday")
-        labels.add("Tuesday")
-        labels.add("Monday")
+        val labels = ArrayList<String>()
+        labels.add("Fri")
+        labels.add("Thu")
+        labels.add("Wed")
+        labels.add("Tue")
+        labels.add("Mon")
 
         var arrayList = ArrayList<BarEntry>()
         arrayList.add(BarEntry(9f, 0))
@@ -51,7 +56,7 @@ class HomeFragment : MPBaseFragment() {
         val data = BarData(labels, bardataset)
         bardataset.setColors(ColorTemplate.LIBERTY_COLORS)
         barchart.setData(data)
-        barchart.setDrawGridBackground(false)*/
+        barchart.setDrawGridBackground(false)
 
     }
 }
