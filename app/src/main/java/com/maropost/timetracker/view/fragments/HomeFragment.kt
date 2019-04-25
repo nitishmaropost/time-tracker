@@ -4,16 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import kotlinx.android.synthetic.main.app_bar_main.*
-import android.app.DatePickerDialog
 import com.maropost.timetracker.R
 import kotlinx.android.synthetic.main.home_fragment.*
-import java.util.*
-import com.github.mikephil.charting.data.BarEntry
-import com.github.mikephil.charting.utils.ColorTemplate
-import com.github.mikephil.charting.data.BarData
-import com.github.mikephil.charting.data.BarDataSet
 
 class HomeFragment : MPBaseFragment() {
 
@@ -29,34 +21,19 @@ class HomeFragment : MPBaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         showNavigationDrawer(true)
         showToolbar(true)
-        setToolbarRightIcon(R.drawable.ic_calendar)
-        setTitle(resources.getString(R.string.app_name))
-        setCalendarListener()
         demoBarChart()
     }
 
-    /*
-    Calendar icon listener
-    */
-    fun setCalendarListener(){
-        val imgToolbarCalendarIcon= activity!!.imgToolbarRightIcon as ImageView
-         imgToolbarCalendarIcon?.setOnClickListener(View.OnClickListener {
-             val c = Calendar.getInstance()
-             val year = c.get(Calendar.YEAR)
-             val month = c.get(Calendar.MONTH)
-             val day = c.get(Calendar.DAY_OF_MONTH)
-             val datePickerDialog = DatePickerDialog(activity,
-                 DatePickerDialog.OnDateSetListener { datePicker, year, month, day ->
-                     val selectedMonth: Int= month+1
-                     tvDay.text= "Day: "+day +"/"+selectedMonth+ "/"+ year
-                 }, year, month, day
-             )
-             datePickerDialog.show()
-         })
+    /**
+     * Set selected date from picker
+     */
+    fun setCalenderDetails(year: Int, month: Int, day: Int){
+        val selectedMonth: Int= month+1
+        tvDay.text= "Day: $day/$selectedMonth/$year"
     }
 
     fun demoBarChart() {
-        val labels = ArrayList<String>()
+   /*     val labels = ArrayList<String>()
         labels.add("Friday")
         labels.add("Thursday")
         labels.add("Wednesday")
@@ -74,7 +51,7 @@ class HomeFragment : MPBaseFragment() {
         val data = BarData(labels, bardataset)
         bardataset.setColors(ColorTemplate.LIBERTY_COLORS)
         barchart.setData(data)
-        barchart.setDrawGridBackground(false)
+        barchart.setDrawGridBackground(false)*/
 
     }
 }

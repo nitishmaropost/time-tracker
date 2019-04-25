@@ -28,7 +28,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorBlack"
                         android:text="@string/app_name"
-                        android:layout_centerHorizontal="true"
+                        android:paddingBottom="@dimen/dp_1"
                         android:textSize="@dimen/sp_18"/>
 
 
@@ -36,15 +36,13 @@
                         android:id="@+id/imgToolbarRightIcon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"/>
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/dp_12"
+                        android:src="@drawable/ic_calendar"/>
 
 
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
-        <com.miguelcatalan.materialsearchview.MaterialSearchView
-                android:id="@+id/search_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
     </FrameLayout>
     <!--Container to inflate fragments-->
     <include layout="@layout/content_main" />

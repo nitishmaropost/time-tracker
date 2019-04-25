@@ -1,22 +1,16 @@
 package com.maropost.timetracker.view.activities
 
-import android.content.Intent
-import android.net.Uri
+import android.app.DatePickerDialog
 import android.os.Bundle
-import android.provider.Settings
-import android.view.Gravity
-import android.view.Menu
 import android.view.View
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.snackbar.Snackbar
 import com.maropost.timetracker.R
+import com.maropost.timetracker.application.MyApplication
 import com.maropost.timetracker.view.adapters.MenuAdapter
-import com.miguelcatalan.materialsearchview.MaterialSearchView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -28,6 +22,10 @@ import java.util.*
 
 open class MPBaseActivity : AppCompatActivity(),DuoMenuView.OnMenuClickListener {
 
+    enum class TransactionType {
+        REPLACE, ADD
+    }
+
     private var mMenuAdapter: MenuAdapter? = null
     private var mTitles = ArrayList<String>()
 
@@ -37,12 +35,11 @@ open class MPBaseActivity : AppCompatActivity(),DuoMenuView.OnMenuClickListener 
 
         mTitles = ArrayList(Arrays.asList(*resources.getStringArray(R.array.menuOptions)))
         setSupportActionBar(toolbar)
-        setSearchListener()
-        // Handle menu actions
         handleMenu()
-        // Handle drawer actions
         handleDrawer()
+        initialiseListener()
     }
+
 
     /**
      * Navigation menu items
@@ -68,47 +65,23 @@ open class MPBaseActivity : AppCompatActivity(),DuoMenuView.OnMenuClickListener 
         duoDrawerToggle.syncState()
     }
 
-    /**
-     * Listen to search events
-     */
-    private fun setSearchListener() {
-        search_view.setVoiceSearch(false)
-
-        /**
-         * Detect on text changed for search view
-         */
-        search_view.setOnQueryTextListener(object : MaterialSearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String): Boolean {
-                return false
-            }
-        })
-
-        /**
-         * Detect search view opened or closed
-         */
-        search_view.setOnSearchViewListener(object : MaterialSearchView.SearchViewListener {
-            override fun onSearchViewShown() {
-            }
-
-            override fun onSearchViewClosed() {
-            }
-        })
+    private fun initialiseListener() {
+       imgToolbarRightIcon.setOnClickListener{
+           val c = Calendar.getInstance()
+           val year = c.get(Calendar.YEAR)
+           val month = c.get(Calendar.MONTH)
+           val day = c.get(Calendar.DAY_OF_MONTH)
+           val datePickerDialog = DatePickerDialog(this,
+               DatePickerDialog.OnDateSetListener { datePicker, year, month, day ->
+                   /*val selectedMonth: Int= month+1
+                   tvDay.text= "Day: "+day +"/"+selectedMonth+ "/"+ year*/
+                   MyApplication.getInstance().setCalenderDetails(year,month,day)
+               }, year, month, day
+           )
+           datePickerDialog.show()
+       }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        val item = menu!!.findItem(R.id.action_search)
-        search_view.setMenuItem(item)
-        return true
-    }
-
-    enum class TransactionType {
-        REPLACE, ADD
-    }
 
     /**
      * Set toolbar visibility
@@ -124,10 +97,8 @@ open class MPBaseActivity : AppCompatActivity(),DuoMenuView.OnMenuClickListener 
      * Intercept on back click
      */
     override fun onBackPressed() {
-        if (getFragmentCount() == 1 && !search_view.isSearchOpen)
+        if (getFragmentCount() == 1)
             finish()
-        else if (search_view.isSearchOpen)
-            search_view.closeSearch()
         else
             super.onBackPressed()
     }
@@ -266,25 +237,6 @@ open class MPBaseActivity : AppCompatActivity(),DuoMenuView.OnMenuClickListener 
     }
 
     /**
-     * Set toolbar title
-     */
-    fun setTitle(title: String) {
-        toolbar.title = ""
-        toolbarTitle.text = title
-    }
-
-
-
-    /**
-     * Set Toolbar right icon
-     */
-    fun setToolbarRightIcon(resId: Int) {
-        imgToolbarRightIcon.setImageResource(resId)
-    }
-
-
-
-    /**
      * Control navigation drawer visibility
      */
     fun showNavigationDrawer(allow: Boolean) {
@@ -313,6 +265,7 @@ open class MPBaseActivity : AppCompatActivity(),DuoMenuView.OnMenuClickListener 
 
     override fun onFooterClicked() {
     }
+
 }
 
 

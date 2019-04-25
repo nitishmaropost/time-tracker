@@ -70,24 +70,6 @@ open class MPBaseFragment : Fragment() {
         }
     }
 
-    /**
-     * Set toolbar title
-     */
-    fun setTitle(title: String) {
-        (activity as MPBaseActivity).toolbar.title = ""
-        (activity as MPBaseActivity).toolbarTitle.text = title
-    }
-
-
-
-    /**
-     * Set Toolbar right icon
-     */
-    fun setToolbarRightIcon(resId: Int){
-        (activity as MPBaseActivity).setToolbarRightIcon(resId)
-    }
-
-
 
     /**
      * Control navigation drawer visibility
