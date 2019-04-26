@@ -19,7 +19,7 @@ class MainActivity : MPBaseActivity() {
      */
     private fun launchInitialView() {
         //replaceFragment(SplashFragment(),false)
-        replaceFragment(LoginFragment(),true)
+        replaceFragment(HomeFragment(),true)
     }
 
     /**

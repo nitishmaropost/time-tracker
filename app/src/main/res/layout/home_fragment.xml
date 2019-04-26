@@ -23,27 +23,9 @@
                 android:padding="@dimen/dp_5"
                 android:text="kdcfljkcnnmn"
                 android:maxLines="1"
-                android:maxLength="40" />
-        <!--<androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardUseCompatPadding="true"
-                android:layout_gravity="center">
-            <TextView
-                    android:id="@+id/tvDay"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/sp_24"
-                    android:layout_marginTop="@dimen/dp_5"
-                    android:layout_marginBottom="@dimen/dp_5"
-                    android:textColor="@color/colorBlack"
-                    android:padding="@dimen/dp_5"
-                    android:text="kdcfljkcnnmn"
-                    android:maxLines="1"
-                    android:maxLength="40"/>
-        </androidx.cardview.widget.CardView>-->
+                android:maxLength="40"/>
 
-        <androidx.cardview.widget.CardView
+        <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="@dimen/dp_5"
@@ -103,7 +85,7 @@
 
                 </LinearLayout>
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </android.support.v7.widget.CardView>
 
         <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/barchart"
@@ -112,7 +94,7 @@
                 android:layout_height="300dp"
         android:layout_marginBottom="@dimen/dp_15"/>
 
-        <androidx.recyclerview.widget.RecyclerView
+        <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
     </LinearLayout>
