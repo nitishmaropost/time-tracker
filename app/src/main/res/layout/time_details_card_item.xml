@@ -10,7 +10,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardCornerRadius="@dimen/dp_5"
-            app:cardElevation="@dimen/dp_2"
+            app:cardElevation="@dimen/dp_5"
             app:cardUseCompatPadding="true">
 
         <LinearLayout
@@ -25,6 +25,7 @@
                     android:layout_margin="@dimen/dp_5">
 
                 <TextView
+                        android:id="@+id/tvInTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/sp_14"
@@ -46,6 +47,7 @@
                     android:layout_margin="@dimen/dp_5">
 
                 <TextView
+                        android:id="@+id/tvOutTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/sp_14"
