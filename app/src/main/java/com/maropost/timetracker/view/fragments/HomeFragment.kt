@@ -39,16 +39,16 @@ class HomeFragment : MPBaseFragment() {
 
     fun demoBarChart() {
         val labels = ArrayList<String>()
-        labels.add("Fri")
-        labels.add("Thu")
-        labels.add("Wed")
-        labels.add("Tue")
         labels.add("Mon")
+        labels.add("Tue")
+        labels.add("Wed")
+        labels.add("Thu")
+        labels.add("Fri")
 
         var arrayList = ArrayList<BarEntry>()
         arrayList.add(BarEntry(9f, 0))
         arrayList.add(BarEntry(8.5f, 1))
-        arrayList.add(BarEntry(8.8f, 2))
+        arrayList.add(BarEntry(2f, 2))
         arrayList.add(BarEntry(9f, 3))
         arrayList.add(BarEntry(7f, 4))
 
@@ -56,7 +56,10 @@ class HomeFragment : MPBaseFragment() {
         val data = BarData(labels, bardataset)
         bardataset.setColors(ColorTemplate.LIBERTY_COLORS)
         barchart.setData(data)
-        barchart.setDrawGridBackground(false)
+        barchart.xAxis.isEnabled = false
+        barchart.axisLeft.isEnabled = false
+        barchart.axisRight.isEnabled = false
+
 
     }
 }
