@@ -17,10 +17,6 @@ import kotlinx.android.synthetic.main.home_fragment.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-
-
-
-
 class HomeFragment : MPBaseFragment() {
 
     private var mView : View?= null
@@ -47,7 +43,7 @@ class HomeFragment : MPBaseFragment() {
     /**
      * Set current date on launch
      */
-    fun setCurrentDate(){
+    private fun setCurrentDate(){
         val c = Calendar.getInstance()
         val df = SimpleDateFormat("dd-MM-yyyy")
         val formattedDate = df.format(c.time)

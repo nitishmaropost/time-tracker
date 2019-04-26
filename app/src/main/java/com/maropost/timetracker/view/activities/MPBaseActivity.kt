@@ -14,7 +14,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.maropost.timetracker.R
@@ -40,7 +39,6 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
     enum class TransactionType {
         REPLACE, ADD
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,7 +69,6 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
         itemList.add(navigationItem3)
 
 
-
         recyclerNavigation.layoutManager = LinearLayoutManager(this)
         navigationAdapter = NavigationAdapter(itemList, this,this)
         recyclerNavigation.adapter = navigationAdapter
@@ -82,7 +79,7 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
         slidingRootNav = SlidingRootNavBuilder(this)
             .withToolbarMenuToggle(toolbar)
             .withMenuOpened(false)
-            .withContentClickableWhenMenuOpened(true)
+            .withContentClickableWhenMenuOpened(false)
             .withMenuLayout(R.layout.menu_left_drawer)
             .inject()
 

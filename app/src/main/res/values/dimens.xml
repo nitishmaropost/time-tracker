@@ -36,6 +36,7 @@
     <dimen name="dp_176">176dp</dimen>
     <dimen name="dp_180">180dp</dimen>
     <dimen name="dp_190">190dp</dimen>
+    <dimen name="dp_250">250dp</dimen>
     <dimen name="speech_bubble_corners">10dp</dimen>
     <dimen name="speech_bubble_corners_plus_tail">15dp</dimen>
     <dimen name="speech_bubble_spacing">5dp</dimen>
