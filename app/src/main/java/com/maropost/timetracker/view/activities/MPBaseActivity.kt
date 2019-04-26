@@ -17,9 +17,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.maropost.timetracker.R
 import com.maropost.timetracker.application.MyApplication
+import com.maropost.timetracker.view.fragments.MPBaseFragment
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder
+import com.yarolegovich.slidingrootnav.SlidingRootNavLayout
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.nav_header_main.*
 import java.util.*
 
 
@@ -37,7 +40,6 @@ open class MPBaseActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
         initialiseListener()
-        loadNavigationData()
 
          SlidingRootNavBuilder(this)
              .withToolbarMenuToggle(toolbar)
@@ -46,18 +48,20 @@ open class MPBaseActivity : AppCompatActivity() {
              .withSavedState(savedInstanceState)
              .withMenuLayout(R.layout.menu_left_drawer)
             .inject()
-
+        loadNavigationData()
     }
 
 
     private fun loadNavigationData(){
-
-       /* var image = findViewById<ImageView>(R.id.navigationImageView)
+/*
+        var image = findViewById<ImageView>(R.id.navigationImageView)*/
         Glide
             .with(this)
-            .load(R.drawable.default_profile_pic)
+            .load(R.drawable.ic_home)
             .apply(RequestOptions.circleCropTransform())
-            .into(image)*/
+            .placeholder(R.drawable.ic_login_user)
+            .error(R.drawable.ic_login_user)
+            .into(navigationImageView)
 
     }
 
