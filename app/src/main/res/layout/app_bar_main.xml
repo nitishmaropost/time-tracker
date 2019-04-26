@@ -3,15 +3,14 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@android:color/white"
-              android:orientation="vertical"
-              android:tag="@string/tag_content">
+              android:orientation="vertical">
 
     <FrameLayout
             android:id="@+id/toolbarFrame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.Toolbar
+        <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
@@ -28,8 +27,9 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorBlack"
                         android:text="@string/app_name"
-                        android:paddingBottom="@dimen/dp_1"
-                        android:textSize="@dimen/sp_18"/>
+                        android:paddingBottom="@dimen/dp_2"
+                        android:textSize="@dimen/sp_20"
+                       android:layout_centerVertical="true"/>
 
 
                 <ImageView
@@ -38,11 +38,12 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="@dimen/dp_12"
+                        android:layout_centerVertical="true"
                         android:src="@drawable/ic_calendar"/>
 
 
             </RelativeLayout>
-        </androidx.appcompat.widget.Toolbar>
+        </android.support.v7.widget.Toolbar>
     </FrameLayout>
     <!--Container to inflate fragments-->
     <include layout="@layout/content_main" />

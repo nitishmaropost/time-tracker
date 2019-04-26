@@ -1,69 +1,67 @@
 package com.maropost.timetracker.view.activities
 
 import android.app.DatePickerDialog
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
+import android.support.design.widget.Snackbar
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
+import android.support.v4.view.ViewCompat
+import android.support.v7.app.AppCompatActivity
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import com.google.android.material.snackbar.Snackbar
+import android.widget.Button
+import android.widget.ImageView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.maropost.timetracker.R
 import com.maropost.timetracker.application.MyApplication
-import com.maropost.timetracker.view.adapters.MenuAdapter
-import kotlinx.android.synthetic.main.activity_main.*
+import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
-import nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout
-import nl.psdcompany.duonavigationdrawer.views.DuoMenuView
-import nl.psdcompany.duonavigationdrawer.widgets.DuoDrawerToggle
 import java.util.*
 
 
-open class MPBaseActivity : AppCompatActivity(),DuoMenuView.OnMenuClickListener {
+open class MPBaseActivity : AppCompatActivity() {
+
 
     enum class TransactionType {
         REPLACE, ADD
     }
 
-    private var mMenuAdapter: MenuAdapter? = null
-    private var mTitles = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mTitles = ArrayList(Arrays.asList(*resources.getStringArray(R.array.menuOptions)))
         setSupportActionBar(toolbar)
-        handleMenu()
-        handleDrawer()
         initialiseListener()
+        loadNavigationData()
+
+         SlidingRootNavBuilder(this)
+             .withToolbarMenuToggle(toolbar)
+             .withMenuOpened(false)
+             .withContentClickableWhenMenuOpened(false)
+             .withSavedState(savedInstanceState)
+             .withMenuLayout(R.layout.menu_left_drawer)
+            .inject()
+
     }
 
 
-    /**
-     * Navigation menu items
-     */
-    private fun handleMenu() {
-        mMenuAdapter = MenuAdapter(mTitles)
-        mDuoMenuView.setOnMenuClickListener(this)
-        mDuoMenuView.adapter = mMenuAdapter
+    private fun loadNavigationData(){
+
+       /* var image = findViewById<ImageView>(R.id.navigationImageView)
+        Glide
+            .with(this)
+            .load(R.drawable.default_profile_pic)
+            .apply(RequestOptions.circleCropTransform())
+            .into(image)*/
+
     }
 
-    /**
-     * Navigation settings and data placement
-     */
-    private fun handleDrawer() {
-        val duoDrawerToggle = DuoDrawerToggle(
-            this,
-            mDrawerLayout,
-            toolbar,
-            R.string.navigation_drawer_open,
-            R.string.navigation_drawer_close
-        )
-        mDrawerLayout.setDrawerListener(duoDrawerToggle)
-        duoDrawerToggle.syncState()
-    }
+
 
     private fun initialiseListener() {
        imgToolbarRightIcon.setOnClickListener{
@@ -72,10 +70,8 @@ open class MPBaseActivity : AppCompatActivity(),DuoMenuView.OnMenuClickListener 
            val month = c.get(Calendar.MONTH)
            val day = c.get(Calendar.DAY_OF_MONTH)
            val datePickerDialog = DatePickerDialog(this,
-               DatePickerDialog.OnDateSetListener { datePicker, year, month, day ->
-                   /*val selectedMonth: Int= month+1
-                   tvDay.text= "Day: "+day +"/"+selectedMonth+ "/"+ year*/
-                   MyApplication.getInstance().setCalenderDetails(year,month,day)
+               DatePickerDialog.OnDateSetListener { datePicker, mYear, mMonth, mDay ->
+                   MyApplication.getInstance().setCalenderDetails(mYear,mMonth,mDay)
                }, year, month, day
            )
            datePickerDialog.show()
@@ -113,10 +109,10 @@ open class MPBaseActivity : AppCompatActivity(),DuoMenuView.OnMenuClickListener 
     /**
      * Get the current displaying fragment
      */
-    fun getCurrentFragment(): Fragment {
+  /*  fun getCurrentFragment(): Fragment {
         return supportFragmentManager.findFragmentById(R.id.container)!!
     }
-
+*/
     /**
      * Display a snack message
      */
@@ -132,7 +128,7 @@ open class MPBaseActivity : AppCompatActivity(),DuoMenuView.OnMenuClickListener 
      * Display permission denied alert
      */
     fun showPermissionSnackAlert() {
-     /*   val snackBar = Snackbar.make(mainContainer, "Access denied!!", Snackbar.LENGTH_SHORT)
+        val snackBar = Snackbar.make(mainContainer, "Access denied!!", Snackbar.LENGTH_SHORT)
                 .setAction("t") {
                     val i = Intent()
                     i.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
@@ -146,7 +142,7 @@ open class MPBaseActivity : AppCompatActivity(),DuoMenuView.OnMenuClickListener 
         snackBar.show()
         val snackView = snackBar.view
         val action = snackView.findViewById(R.id.snackbar_action) as Button
-        action.text = ""*/
+        action.text = ""
     }
 
     /**
@@ -240,10 +236,10 @@ open class MPBaseActivity : AppCompatActivity(),DuoMenuView.OnMenuClickListener 
      * Control navigation drawer visibility
      */
     fun showNavigationDrawer(allow: Boolean) {
-        if (allow)
+       /* if (allow)
             mDrawerLayout.setDrawerLockMode(DuoDrawerLayout.LOCK_MODE_UNLOCKED)
         else
-            mDrawerLayout.setDrawerLockMode(DuoDrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+            mDrawerLayout.setDrawerLockMode(DuoDrawerLayout.LOCK_MODE_LOCKED_CLOSED)*/
     }
 
     /**
@@ -253,17 +249,6 @@ open class MPBaseActivity : AppCompatActivity(),DuoMenuView.OnMenuClickListener 
         if (isAllow)
             progressBar.visibility = View.VISIBLE
         else progressBar.visibility = View.GONE
-    }
-
-  override fun onOptionClicked(position: Int, objectClicked: Any?) {
-      mMenuAdapter?.setViewSelected(position, true)
-      mDrawerLayout.closeDrawer()
-  }
-
-    override fun onHeaderClicked() {
-    }
-
-    override fun onFooterClicked() {
     }
 
 }
