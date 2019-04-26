@@ -1,33 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/navigation_gradient"
-    android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:background="@color/colorLightGrey"
+                android:orientation="vertical">
 
-    <ImageView
-            android:id="@+id/navigationImageView"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center"
-            android:padding="@dimen/dp_4"
-            android:layout_marginTop="@dimen/dp_50"
-            android:background="@drawable/circle_shadow" />
 
-    <TextView
-            android:layout_width="match_parent"
+    <LinearLayout
+            android:id="@+id/lnrHeader"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/dp_8"
-            android:text="oqwoqwop"
-            android:visibility="gone"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+            android:padding="@dimen/dp_16"
+            android:orientation="vertical">
+        <ImageView
+                android:id="@+id/navigationImageView"
+                android:layout_width="@dimen/dp_140"
+                android:layout_height="@dimen/dp_140"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/circle_shadow"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_20"
+                android:textStyle="bold"
+                android:textSize="@dimen/sp_18"
+                android:textColor="@color/colorRed"
+                android:text="User Name"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_gravity="center_horizontal"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold"
+                android:text="email@maropost.com"/>
+    </LinearLayout>
+
+    <View
+            android:id="@+id/view"
+            android:layout_width="250dp"
+            android:layout_height="1dp"
+            android:layout_below="@id/lnrHeader"
+            android:background="@color/colorBlack"/>
+
+
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerNavigation"
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            android:layout_below="@id/view"
+            android:layout_above="@id/txtVersion"
+            android:layout_marginTop="@dimen/dp_10">
+
+    </android.support.v7.widget.RecyclerView>
 
     <TextView
-            android:id="@+id/textView"
+            android:id="@+id/txtVersion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:text="kldjkljdkl" />
+            android:layout_alignParentBottom="true"
+            android:padding="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp_10"
+            android:text="Version 1.0.0"/>
 
 
-</LinearLayout>
+</RelativeLayout>

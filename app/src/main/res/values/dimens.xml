@@ -31,7 +31,9 @@
     <dimen name="dp_80">80dp</dimen>
     <dimen name="dp_105_negative">-105dp</dimen>
     <dimen name="dp_100_negative">-100dp</dimen>
+    <dimen name="dp_140">140dp</dimen>
     <dimen name="dp_170">170dp</dimen>
+    <dimen name="dp_176">176dp</dimen>
     <dimen name="dp_180">180dp</dimen>
     <dimen name="dp_190">190dp</dimen>
     <dimen name="speech_bubble_corners">10dp</dimen>
@@ -55,4 +57,12 @@
     <dimen name="sp_32">32sp</dimen>
     <dimen name="sp_36">36sp</dimen>
     <dimen name="sp_40">40sp</dimen>
+
+
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
 </resources>

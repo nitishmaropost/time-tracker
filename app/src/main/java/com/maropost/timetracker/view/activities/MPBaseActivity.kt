@@ -10,6 +10,8 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -17,14 +19,23 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.maropost.timetracker.R
 import com.maropost.timetracker.application.MyApplication
+import com.maropost.timetracker.pojomodels.NavigationItem
+import com.maropost.timetracker.view.adapters.NavigationAdapter
+import com.maropost.timetracker.view.adapters.NavigationAdapterCallbacks
+import com.yarolegovich.slidingrootnav.SlidingRootNav
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.menu_left_drawer.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 
-open class MPBaseActivity : AppCompatActivity() {
+open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
 
+    private var slidingRootNav: SlidingRootNav? = null
+    private var navigationAdapter:NavigationAdapter ? = null
+    private var itemList  = ArrayList<NavigationItem>()
 
     enum class TransactionType {
         REPLACE, ADD
@@ -36,28 +47,55 @@ open class MPBaseActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setSupportActionBar(toolbar)
-        initialiseListener()
         loadNavigationData()
-
-         SlidingRootNavBuilder(this)
-             .withToolbarMenuToggle(toolbar)
-             .withMenuOpened(false)
-             .withContentClickableWhenMenuOpened(false)
-             .withSavedState(savedInstanceState)
-             .withMenuLayout(R.layout.menu_left_drawer)
-            .inject()
+        setupRecyclerView()
+        initialiseListener()
 
     }
 
+    private fun setupRecyclerView(){
+        // Creates a vertical Layout Manager
+        val navigationItem = NavigationItem()
+        navigationItem.itemName = "Home"
+        navigationItem.itemImage = R.drawable.ic_calendar
+        itemList.add(navigationItem)
+
+        val navigationItem2 = NavigationItem()
+        navigationItem2.itemName = "Calendar"
+        navigationItem2.itemImage = R.drawable.ic_calendar
+        itemList.add(navigationItem2)
+
+        val navigationItem3 = NavigationItem()
+        navigationItem3.itemName = "Logout"
+        navigationItem3.itemImage = R.drawable.ic_calendar
+        itemList.add(navigationItem3)
+
+
+
+        recyclerNavigation.layoutManager = LinearLayoutManager(this)
+        navigationAdapter = NavigationAdapter(itemList, this,this)
+        recyclerNavigation.adapter = navigationAdapter
+    }
 
     private fun loadNavigationData(){
 
-       /* var image = findViewById<ImageView>(R.id.navigationImageView)
+        slidingRootNav = SlidingRootNavBuilder(this)
+            .withToolbarMenuToggle(toolbar)
+            .withMenuOpened(false)
+            .withContentClickableWhenMenuOpened(true)
+            .withMenuLayout(R.layout.menu_left_drawer)
+            .inject()
+
         Glide
             .with(this)
             .load(R.drawable.default_profile_pic)
             .apply(RequestOptions.circleCropTransform())
-            .into(image)*/
+            .into(navigationImageView)
+
+        navigationImageView.setOnClickListener{
+            Log.e("navigationImageView","")
+        }
+
 
     }
 
