@@ -2,10 +2,10 @@ package com.maropost.timetracker.view.fragments
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
@@ -48,29 +48,38 @@ class HomeFragment : MPBaseFragment() {
         val df = SimpleDateFormat("dd-MM-yyyy")
         val formattedDate = df.format(c.time)
         tvDay.text= "Today, "+formattedDate
-
-
-        /*final String timeFormatString = "h:mm aa";
-        final String dateTimeFormatString = "EEEE, MMMM d, h:mm aa";
-        final long HOURS = 60 * 60 * 60;
-        if (now.get(Calendar.DATE) == smsTime.get(Calendar.DATE) ) {
-            return "Today " + DateFormat.format(timeFormatString, smsTime);
-        } else if (now.get(Calendar.DATE) - smsTime.get(Calendar.DATE) == 1  ){
-            return "Yesterday " + DateFormat.format(timeFormatString, smsTime);
-        } else if (now.get(Calendar.YEAR) == smsTime.get(Calendar.YEAR)) {
-            return DateFormat.format(dateTimeFormatString, smsTime).toString();
-        } else {
-            return DateFormat.format("MMMM dd yyyy, h:mm aa", smsTime).toString();
-        }*/
-
     }
 
     /**
      * Set selected date from picker
      */
     fun setCalenderDetails(year: Int, month: Int, day: Int){
-        val selectedMonth: Int= month+1
-        tvDay.text= "$day/$selectedMonth/$year"
+        val calendar = Calendar.getInstance()
+        calendar.set(year, month, day)
+        val sdf = SimpleDateFormat("dd-MM-yyyy")
+        val formattedDate: String= sdf.format(calendar.getTime())
+        formatToTodayYesterday(formattedDate)
+
+    }
+
+    /*
+    Display today/yesterday against date
+    */
+    fun formatToTodayYesterday(formattedDate: String){
+        val currentDate = Date(System.currentTimeMillis())
+        val mydate = Date(System.currentTimeMillis() - 1000 * 60 * 60 * 24)
+        val dateFormat = SimpleDateFormat("dd-MM-yyyy")
+        val today: String= dateFormat.format(currentDate)
+        val yesterday: String = dateFormat.format(mydate)
+
+        if(formattedDate.equals(yesterday)){
+            tvDay.text= "Yesterday, $formattedDate"
+        }
+        else if(formattedDate.equals(today)){
+            tvDay.text= "Today, $formattedDate"
+        }
+        else
+            tvDay.text= "$formattedDate"
     }
 
 
@@ -88,11 +97,13 @@ class HomeFragment : MPBaseFragment() {
 
     fun demoBarChart() {
         val labels = ArrayList<String>()
+        labels.add("Sun")
         labels.add("Mon")
         labels.add("Tue")
         labels.add("Wed")
         labels.add("Thu")
         labels.add("Fri")
+        labels.add("Sat")
 
         var arrayList = ArrayList<BarEntry>()
         arrayList.add(BarEntry(9f, 0))
@@ -100,14 +111,27 @@ class HomeFragment : MPBaseFragment() {
         arrayList.add(BarEntry(2f, 2))
         arrayList.add(BarEntry(9f, 3))
         arrayList.add(BarEntry(7f, 4))
+        arrayList.add(BarEntry(5f, 5))
+        arrayList.add(BarEntry(8f, 6))
 
         val bardataset = BarDataSet(arrayList,"Days")
+        bardataset.setDrawValues(false)
         val data = BarData(labels, bardataset)
+
+        data.setHighlightEnabled(false)
         bardataset.setColors(ColorTemplate.LIBERTY_COLORS)
         barchart.setData(data)
-        barchart.xAxis.isEnabled = false
-        barchart.axisLeft.isEnabled = false
+        barchart.xAxis.isEnabled = true
+        barchart.axisLeft.isEnabled = true
         barchart.axisRight.isEnabled = false
+        barchart.setScaleEnabled(false)
+        barchart.getXAxis().setTextSize(14f)
+        barchart.setDescription("")
+        barchart.getLegend().setEnabled(false)
+        barchart.getXAxis().setDrawGridLines(false)
+        barchart.getAxisLeft().setDrawGridLines(false)
+        barchart.getAxisRight().setDrawGridLines(false)
+        barchart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM)
 
 
     }

@@ -19,7 +19,7 @@ class TimeDetailsAdapter(private var timeDetailList : ArrayList<TimeUtils>, val 
     }
 
     override fun getItemCount(): Int {
-        return 5
+        return 3
     }
 
     override fun onBindViewHolder(holder:TimeDetailsViewHolder, position: Int) {
