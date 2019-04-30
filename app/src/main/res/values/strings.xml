@@ -1,5 +1,5 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-    <string name="app_name">TimeTracker</string>
+    <string name="app_name">Time    Tracker</string>
     <string name="nav_home">Home</string>
     <string name="nav_calendar">Calendar View</string>
     <string name="nav_create_pin">Create Pin</string>

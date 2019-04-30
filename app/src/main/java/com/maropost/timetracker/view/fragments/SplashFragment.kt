@@ -33,7 +33,7 @@ class SplashFragment : MPBaseFragment() {
     /**
      * Setup animation to be performed for the view background
      */
-    private fun setupTransitionAnimation() {
+    /*private fun setupTransitionAnimation() {
         // initializing animation drawable by getting background from parent layout
         animationDrawable = relSplashParent.background as AnimationDrawable?
         // setting enter fade animation duration to 1 second
@@ -41,27 +41,27 @@ class SplashFragment : MPBaseFragment() {
         // setting exit fade animation duration to 1 second
         animationDrawable?.setExitFadeDuration(1000)
         startAnimation()
-    }
+    }*/
 
     /**
      * Start transition element animation
      */
-    private fun startAnimation(){
+   /* private fun startAnimation(){
         if (animationDrawable != null && !animationDrawable!!.isRunning) {
             // start the animation
             animationDrawable?.start();
         }
     }
-
+*/
     /**
      * Stop transition element animation
      */
-    private fun stopAnimation(){
+  /*  private fun stopAnimation(){
         if (animationDrawable != null && animationDrawable!!.isRunning) {
             // stop the animation
             animationDrawable?.stop();
         }
-    }
+    }*/
 
     /**
      * Display the screen depending on user key present in preference or not
@@ -70,12 +70,12 @@ class SplashFragment : MPBaseFragment() {
      */
     private fun launchView() {
         handler.postDelayed({
-            stopAnimation()
+            //stopAnimation()
         }, 5000)
     }
 
     override fun onPause() {
         super.onPause()
-        stopAnimation()
+        //stopAnimation()
     }
 }

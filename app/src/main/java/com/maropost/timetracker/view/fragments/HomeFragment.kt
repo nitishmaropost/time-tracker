@@ -73,6 +73,9 @@ class HomeFragment : MPBaseFragment() {
         tvDay.text= "$day/$selectedMonth/$year"
     }
 
+
+
+
     /*
     * Initialize recyclerview and set adapter
     */

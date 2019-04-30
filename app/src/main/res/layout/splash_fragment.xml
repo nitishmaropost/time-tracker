@@ -1,25 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/relSplashParent"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorAmber_A400">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/relSplashParent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+android:background="@drawable/navigation_gradient">
 
-    <LinearLayout
-        android:id="@+id/lnrTransition"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical"
-        android:transitionName="@string/simple_fragment_transition">
-
-        <ImageView
-            android:layout_width="match_parent"
+    <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/dp_10"/>
+            android:layout_centerHorizontal="true"
+            android:text="@string/app_name"
+            android:textSize="@dimen/sp_40"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlack"
+            android:layout_marginTop="@dimen/dp_40"/>
 
-    </LinearLayout>
+
+    <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:lottie_fileName="stopwatch.json"
+            app:lottie_loop="true"
+            android:layout_centerInParent="true"
+            app:lottie_autoPlay="true" />
+
+    <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            app:lottie_fileName="wave.json"
+            app:lottie_loop="true"
+            android:layout_marginBottom="@dimen/dp_40"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            app:lottie_autoPlay="true" />
 
 
 </RelativeLayout>

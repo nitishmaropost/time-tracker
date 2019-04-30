@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.maropost.timetracker.application.MyApplication
 import com.maropost.timetracker.view.fragments.HomeFragment
 import com.maropost.timetracker.view.fragments.LoginFragment
+import com.maropost.timetracker.view.fragments.SplashFragment
 
 
 class MainActivity : MPBaseActivity() {
@@ -18,8 +19,8 @@ class MainActivity : MPBaseActivity() {
      * Display the initial splash view
      */
     private fun launchInitialView() {
-        //replaceFragment(SplashFragment(),false)
-        replaceFragment(HomeFragment(),true)
+        replaceFragment(SplashFragment(),false)
+        //replaceFragment(HomeFragment(),true)
     }
 
     /**

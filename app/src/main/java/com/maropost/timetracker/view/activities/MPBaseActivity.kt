@@ -48,7 +48,6 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
         loadNavigationData()
         setupRecyclerView()
         initialiseListener()
-
     }
 
     private fun setupRecyclerView(){
