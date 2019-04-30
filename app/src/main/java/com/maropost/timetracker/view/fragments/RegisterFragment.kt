@@ -29,7 +29,7 @@ class RegisterFragment : MPBaseFragment() {
             popCurrentFragment()
         }
         relDone.setOnClickListener{
-            popAllFragments()
+            //popAllFragments()
             replaceFragment(HomeFragment(),true)
         }
     }
