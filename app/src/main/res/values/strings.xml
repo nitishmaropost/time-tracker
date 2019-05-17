@@ -1,3 +1,23 @@
-<resources>
-    <string name="app_name">TimeTracker</string>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <string name="app_name">Time    Tracker</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_calendar">Calendar View</string>
+    <string name="nav_create_pin">Create Pin</string>
+    <string name="nav_logout">Logout</string>
+    <string name="simple_fragment_transition">simple_fragment_transition</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="email_address">Email Address</string>
+    <string name="register">Register</string>
+    <string name="details">Details</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot password?</string>
+
+    <array name="menuOptions">
+        <item>Home</item>
+        <item>Personal</item>
+        <item>High scores</item>
+        <item>Settings</item>
+        <item>About</item>
+    </array>
 </resources>

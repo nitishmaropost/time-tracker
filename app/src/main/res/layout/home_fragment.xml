@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/colorWhite"
+            android:padding="@dimen/dp_10">
+
+        <TextView
+                android:id="@+id/tvDay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_22"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_marginBottom="@dimen/dp_5"
+                android:textColor="@color/colorBlack"
+                android:paddingStart="@dimen/dp_10"
+                android:paddingEnd="@dimen/dp_5"
+                android:text="kdcfljkcnnmn"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:maxLength="40"/>
+
+        <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/dp_5"
+                app:cardElevation="@dimen/dp_5"
+                app:cardUseCompatPadding="true"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_gravity="center">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="start|center"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:paddingRight="@dimen/dp_10"
+                        android:paddingTop="@dimen/dp_12"
+                        android:paddingBottom="@dimen/dp_12"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.5">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_16"
+                            android:text="10:05 AM"
+                            android:textColor="@color/colorBlack"
+                            android:paddingEnd="@dimen/dp_2"/>
+
+                    <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_arrow_down"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="end|center"
+                        android:padding="@dimen/dp_10"
+                        android:layout_weight="0.5">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_16"
+                            android:text="07:10 PM"
+                            android:textColor="@color/colorBlack"
+                            android:paddingEnd="@dimen/dp_2"/>
+
+                    <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_arrow_up"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/details"
+                android:layout_marginTop="@dimen/dp_20"
+                android:paddingStart="@dimen/dp_5"
+                android:textStyle="bold"
+                android:paddingEnd="@dimen/dp_5"
+                android:textSize="@dimen/sp_12"/>
+
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/timeDetailsRecyclerview"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_height="wrap_content"/>
+
+        <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/barchart"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_height="300dp"
+                android:paddingEnd="@dimen/dp_5"
+                android:layout_marginBottom="@dimen/dp_15"/>
+
+
+    </LinearLayout>
+
+</ScrollView>
