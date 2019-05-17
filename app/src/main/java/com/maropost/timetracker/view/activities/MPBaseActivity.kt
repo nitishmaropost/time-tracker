@@ -9,6 +9,8 @@ import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.view.ViewCompat
+import android.support.v4.widget.DrawerLayout.LOCK_MODE_LOCKED_CLOSED
+import android.support.v4.widget.DrawerLayout.LOCK_MODE_UNLOCKED
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
@@ -21,8 +23,10 @@ import com.maropost.timetracker.application.MyApplication
 import com.maropost.timetracker.pojomodels.NavigationItem
 import com.maropost.timetracker.view.adapters.NavigationAdapter
 import com.maropost.timetracker.view.adapters.NavigationAdapterCallbacks
+import com.maropost.timetracker.view.fragments.HomeFragment
 import com.yarolegovich.slidingrootnav.SlidingRootNav
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.menu_left_drawer.*
@@ -45,8 +49,6 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
         setContentView(R.layout.activity_main)
 
         setSupportActionBar(toolbar)
-        loadNavigationData()
-        setupRecyclerView()
         initialiseListener()
     }
 
@@ -91,10 +93,7 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
         navigationImageView.setOnClickListener{
             Log.e("navigationImageView","")
         }
-
-
     }
-
 
 
     private fun initialiseListener() {
@@ -127,7 +126,7 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
      * Intercept on back click
      */
     override fun onBackPressed() {
-        if (getFragmentCount() == 1)
+        if (getCurrentFragment() is HomeFragment)
             finish()
         else
             super.onBackPressed()
@@ -143,10 +142,9 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
     /**
      * Get the current displaying fragment
      */
-  /*  fun getCurrentFragment(): Fragment {
-        return supportFragmentManager.findFragmentById(R.id.container)!!
+    fun getCurrentFragment(): Fragment {
+        return supportFragmentManager.findFragmentById(R.id.mainContainer)!!
     }
-*/
     /**
      * Display a snack message
      */
@@ -270,10 +268,13 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
      * Control navigation drawer visibility
      */
     fun showNavigationDrawer(allow: Boolean) {
-       /* if (allow)
-            mDrawerLayout.setDrawerLockMode(DuoDrawerLayout.LOCK_MODE_UNLOCKED)
+        if (allow) {
+            mDrawerLayout.setDrawerLockMode(LOCK_MODE_UNLOCKED)
+            loadNavigationData()
+            setupRecyclerView()
+        }
         else
-            mDrawerLayout.setDrawerLockMode(DuoDrawerLayout.LOCK_MODE_LOCKED_CLOSED)*/
+            mDrawerLayout.setDrawerLockMode(LOCK_MODE_LOCKED_CLOSED)
     }
 
     /**

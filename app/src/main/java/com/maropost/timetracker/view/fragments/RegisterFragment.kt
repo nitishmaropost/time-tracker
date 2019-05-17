@@ -1,6 +1,7 @@
 package com.maropost.timetracker.view.fragments
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,8 +30,9 @@ class RegisterFragment : MPBaseFragment() {
             popCurrentFragment()
         }
         relDone.setOnClickListener{
-            //popAllFragments()
+           // popAllFragments()
             replaceFragment(HomeFragment(),true)
+
         }
     }
 }
