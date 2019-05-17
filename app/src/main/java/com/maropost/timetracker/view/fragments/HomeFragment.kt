@@ -118,19 +118,19 @@ class HomeFragment : MPBaseFragment() {
         bardataset.setDrawValues(false)
         val data = BarData(labels, bardataset)
 
-        data.setHighlightEnabled(false)
-        bardataset.setColors(ColorTemplate.JOYFUL_COLORS)
-        barchart.setData(data)
+        data.isHighlightEnabled = false
+        bardataset.setColors(ColorTemplate.LIBERTY_COLORS)
+        barchart.data = data
         barchart.xAxis.isEnabled = true
         barchart.axisLeft.isEnabled = true
         barchart.axisRight.isEnabled = false
-        barchart.getXAxis().setTextSize(12f)
+        barchart.xAxis.textSize = 12f
         barchart.setDescription("")
-        barchart.getLegend().setEnabled(false)
-        barchart.getXAxis().setDrawGridLines(false)
-        barchart.getAxisLeft().setDrawGridLines(false)
-        barchart.getAxisRight().setDrawGridLines(false)
-        barchart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM)
+        barchart.legend.isEnabled = false
+        barchart.xAxis.setDrawGridLines(false)
+        barchart.axisLeft.setDrawGridLines(false)
+        barchart.axisRight.setDrawGridLines(false)
+        barchart.xAxis.position = XAxis.XAxisPosition.BOTTOM
         barchart.animateY(3000)
 
     }
