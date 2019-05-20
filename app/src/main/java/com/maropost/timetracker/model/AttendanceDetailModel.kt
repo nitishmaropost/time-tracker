@@ -5,13 +5,18 @@ import com.google.gson.Gson
 import com.maropost.timetracker.clients.OkhttpClient
 import com.maropost.timetracker.clients.WebServiceClient
 import com.maropost.timetracker.pojomodels.AttendanceDetailsPojo
+import com.maropost.timetracker.pojomodels.Rows
 import com.maropost.timetracker.utils.Constants
 import org.json.JSONObject
 
-class AttendanceDetailModel {
+class AttendanceDetailModel(private val attendanceDetailModelCallback: AttendanceDetailModelCallback) {
 
     private val webServiceClient = WebServiceClient(OkhttpClient())
+    private var arrayList = ArrayList<Rows>()
 
+    /**
+     * Fetch all the punch records till date
+     */
     fun fetchAttendanceDetails() {
         val payload = JSONObject()
         webServiceClient.callWebService(payload, Constants.ATTENDANCE_DETAIL_API, Constants.REQUEST.GET,
@@ -20,9 +25,11 @@ class AttendanceDetailModel {
                     try {
                         if(!TextUtils.isEmpty(responseBody)) {
                             val json = JSONObject(responseBody)
-                            var attendanceDetailsPojo =  Gson().fromJson(json.toString(), AttendanceDetailsPojo::class.java)
-
-                            //loginModelCallback.onLoginTaskSuccess()
+                            val attendanceDetailsPojo =  Gson().fromJson(json.toString(), AttendanceDetailsPojo::class.java)
+                            for (i in 0 until attendanceDetailsPojo.rows.size){
+                                arrayList.add(attendanceDetailsPojo.rows[i])
+                            }
+                            attendanceDetailModelCallback.onSuccess(arrayList)
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
@@ -31,9 +38,7 @@ class AttendanceDetailModel {
                 override fun onFailure(responseBody: String) {
                     try {
                         if(!TextUtils.isEmpty(responseBody)) {
-//                            val json = JSONObject(responseBody)
-//                            MaropostApplication.getInstance().user = Gson().fromJson(json.toString(), User::class.java)
-//                            loginModelCallback.onLoginFailed(MaropostApplication.getInstance().user.error)
+                            attendanceDetailModelCallback.onFailure(responseBody)
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
@@ -43,6 +48,7 @@ class AttendanceDetailModel {
     }
 
     interface AttendanceDetailModelCallback{
-        fun onSuccess()
+        fun onSuccess(arrayList : ArrayList<Rows>)
+        fun onFailure(failureMessage : String)
     }
 }

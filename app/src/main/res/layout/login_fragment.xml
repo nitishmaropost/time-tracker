@@ -63,6 +63,7 @@
                     android:textColorHint="@color/colorBlack"
                     android:paddingStart="@dimen/dp_20"
                     android:paddingEnd="@dimen/dp_20"
+                    android:text="saurabh.thukral@maropost.com"
                     android:hint="@string/username"/>
             <EditText
                     android:id="@+id/edtPassword"
@@ -82,6 +83,7 @@
                     android:paddingEnd="@dimen/dp_20"
                     android:inputType="textPassword"
                     android:singleLine="true"
+                    android:text="saurabh.thukral@maropost.com"
                     android:hint="@string/password"/>
 
             <RelativeLayout

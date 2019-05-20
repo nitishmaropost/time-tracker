@@ -9,6 +9,7 @@ import android.widget.TextView
 import com.maropost.timetracker.R
 import com.maropost.timetracker.pojomodels.AttendanceDetailsPojo
 import com.maropost.timetracker.pojomodels.Rows
+import com.maropost.timetracker.utils.Utility
 import kotlinx.android.synthetic.main.item_attendance_detail.view.*
 import java.util.ArrayList
 
@@ -27,13 +28,17 @@ class AttendanceDetailAdapter(private var arrayList: ArrayList<Rows>, val contex
     }
 
     override fun onBindViewHolder(holder: AttendanceDetailViewHolder, position: Int) {
-        holder.textEmpCode?.text= "10:05 AM"
-        holder.txtTimeOfPunch?.text= "07:10 PM"
+        holder.txtTimeOfPunch?.text= Utility.getInstance().getEpochTime(arrayList[position].punch_time)
+        when(arrayList[position].pin_type){
+            1   -> holder.txtPunchType?.text = context.getString(R.string.in_fingerprint)
+            4   -> holder.txtPunchType?.text = context.getString(R.string.in_card)
+            101 -> holder.txtPunchType?.text = context.getString(R.string.out_fingerprint)
+            104 -> holder.txtPunchType?.text = context.getString(R.string.out_card)
+        }
     }
 }
 
 class AttendanceDetailViewHolder(view: View): RecyclerView.ViewHolder(view) {
-    var textEmpCode: TextView? = view.textEmpCode
     var txtTimeOfPunch: TextView? = view.txtTimeOfPunch
     var txtPunchType: TextView? = view.txtPunchType
 }

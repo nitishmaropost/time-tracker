@@ -1,5 +1,6 @@
 package com.maropost.timetracker.utils
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
@@ -15,12 +16,12 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import android.app.DatePickerDialog
 import android.widget.DatePicker
+import java.text.SimpleDateFormat
 import java.util.*
 
 
-class Utility() : DatePickerDialog.OnDateSetListener {
+class Utility()  {
     var alertDialog : AlertDialog ?= null
-    var dialog : Dialog ? = null
 
     companion object {
         private var instance: Utility? = null
@@ -126,29 +127,19 @@ class Utility() : DatePickerDialog.OnDateSetListener {
     }
 
     /**
-     * Filter Date Dialog Box
+     * Convert date to epoch time
      */
-    fun showDateDialog(context: Context){
-            val calendar = Calendar.getInstance(TimeZone.getDefault())
-
-            val dialog = DatePickerDialog(
-                context, this,
-                calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
-            )
-            dialog.show()
-
-    }
-
-    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-
-    }
-
-    /*
-   * Dialog select date callback
-   */
-    interface DatePickerCallbacks {
-        fun onSubmitClicked(dayOfMonth: Int, month: Int,year: Int )
+    @SuppressLint("SimpleDateFormat")
+    fun getEpochTime(date: String) : String {
+        val input = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+        val output = SimpleDateFormat("dd/MM/yyyy hh:mm a")
+        var d: Date? = null
+        try {
+            d = input.parse(date)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return output.format(d)
     }
 }
 

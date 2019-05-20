@@ -21,8 +21,8 @@ class LoginModel(private val loginTokenModelCallback: LoginTokenModelCallback) {
      */
     fun getLoginToken(email: String, password: String) {
         val payload = JSONObject()
-        payload.put("username", "saurabh.thukral@maropost.com")
-        payload.put("password", "saurabh.thukral@maropost.com")
+        payload.put("username", email)
+        payload.put("password", password)
 
         webServiceClient.callWebService(payload, Constants.LOGIN_API, Constants.REQUEST.POST,
             object : WebServiceClient.WebServiceClientCallback {

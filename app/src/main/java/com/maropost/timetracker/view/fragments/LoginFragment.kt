@@ -67,7 +67,7 @@ class LoginFragment : MPBaseFragment() {
                 LoginViewModel.LoginApiStatus.SUCCESS -> {
                     showProgressBar(false)
                     Utility.getInstance().showToast(activity!!, "Success")
-                    replaceFragment(HomeFragment(),true)
+                    replaceFragment(AttendanceDetailFragment(),true)
                 }
                 LoginViewModel.LoginApiStatus.FAILURE -> {
                     showProgressBar(false)
