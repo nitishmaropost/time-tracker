@@ -65,6 +65,7 @@ class OkhttpClient {
         request = Request.Builder()
                 .url(Constants.WEB_BASE_URL + apiRequestUrl)
                 .get()
+            .addHeader("x-access-token",)
                 .build()
     }
 

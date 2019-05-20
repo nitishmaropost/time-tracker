@@ -1,7 +1,6 @@
 package com.maropost.timetracker.view.adapters
 
 import android.content.Context
-import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +21,7 @@ class TimeDetailsAdapter(private var timeDetailList : ArrayList<TimeUtils>, val 
         return 3
     }
 
-    override fun onBindViewHolder(holder:TimeDetailsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TimeDetailsViewHolder, position: Int) {
         holder.tvInTime?.text= "10:05 AM"
         holder.tvOutTime?.text= "07:10 PM"
     }

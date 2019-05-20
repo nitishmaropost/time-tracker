@@ -45,4 +45,9 @@ dependencies {
     implementation 'com.yarolegovich:sliding-root-nav:1.1.0'
     implementation 'com.airbnb.android:lottie:2.5.0' // Don't update to latest version since they use androidx
     implementation 'com.squareup.okhttp3:okhttp:3.12.0'
+    //for lifecycle and LiveData and ViewModel
+    implementation 'android.arch.lifecycle:runtime:1.1.1'
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
+    implementation 'com.google.code.gson:gson:2.8.5'
 }
