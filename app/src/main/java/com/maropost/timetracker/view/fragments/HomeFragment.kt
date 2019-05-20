@@ -38,6 +38,11 @@ class HomeFragment : MPBaseFragment() {
         showToolbar(true)
         initializeRecyclerView()
         demoBarChart()
+        fetchAttendanceDetails()
+    }
+
+    private fun fetchAttendanceDetails() {
+
     }
 
     /**
