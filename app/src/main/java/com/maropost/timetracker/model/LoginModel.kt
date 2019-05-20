@@ -35,7 +35,7 @@ class LoginModel(private val loginTokenModelCallback: LoginTokenModelCallback) {
                             val login = Gson().fromJson(response.toString(), Login::class.java)
                             MyApplication.getInstance().accessToken = login.token
                             saveLoginTokenInPreference(login.token)
-                            loginTokenModelCallback.getReportSuccess()
+                            loginTokenModelCallback.onLoginSuccess()
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
@@ -43,7 +43,7 @@ class LoginModel(private val loginTokenModelCallback: LoginTokenModelCallback) {
                 }
 
                 override fun onFailure(failureMessage: String) {
-                    loginTokenModelCallback.getReportFailed(failureMessage)
+                    loginTokenModelCallback.onLoginFailed(failureMessage)
                 }
             })
     }
@@ -58,8 +58,8 @@ class LoginModel(private val loginTokenModelCallback: LoginTokenModelCallback) {
     }
 
     interface LoginTokenModelCallback {
-        fun getReportSuccess()
-        fun getReportFailed(failureMessage: String)
+        fun onLoginSuccess()
+        fun onLoginFailed(failureMessage: String)
     }
 
 }
