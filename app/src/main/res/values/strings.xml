@@ -12,6 +12,7 @@
     <string name="details">Details</string>
     <string name="login">Login</string>
     <string name="forgot_password">Forgot password?</string>
+    <string name="login_token">LOGIN_TOKEN</string>
 
     <array name="menuOptions">
         <item>Home</item>

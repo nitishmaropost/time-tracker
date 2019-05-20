@@ -2,7 +2,7 @@ package com.maropost.timetracker.utils
 
 object Constants {
 
-    var WEB_BASE_URL = "http://localhost:8000/api/v1/"
+    var WEB_BASE_URL = "http://173.168.100.191:8000/api/v1/"
     const val LOGIN_API = "auth/login"
     const val ATTENDANCE_DETAIL_API = "attendance/logs"
 
