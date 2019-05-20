@@ -20,8 +20,8 @@ class AttendanceDetailModel {
                     try {
                         if(!TextUtils.isEmpty(responseBody)) {
                             val json = JSONObject(responseBody)
-                            /*MaropostApplication.getInstance().user =*/ Gson().fromJson(json.toString(), AttendanceDetailsPojo::class.java)
-                            //saveUserKeyInPreference(MaropostApplication.getInstance().user)
+                            var attendanceDetailsPojo =  Gson().fromJson(json.toString(), AttendanceDetailsPojo::class.java)
+
                             //loginModelCallback.onLoginTaskSuccess()
                         }
                     } catch (e: Exception) {
@@ -40,5 +40,9 @@ class AttendanceDetailModel {
                     }
                 }
             })
+    }
+
+    interface AttendanceDetailModelCallback{
+        fun onSuccess()
     }
 }

@@ -2,6 +2,7 @@ package com.maropost.timetracker.view.activities
 
 import android.os.Bundle
 import com.maropost.timetracker.application.MyApplication
+import com.maropost.timetracker.view.fragments.AttendanceDetailFragment
 import com.maropost.timetracker.view.fragments.HomeFragment
 import com.maropost.timetracker.view.fragments.SplashFragment
 
@@ -19,7 +20,7 @@ class MainActivity : MPBaseActivity() {
      */
     private fun launchInitialView() {
         replaceFragment(SplashFragment(),false)
-        //replaceFragment(HomeFragment(),true)
+        //replaceFragment(AttendanceDetailFragment(),true)
     }
 
     /**

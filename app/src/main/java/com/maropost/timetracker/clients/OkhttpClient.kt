@@ -4,6 +4,7 @@ import okhttp3.*
 import org.json.JSONObject
 import android.os.AsyncTask
 import android.text.TextUtils
+import com.maropost.timetracker.application.MyApplication
 import com.maropost.timetracker.utils.Constants
 
 class OkhttpClient {
@@ -40,10 +41,10 @@ class OkhttpClient {
      */
     private fun postRequest(apiRequestUrl: String, body: RequestBody){
         request = Request.Builder()
-                .url(Constants.WEB_BASE_URL + apiRequestUrl)
-                .post(body)
-                .addHeader("Content-Type", "application/json")
-                .build()
+            .url(Constants.WEB_BASE_URL + apiRequestUrl)
+            .post(body)
+            .addHeader("Content-Type", "application/json")
+            .build()
     }
 
     /**
@@ -51,10 +52,10 @@ class OkhttpClient {
      */
     private fun putRequest(apiRequestUrl: String, body: RequestBody){
         request =   Request.Builder()
-                .url(Constants.WEB_BASE_URL + apiRequestUrl)
-                .put(body)
-                .addHeader("Content-Type", "application/json")
-                .build()
+            .url(Constants.WEB_BASE_URL + apiRequestUrl)
+            .put(body)
+            .addHeader("Content-Type", "application/json")
+            .build()
     }
 
     /**
@@ -63,10 +64,10 @@ class OkhttpClient {
     private fun getRequest(apiRequestUrl: String){
 
         request = Request.Builder()
-                .url(Constants.WEB_BASE_URL + apiRequestUrl)
-                .get()
-            .addHeader("x-access-token",)
-                .build()
+            .url(Constants.WEB_BASE_URL + apiRequestUrl)
+            .get()
+            .addHeader("x-access-token",MyApplication.getInstance().accessToken)
+            .build()
     }
 
     /**
