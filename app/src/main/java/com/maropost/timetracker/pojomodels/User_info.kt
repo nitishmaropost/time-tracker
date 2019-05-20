@@ -1,6 +1,6 @@
 package com.maropost.timetracker.pojomodels
 
-class UserDetails {
+class User_info {
     var full_name: String= ""
     var first_name: String= ""
     var last_name: String= ""

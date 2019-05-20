@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.maropost.timetracker.R
+import com.maropost.timetracker.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.login_fragment.*
 
 class LoginFragment : MPBaseFragment() {
 
     private var mView : View?= null
+    private val loginViewModel = LoginViewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if(mView == null)
@@ -26,9 +28,11 @@ class LoginFragment : MPBaseFragment() {
 
     private fun initialiseListeners() {
         txtRegister.setOnClickListener{
-            replaceFragment(RegisterFragment(),true)
+            //replaceFragment(RegisterFragment(),true)
+
         }
         relDone.setOnClickListener{
+            loginViewModel.performLoginOperation("","")
         }
     }
 }
