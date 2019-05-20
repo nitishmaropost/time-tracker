@@ -4,15 +4,9 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.text.TextUtils
 import com.maropost.timetracker.model.LoginModel
-import com.maropost.timetracker.pojomodels.Login
 import com.maropost.timetracker.utils.Utility
 
 class LoginViewModel: ViewModel(), LoginModel.LoginTokenModelCallback {
-    override fun getReportSuccess() {
-    }
-
-    override fun getReportFailed(failureMessage: String) {
-    }
 
     private val loginModel = LoginModel(this)
     var loginFailedResponse = MutableLiveData<String>()
@@ -55,5 +49,14 @@ class LoginViewModel: ViewModel(), LoginModel.LoginTokenModelCallback {
      */
     fun performLoginOperation(email: String, password: String){
         loginModel.getLoginToken(email, password)
+    }
+
+    override fun onLoginSuccess() {
+        loginApiStatus.value = LoginApiStatus.SUCCESS
+    }
+
+    override fun onLoginFailed(failureMessage: String) {
+        loginApiStatus.value = LoginApiStatus.FAILURE
+        loginFailedResponse.value = failureMessage
     }
 }
