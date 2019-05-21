@@ -3,7 +3,9 @@ package com.maropost.timetracker.view.fragments
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
+import android.view.View.OnTouchListener
 import android.view.ViewGroup
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -13,14 +15,16 @@ import com.github.mikephil.charting.utils.ColorTemplate
 import com.maropost.timetracker.R
 import com.maropost.timetracker.pojomodels.TimeUtils
 import com.maropost.timetracker.view.adapters.TimeDetailsAdapter
+import com.maropost.timetracker.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.home_fragment.*
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 class HomeFragment : MPBaseFragment() {
 
     private var mView : View?= null
-    //private var homeViewModel : HomeViewModel? = null
+    private var homeViewModel : HomeViewModel? = null
     private var timeDetailsAdapter : TimeDetailsAdapter?= null
     private var timeDetailsList = ArrayList<TimeUtils>()
 
@@ -34,15 +38,28 @@ class HomeFragment : MPBaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showNavigationDrawer(true)
-        setCurrentDate()
         showToolbar(true)
-        initializeRecyclerView()
-        demoBarChart()
-        fetchAttendanceDetails()
+        if(homeViewModel == null) {
+            homeViewModel = HomeViewModel()
+            initialiseListener()
+            setCurrentDate()
+            initializeRecyclerView()
+            demoBarChart()
+        }
     }
 
-    private fun fetchAttendanceDetails() {
-
+    private fun initialiseListener() {
+        txtDetails.setOnTouchListener(OnTouchListener { v, event ->
+            val DRAWABLE_RIGHT = 2
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                if (event.rawX >= txtDetails.right - txtDetails.compoundDrawables[DRAWABLE_RIGHT].bounds.width()) {
+                    // Intercept arrow click
+                    replaceFragment(AttendanceDetailFragment(),true)
+                    return@OnTouchListener true
+                }
+            }
+            false
+        })
     }
 
     /**
@@ -124,7 +141,7 @@ class HomeFragment : MPBaseFragment() {
         val data = BarData(labels, bardataset)
 
         data.isHighlightEnabled = false
-        bardataset.setColors(ColorTemplate.LIBERTY_COLORS)
+        bardataset.setColors(ColorTemplate.PASTEL_COLORS)
         barchart.data = data
         barchart.xAxis.isEnabled = true
         barchart.axisLeft.isEnabled = true

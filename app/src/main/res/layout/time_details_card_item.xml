@@ -10,7 +10,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardCornerRadius="@dimen/dp_5"
-            app:cardElevation="@dimen/dp_5"
+            app:cardElevation="@dimen/dp_8"
             app:cardUseCompatPadding="true">
 
         <LinearLayout
@@ -28,7 +28,9 @@
                         android:id="@+id/tvInTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/sp_14"
+                        android:textSize="@dimen/sp_15"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/colorBlack"
                         android:text="10:05 AM"
                         android:padding="@dimen/dp_5"/>
 
@@ -36,7 +38,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dp_5"
-                        android:src="@drawable/ic_arrow_down"/>
+                        android:src="@drawable/ic_person_in"/>
 
             </LinearLayout>
 
@@ -50,15 +52,17 @@
                         android:id="@+id/tvOutTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/sp_14"
+                        android:textSize="@dimen/sp_15"
+                        android:layout_gravity="center_vertical"
                         android:text="07:10 PM"
+                        android:textColor="@color/colorBlack"
                         android:padding="@dimen/dp_5"/>
 
                 <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dp_5"
-                        android:src="@drawable/ic_arrow_up"/>
+                        android:src="@drawable/ic_person_out"/>
 
             </LinearLayout>
         </LinearLayout>

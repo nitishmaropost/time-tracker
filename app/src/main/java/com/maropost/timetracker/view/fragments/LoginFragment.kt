@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ class LoginFragment : MPBaseFragment() {
 
     private var mView : View?= null
     private var loginViewModel : LoginViewModel ?= null
+    private lateinit var handler : Handler
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if(mView == null)
@@ -28,6 +30,7 @@ class LoginFragment : MPBaseFragment() {
 
         if(loginViewModel == null) {
             loginViewModel = LoginViewModel()
+            handler = Handler()
             loginViewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
             observeLiveData()
             initialiseListeners()
@@ -65,20 +68,19 @@ class LoginFragment : MPBaseFragment() {
         loginViewModel?.loginApiStatus?.observe(this, Observer { loginApiStatus ->
             when(loginApiStatus){
                 LoginViewModel.LoginApiStatus.SUCCESS -> {
-                    showProgressBar(false)
-                    Utility.getInstance().showToast(activity!!, "Success")
-                    replaceFragment(AttendanceDetailFragment(),true)
+                    setViewVisibilty(false,false,true)
+                    lottieView.playAnimation()
+                    handler.postDelayed({replaceFragment(HomeFragment(),true)},2000)
                 }
                 LoginViewModel.LoginApiStatus.FAILURE -> {
-                    showProgressBar(false)
-                    Utility.getInstance().showToast(activity!!,"Failure")
+                    setViewVisibilty(true,false,false)
                 }
             }
         })
 
         // Login failure observer
         loginViewModel?.loginFailedResponse?.observe(this, Observer { loginFailedResponse ->
-            //showSnackAlert(loginFailedResponse)
+            showSnackAlert(loginFailedResponse)
         })
     }
 
@@ -93,7 +95,31 @@ class LoginFragment : MPBaseFragment() {
      * Hit the login API
      */
     private fun consumeLoginApi() {
-        showProgressBar(true)
-        loginViewModel?.performLoginOperation(edtUsername.text.toString().trim(),edtPassword.text.toString().trim())
+        setViewVisibilty(false,true,false)
+        handler.postDelayed({loginViewModel?.performLoginOperation(edtUsername.text.toString().trim(),edtPassword.text.toString().trim())},1000)
+
+    }
+
+    /**
+     * Set views visibility on service hit
+     */
+    private fun setViewVisibilty(showDone: Boolean, showProgress: Boolean, showSuccess: Boolean){
+        when {
+            showDone -> {
+                relDone.visibility = View.VISIBLE
+                relProgress.visibility = View.GONE
+                relSuccess.visibility = View.GONE
+            }
+            showProgress -> {
+                relDone.visibility = View.GONE
+                relProgress.visibility = View.VISIBLE
+                relSuccess.visibility = View.GONE
+            }
+            showSuccess -> {
+                relDone.visibility = View.GONE
+                relProgress.visibility = View.GONE
+                relSuccess.visibility = View.VISIBLE
+            }
+        }
     }
 }

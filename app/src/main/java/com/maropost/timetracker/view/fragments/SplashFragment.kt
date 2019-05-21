@@ -71,7 +71,7 @@ class SplashFragment : MPBaseFragment() {
     private fun launchView() {
         handler.postDelayed({
             //stopAnimation()
-            replaceFragment(LoginFragment(),true)
+            replaceFragment(LoginFragment(),false)
         }, 4000)
     }
 
