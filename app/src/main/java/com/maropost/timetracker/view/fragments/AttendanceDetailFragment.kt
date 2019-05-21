@@ -15,16 +15,19 @@ import com.maropost.timetracker.view.adapters.AttendanceDetailAdapter
 import com.maropost.timetracker.viewmodel.AttendanceDetailViewModel
 import com.maropost.timetracker.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.attendance_detail_fragment.*
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 class AttendanceDetailFragment : MPBaseFragment() {
-    private var mView : View ?= null
-    private var attendanceDetailAdapter : AttendanceDetailAdapter?= null
-    private var arrayList : ArrayList<Rows> ?= null
-    private var attendanceDetailViewModel : AttendanceDetailViewModel ?= null
+    private var mView: View? = null
+    private var attendanceDetailAdapter: AttendanceDetailAdapter? = null
+    private var arrayList: ArrayList<Rows>? = null
+    private var attendanceDetailViewModel: AttendanceDetailViewModel? = null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        if(mView == null)
+        if (mView == null)
             mView = inflater.inflate(R.layout.attendance_detail_fragment, container, false)
         return mView
     }
@@ -33,7 +36,7 @@ class AttendanceDetailFragment : MPBaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         showNavigationDrawer(true)
         showToolbar(false)
-        if(attendanceDetailViewModel == null ) {
+        if (attendanceDetailViewModel == null) {
             attendanceDetailViewModel = AttendanceDetailViewModel()
             attendanceDetailViewModel = ViewModelProviders.of(this).get(AttendanceDetailViewModel::class.java)
             observeLiveData()
@@ -45,12 +48,12 @@ class AttendanceDetailFragment : MPBaseFragment() {
 
     private fun observeLiveData() {
         attendanceDetailViewModel?.failedResponse?.observe(this, Observer { loginFailedResponse ->
-            Utility.getInstance().showToast(activity!!,loginFailedResponse!!)
+            Utility.getInstance().showToast(activity!!, loginFailedResponse!!)
         })
 
         attendanceDetailViewModel?.arrayList?.observe(this, Observer { list ->
-            if(list!!.isNotEmpty())
-            this.arrayList?.addAll(list)
+            if (list!!.isNotEmpty())
+                this.arrayList?.addAll(list)
             attendanceDetailAdapter?.notifyDataSetChanged()
         })
     }
@@ -58,8 +61,8 @@ class AttendanceDetailFragment : MPBaseFragment() {
     /*
     * Initialize recyclerview and set adapter
     */
-    private fun initializeRecyclerView(){
-        val layoutManager= LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL,false)
+    private fun initializeRecyclerView() {
+        val layoutManager = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
         attendanceDetailAdapter = AttendanceDetailAdapter(arrayList!!, activity!!)
         detailRecyclerView.layoutManager = layoutManager
         detailRecyclerView.adapter = attendanceDetailAdapter
