@@ -38,7 +38,9 @@ class HomeFragment : MPBaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showNavigationDrawer(true)
+        setTitle(getString(R.string.app_name))
         showToolbar(true)
+        setToolbarIconVisibility(true)
         if(homeViewModel == null) {
             homeViewModel = HomeViewModel()
             initialiseListener()
@@ -103,8 +105,6 @@ class HomeFragment : MPBaseFragment() {
         else
             tvDay.text= "$formattedDate"
     }
-
-
 
 
     /*

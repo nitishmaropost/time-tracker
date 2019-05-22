@@ -1,5 +1,5 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-    <string name="app_name">Time    Tracker</string>
+    <string name="app_name">Timely</string>
     <string name="nav_home">Home</string>
     <string name="nav_calendar">Calendar View</string>
     <string name="nav_create_pin">Create Pin</string>
@@ -20,6 +20,7 @@
     <string name="in_card">In Card</string>
     <string name="out_fingerprint">Out Fingerprint</string>
     <string name="out_card">Out Card</string>
+    <string name="time_logs">Time Logs</string>
 
     <array name="menuOptions">
         <item>Home</item>

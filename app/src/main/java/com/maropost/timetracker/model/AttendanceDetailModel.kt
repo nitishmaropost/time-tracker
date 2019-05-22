@@ -1,6 +1,8 @@
 package com.maropost.timetracker.model
 
+import android.os.Handler
 import android.text.TextUtils
+import android.util.Log
 import com.google.gson.Gson
 import com.maropost.timetracker.clients.OkhttpClient
 import com.maropost.timetracker.clients.WebServiceClient
@@ -13,6 +15,7 @@ class AttendanceDetailModel(private val attendanceDetailModelCallback: Attendanc
 
     private val webServiceClient = WebServiceClient(OkhttpClient())
     private var arrayList = ArrayList<Rows>()
+    private val handler = Handler()
 
     /**
      * Fetch all the punch records till date
@@ -21,14 +24,12 @@ class AttendanceDetailModel(private val attendanceDetailModelCallback: Attendanc
         val payload = JSONObject()
         webServiceClient.callWebService(payload, Constants.ATTENDANCE_DETAIL_API, Constants.REQUEST.GET,
             object: WebServiceClient.WebServiceClientCallback{
-                override fun onSuccess(responseBody: String) {
+                override fun onSuccess(response: String) {
                     try {
-                        if(!TextUtils.isEmpty(responseBody)) {
-                            val json = JSONObject(responseBody)
+                        if(!TextUtils.isEmpty(response)) {
+                            val json = JSONObject(response)
                             val attendanceDetailsPojo =  Gson().fromJson(json.toString(), AttendanceDetailsPojo::class.java)
-                            for (i in 0 until attendanceDetailsPojo.rows.size){
-                                arrayList.add(attendanceDetailsPojo.rows[i])
-                            }
+                            arrayList.addAll(attendanceDetailsPojo.rows)
                             attendanceDetailModelCallback.onSuccess(arrayList)
                         }
                     } catch (e: Exception) {
@@ -36,13 +37,7 @@ class AttendanceDetailModel(private val attendanceDetailModelCallback: Attendanc
                     }
                 }
                 override fun onFailure(responseBody: String) {
-                    try {
-                        if(!TextUtils.isEmpty(responseBody)) {
-                            attendanceDetailModelCallback.onFailure(responseBody)
-                        }
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
+                    attendanceDetailModelCallback.onFailure(responseBody)
                 }
             })
     }

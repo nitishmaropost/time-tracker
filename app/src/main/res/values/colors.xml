@@ -3,7 +3,7 @@
     <color name="colorPrimary">#000000</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="colorLightGrey">#20656565</color>
+        <color name="colorLightGrey">#20656565</color>
 
 
     <!-- 1st Gradient color -->
@@ -45,6 +45,7 @@
     <color name="colorOrange">#ff530e</color>
     <color name="colorBlue">#02c0f4</color>
     <color name="colorRed">#e92c0c</color>
+    <color name="placeholder_bg">#dddddd</color>
 
     <color name="colorWhite">#FFFFFF</color>
 </resources>

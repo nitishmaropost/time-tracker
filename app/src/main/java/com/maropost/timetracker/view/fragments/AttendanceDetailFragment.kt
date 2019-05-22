@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,8 +35,10 @@ class AttendanceDetailFragment : MPBaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showNavigationDrawer(true)
-        showToolbar(false)
+        showToolbar(true)
+        setToolbarIconVisibility(false)
+        setTitle(getString(R.string.time_logs))
+        shimmer_view_container.startShimmerAnimation()
         if (attendanceDetailViewModel == null) {
             attendanceDetailViewModel = AttendanceDetailViewModel()
             attendanceDetailViewModel = ViewModelProviders.of(this).get(AttendanceDetailViewModel::class.java)
@@ -46,20 +49,26 @@ class AttendanceDetailFragment : MPBaseFragment() {
         }
     }
 
+    /**
+     * Observe live data values
+     */
     private fun observeLiveData() {
         attendanceDetailViewModel?.failedResponse?.observe(this, Observer { loginFailedResponse ->
-            Utility.getInstance().showToast(activity!!, loginFailedResponse!!)
+            if(!TextUtils.isEmpty(loginFailedResponse))
+            showSnackAlert(loginFailedResponse)
+            stopShimmerAnimation()
         })
 
         attendanceDetailViewModel?.arrayList?.observe(this, Observer { list ->
             if (list!!.isNotEmpty())
                 this.arrayList?.addAll(list)
             attendanceDetailAdapter?.notifyDataSetChanged()
+            stopShimmerAnimation()
         })
     }
 
     /*
-    * Initialize recyclerview and set adapter
+    * Initialize recycler view and set adapter
     */
     private fun initializeRecyclerView() {
         val layoutManager = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
@@ -73,5 +82,13 @@ class AttendanceDetailFragment : MPBaseFragment() {
      */
     private fun fetchAttendanceDetails() {
         attendanceDetailViewModel?.fetchAttendanceDetails()
+    }
+
+    /**
+     * Stop shimmer animation
+     */
+    private fun stopShimmerAnimation(){
+        shimmer_view_container.stopShimmerAnimation()
+        shimmer_view_container.visibility = View.GONE
     }
 }

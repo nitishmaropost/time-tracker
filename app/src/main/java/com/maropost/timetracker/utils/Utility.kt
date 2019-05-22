@@ -142,24 +142,6 @@ class Utility()  {
         return output.format(d)
     }
 
-    /**
-     * Convert date to epoch time
-     */
-    @SuppressLint("SimpleDateFormat")
-    fun getEpochDate(date: String): Date {
-        val input = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-        //val output = SimpleDateFormat("dd/MM/yyyy hh:mm a")
-        val output = SimpleDateFormat("dd/MM/yyyy")
-        var d: Date? = null
-        var formattedDate: Date? = null
-        try {
-            d = input.parse(date)
-            formattedDate = output.parse(output.format(d))
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return formattedDate!!
-    }
 }
 
 

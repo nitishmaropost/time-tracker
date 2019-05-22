@@ -111,6 +111,15 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
        }
     }
 
+    /**
+     * Maintain calendar icon visibility
+     */
+    fun setToolbarIconVisibility(allow: Boolean){
+        if (allow)
+            imgToolbarRightIcon.visibility = View.VISIBLE
+        else imgToolbarRightIcon.visibility = View.GONE
+    }
+
 
     /**
      * Set toolbar visibility
@@ -120,6 +129,13 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
             toolbarFrame.visibility = View.VISIBLE
         else
             toolbarFrame.visibility = View.GONE
+    }
+
+    /**
+     * Set toolbar title
+     */
+    fun setTitle(title: String){
+        toolbarTitle.text = title
     }
 
     /**
