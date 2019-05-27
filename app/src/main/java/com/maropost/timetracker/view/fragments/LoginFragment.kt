@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.maropost.timetracker.R
-import com.maropost.timetracker.utils.Utility
 import com.maropost.timetracker.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.login_fragment.*
 
@@ -42,8 +41,6 @@ class LoginFragment : MPBaseFragment() {
     private fun initialiseListeners() {
         txtRegister.setOnClickListener{
             //replaceFragment(RegisterFragment(),true)
-
-
         }
         relDone.setOnClickListener{
             validateLoginFields()
@@ -87,7 +84,7 @@ class LoginFragment : MPBaseFragment() {
     /**
      * Check for empty email and password fields along with valid email content
      */
-    private fun validateLoginFields() {
+    fun validateLoginFields() {
         loginViewModel?.validateLoginDetails(edtUsername.text.toString().trim(),edtPassword.text.toString().trim())
     }
 
@@ -122,4 +119,5 @@ class LoginFragment : MPBaseFragment() {
             }
         }
     }
+
 }

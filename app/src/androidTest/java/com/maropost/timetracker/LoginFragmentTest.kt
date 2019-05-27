@@ -1,20 +1,16 @@
 package com.maropost.timetracker
 
 import android.Manifest
-import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
-import android.support.v4.app.ActivityCompat
 import android.text.TextUtils
 import android.util.Patterns
 import com.maropost.timetracker.application.MyApplication
 import junit.framework.Assert.assertEquals
 import org.junit.Test
 import android.content.pm.PackageManager
-import android.support.test.InstrumentationRegistry.getInstrumentation
 import android.support.v4.content.ContextCompat
-import com.maropost.timetracker.view.activities.MPBaseActivity
 
 
 class LoginFragmentTest {
