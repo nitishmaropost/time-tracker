@@ -2,14 +2,14 @@ package com.maropost.timetracker.model
 
 import android.os.Handler
 import android.text.TextUtils
-import android.util.Log
 import com.google.gson.Gson
 import com.maropost.timetracker.clients.OkhttpClient
 import com.maropost.timetracker.clients.WebServiceClient
-import com.maropost.timetracker.pojomodels.AttendanceDetailsPojo
+import com.maropost.timetracker.pojomodels.AttendanceDetails
 import com.maropost.timetracker.pojomodels.Rows
 import com.maropost.timetracker.utils.Constants
 import org.json.JSONObject
+
 
 class AttendanceDetailModel(private val attendanceDetailModelCallback: AttendanceDetailModelCallback) {
 
@@ -27,10 +27,17 @@ class AttendanceDetailModel(private val attendanceDetailModelCallback: Attendanc
                 override fun onSuccess(response: String) {
                     try {
                         if(!TextUtils.isEmpty(response)) {
-                            val json = JSONObject(response)
-                            val attendanceDetailsPojo =  Gson().fromJson(json.toString(), AttendanceDetailsPojo::class.java)
-                            arrayList.addAll(attendanceDetailsPojo.rows)
-                            attendanceDetailModelCallback.onSuccess(arrayList)
+                            Thread(Runnable {
+                                val json = JSONObject(response)
+                                val attendanceDetails=  Gson().fromJson(json.toString(), AttendanceDetails::class.java)
+                                /*for (i in 0 until attendanceDetails.rows.size){
+                                    attendanceDetails.rows[i].pinTypeText = (attendanceDetails.pin_type_text as JsonObject)
+                                        .get(attendanceDetails.rows[i].pin_type.toString()).asString
+                                    arrayList.add(attendanceDetails.rows[i])
+                                }*/
+                               // arrayList.addAll(attendanceDetails.rows)
+                                handler.post{attendanceDetailModelCallback.onSuccess(attendanceDetails)}
+                            }).start()
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
@@ -43,7 +50,7 @@ class AttendanceDetailModel(private val attendanceDetailModelCallback: Attendanc
     }
 
     interface AttendanceDetailModelCallback{
-        fun onSuccess(arrayList : ArrayList<Rows>)
+        fun onSuccess(attendanceDetails: AttendanceDetails)
         fun onFailure(failureMessage : String)
     }
 }

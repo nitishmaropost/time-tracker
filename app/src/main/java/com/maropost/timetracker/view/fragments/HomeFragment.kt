@@ -37,13 +37,14 @@ class HomeFragment : MPBaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showNavigationDrawer(true)
+
         setTitle(getString(R.string.app_name))
         showToolbar(true)
         setToolbarIconVisibility(true)
         if(homeViewModel == null) {
             homeViewModel = HomeViewModel()
             initialiseListener()
+            showNavigationDrawer(true)
             setCurrentDate()
             initializeRecyclerView()
             demoBarChart()
@@ -51,17 +52,7 @@ class HomeFragment : MPBaseFragment() {
     }
 
     private fun initialiseListener() {
-        txtDetails.setOnTouchListener(OnTouchListener { v, event ->
-            val DRAWABLE_RIGHT = 2
-            if (event.action == MotionEvent.ACTION_DOWN) {
-                if (event.rawX >= txtDetails.right - txtDetails.compoundDrawables[DRAWABLE_RIGHT].bounds.width()) {
-                    // Intercept arrow click
-                    replaceFragment(AttendanceDetailFragment(),true)
-                    return@OnTouchListener true
-                }
-            }
-            false
-        })
+        imgDetails.setOnClickListener{replaceFragment(AttendanceDetailFragment(),true)}
     }
 
     /**

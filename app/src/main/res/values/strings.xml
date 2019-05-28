@@ -21,6 +21,8 @@
     <string name="out_fingerprint">Out Fingerprint</string>
     <string name="out_card">Out Card</string>
     <string name="time_logs">Time Logs</string>
+    <string name="no_internet">Internet connection unavailable !!</string>
+    <string name="no_record_found">No record found !</string>
 
     <array name="menuOptions">
         <item>Home</item>

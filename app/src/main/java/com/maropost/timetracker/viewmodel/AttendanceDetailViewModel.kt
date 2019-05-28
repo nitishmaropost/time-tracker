@@ -3,12 +3,13 @@ package com.maropost.timetracker.viewmodel
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.maropost.timetracker.model.AttendanceDetailModel
+import com.maropost.timetracker.pojomodels.AttendanceDetails
 import com.maropost.timetracker.pojomodels.Rows
 
 class AttendanceDetailViewModel : ViewModel(), AttendanceDetailModel.AttendanceDetailModelCallback {
 
     private var attendanceDetailModel = AttendanceDetailModel(this)
-    var arrayList = MutableLiveData<ArrayList<Rows>>()
+    var arrayList = MutableLiveData<AttendanceDetails>()
     var failedResponse = MutableLiveData<String>()
 
     /**
@@ -18,8 +19,8 @@ class AttendanceDetailViewModel : ViewModel(), AttendanceDetailModel.AttendanceD
         attendanceDetailModel.fetchAttendanceDetails()
     }
 
-    override fun onSuccess(arrayList: ArrayList<Rows>) {
-    this.arrayList.value = arrayList
+    override fun onSuccess(attendanceDetails: AttendanceDetails) {
+    this.arrayList.value = attendanceDetails
     }
 
     override fun onFailure(failureMessage: String) {

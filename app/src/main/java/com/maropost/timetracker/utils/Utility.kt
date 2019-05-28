@@ -18,6 +18,9 @@ import android.app.DatePickerDialog
 import android.widget.DatePicker
 import java.text.SimpleDateFormat
 import java.util.*
+import android.support.v4.content.ContextCompat.getSystemService
+import android.net.ConnectivityManager
+import com.maropost.timetracker.application.MyApplication
 
 
 class Utility()  {
@@ -131,7 +134,7 @@ class Utility()  {
      */
     @SuppressLint("SimpleDateFormat")
     fun getEpochTime(date: String) : String {
-        val input = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+        val input = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
         val output = SimpleDateFormat("dd/MM/yyyy hh:mm a")
         var d: Date? = null
         try {
@@ -142,6 +145,10 @@ class Utility()  {
         return output.format(d)
     }
 
+     fun isNetworkConnected(): Boolean {
+        val cm = MyApplication.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+        return cm!!.activeNetworkInfo != null
+    }
 }
 
 

@@ -3,7 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/navigation_gradient"
+        android:background="@color/user_profile_grey"
         android:orientation="vertical">
 
     <LinearLayout
@@ -27,15 +27,17 @@
                 android:textStyle="bold"
                 android:textSize="@dimen/sp_18"
                 android:textColor="@color/colorRed"
-                android:text="User Name"/>
+                android:text="Test User"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_5"
                 android:layout_gravity="center_horizontal"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp_13"
+                android:gravity="center_horizontal"
                 android:textStyle="bold"
-                android:text="email@maropost.com"/>
+                android:textColor="#0000ff"
+                android:text="saurabh.thukral@maropost.com"/>
     </LinearLayout>
 
 
@@ -62,8 +64,7 @@
             android:layout_alignParentBottom="true"
             android:padding="@dimen/dp_10"
             android:textSize="@dimen/sp_12"
-            android:layout_marginStart="@dimen/dp_10"
-            android:text="Version 1.0.0"/>
+            android:layout_marginStart="@dimen/dp_10"/>
 
 
 </RelativeLayout>

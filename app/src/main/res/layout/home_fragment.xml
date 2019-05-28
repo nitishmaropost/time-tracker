@@ -22,7 +22,7 @@
                 android:textColor="@color/colorBlack"
                 android:paddingStart="@dimen/dp_10"
                 android:paddingEnd="@dimen/dp_5"
-                android:text="kdcfljkcnnmn"
+                android:text="Current Date"
                 android:textStyle="bold"
                 android:maxLines="1"
                 android:maxLength="40"/>
@@ -90,25 +90,40 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_person_out"
-                    android:layout_marginStart="@dimen/dp_5"/>
+                            android:layout_marginStart="@dimen/dp_5"/>
 
                 </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
-        <TextView
-                android:id="@+id/txtDetails"
+
+        <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/details"
-                android:layout_marginTop="@dimen/dp_20"
-                android:padding="@dimen/dp_5"
-                android:layout_marginStart="@dimen/dp_5"
-                android:textStyle="bold"
-                android:gravity="center_vertical"
-                android:drawablePadding="@dimen/dp_10"
-                android:drawableEnd="@drawable/ic_arrow_right_black_24dp"
-                android:textSize="@dimen/sp_14"/>
+                android:layout_marginTop="@dimen/dp_15">
+
+            <TextView
+                    android:id="@+id/txtDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/details"
+                    android:layout_marginStart="@dimen/dp_12"
+                    android:textStyle="bold"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/sp_14"/>
+
+            <ImageView
+                    android:id="@+id/imgDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/dp_10"
+                    android:src="@drawable/ic_arrow_right_black_24dp"/>
+
+
+        </RelativeLayout>
+
 
         <android.support.v7.widget.RecyclerView
                 android:id="@+id/timeDetailsRecyclerview"

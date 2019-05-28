@@ -9,14 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.maropost.timetracker.R
-import com.maropost.timetracker.pojomodels.AttendanceDetailsPojo
 import com.maropost.timetracker.pojomodels.Rows
-import com.maropost.timetracker.utils.Utility
 import com.maropost.timetracker.view.adapters.AttendanceDetailAdapter
 import com.maropost.timetracker.viewmodel.AttendanceDetailViewModel
-import com.maropost.timetracker.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.attendance_detail_fragment.*
-import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -59,9 +55,10 @@ class AttendanceDetailFragment : MPBaseFragment() {
             stopShimmerAnimation()
         })
 
-        attendanceDetailViewModel?.arrayList?.observe(this, Observer { list ->
-            if (list!!.isNotEmpty())
-                this.arrayList?.addAll(list)
+        attendanceDetailViewModel?.arrayList?.observe(this, Observer { attendanceDetails ->
+            if (attendanceDetails?.rows!!.isNotEmpty())
+                this.arrayList?.addAll(attendanceDetails.rows)
+            attendanceDetailAdapter?.setModel(attendanceDetails)
             attendanceDetailAdapter?.notifyDataSetChanged()
             stopShimmerAnimation()
         })
@@ -74,6 +71,7 @@ class AttendanceDetailFragment : MPBaseFragment() {
         val layoutManager = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
         attendanceDetailAdapter = AttendanceDetailAdapter(arrayList!!, activity!!)
         detailRecyclerView.layoutManager = layoutManager
+        detailRecyclerView.adapter?.setHasStableIds(true)
         detailRecyclerView.adapter = attendanceDetailAdapter
     }
 

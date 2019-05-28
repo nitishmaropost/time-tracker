@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.SystemClock
 import android.provider.Settings
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
@@ -32,6 +33,12 @@ import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.menu_left_drawer.*
 import java.util.*
 import kotlin.collections.ArrayList
+import android.content.pm.PackageManager
+import android.R.attr.versionName
+import android.annotation.SuppressLint
+import android.content.pm.PackageInfo
+
+
 
 
 open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
@@ -39,6 +46,7 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
     private var slidingRootNav: SlidingRootNav? = null
     private var navigationAdapter:NavigationAdapter ? = null
     private var itemList  = ArrayList<NavigationItem>()
+    private var mLastClickTime: Long = 0
 
     enum class TransactionType {
         REPLACE, ADD
@@ -65,9 +73,14 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
         itemList.add(navigationItem2)
 
         val navigationItem3 = NavigationItem()
-        navigationItem3.itemName = "Logout"
+        navigationItem3.itemName = "About Us"
         navigationItem3.itemImage = R.drawable.ic_calendar
         itemList.add(navigationItem3)
+
+        val navigationItem4 = NavigationItem()
+        navigationItem4.itemName = "Logout"
+        navigationItem4.itemImage = R.drawable.ic_calendar
+        itemList.add(navigationItem4)
 
 
         recyclerNavigation.layoutManager = LinearLayoutManager(this)
@@ -75,6 +88,7 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
         recyclerNavigation.adapter = navigationAdapter
     }
 
+    @SuppressLint("SetTextI18n")
     private fun loadNavigationData(){
 
         slidingRootNav = SlidingRootNavBuilder(this)
@@ -86,9 +100,19 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
 
         Glide
             .with(this)
-            .load(R.drawable.default_profile_pic)
+            .load(R.drawable.profilepic)
             .apply(RequestOptions.circleCropTransform())
             .into(navigationImageView)
+
+        try {
+            val pInfo = packageManager.getPackageInfo(packageName, 0)
+            val version = pInfo.versionName
+            txtVersion.text = "Version $version"
+        } catch (e: PackageManager.NameNotFoundException) {
+            e.printStackTrace()
+        }
+
+
 
         navigationImageView.setOnClickListener{
             Log.e("navigationImageView","")
@@ -98,16 +122,21 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
 
     private fun initialiseListener() {
        imgToolbarRightIcon.setOnClickListener{
-           val c = Calendar.getInstance()
-           val year = c.get(Calendar.YEAR)
-           val month = c.get(Calendar.MONTH)
-           val day = c.get(Calendar.DAY_OF_MONTH)
-           val datePickerDialog = DatePickerDialog(this,
-               DatePickerDialog.OnDateSetListener { datePicker, mYear, mMonth, mDay ->
-                   MyApplication.getInstance().setCalenderDetails(mYear,mMonth,mDay)
-               }, year, month, day
-           )
-           datePickerDialog.show()
+
+           if (SystemClock.elapsedRealtime() - mLastClickTime > 1000) {
+               mLastClickTime = SystemClock.elapsedRealtime()
+               val c = Calendar.getInstance()
+               val year = c.get(Calendar.YEAR)
+               val month = c.get(Calendar.MONTH)
+               val day = c.get(Calendar.DAY_OF_MONTH)
+               val datePickerDialog = DatePickerDialog(
+                   this,
+                   DatePickerDialog.OnDateSetListener { datePicker, mYear, mMonth, mDay ->
+                       MyApplication.getInstance().setCalenderDetails(mYear, mMonth, mDay)
+                   }, year, month, day
+               )
+               datePickerDialog.show()
+           }
        }
     }
 
@@ -166,7 +195,7 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
      */
     fun showSnackAlert(message: String) {
         try {
-            Snackbar.make(mainContainer, message, Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(mainContainer, message, Snackbar.LENGTH_LONG).show()
         } catch (e: Exception) {
             e.printStackTrace()
         }
