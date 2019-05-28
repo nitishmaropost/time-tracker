@@ -50,7 +50,7 @@ class MainActivity : MPBaseActivity() {
     /**
      * Fetch home fragment from backstack and refresh view for the date selected from picker
      */
-    fun setCalenderDetails(year: Int, month: Int, day: Int) {
+   /* fun setCalenderDetails(year: Int, month: Int, day: Int) {
         if (supportFragmentManager.backStackEntryCount > 0) {
             val fragments = supportFragmentManager.fragments
                 for (fragment in fragments) {
@@ -59,7 +59,7 @@ class MainActivity : MPBaseActivity() {
                     }
                 }
         }
-    }
+    }*/
 
     override fun onDestroy() {
         super.onDestroy()

@@ -35,9 +35,9 @@ class MyApplication : Application() {
         this.actiity = actiity
     }
 
-    fun setCalenderDetails(year: Int, month: Int, day: Int) {
+    /*fun setCalenderDetails(year: Int, month: Int, day: Int) {
         actiity.setCalenderDetails(year,month,day)
-    }
+    }*/
 
     /**
      * Check if login token is present in preference or not

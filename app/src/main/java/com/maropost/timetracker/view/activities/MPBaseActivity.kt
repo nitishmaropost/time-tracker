@@ -1,10 +1,10 @@
 package com.maropost.timetracker.view.activities
 
-import android.app.DatePickerDialog
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.os.SystemClock
 import android.provider.Settings
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
@@ -33,12 +33,6 @@ import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.menu_left_drawer.*
 import java.util.*
 import kotlin.collections.ArrayList
-import android.content.pm.PackageManager
-import android.R.attr.versionName
-import android.annotation.SuppressLint
-import android.content.pm.PackageInfo
-
-
 
 
 open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
@@ -121,7 +115,7 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
 
 
     private fun initialiseListener() {
-       imgToolbarRightIcon.setOnClickListener{
+     /*  imgToolbarRightIcon.setOnClickListener{
 
            if (SystemClock.elapsedRealtime() - mLastClickTime > 1000) {
                mLastClickTime = SystemClock.elapsedRealtime()
@@ -137,18 +131,31 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
                )
                datePickerDialog.show()
            }
-       }
+       }*/
+    }
+
+    /**
+     * Set Toolbar linear layout view dynamically
+     */
+    fun setToolbarIconLayout(view: View){
+        lnrViewToolbar.addView(view)
+    }
+
+    /**
+     * Remove Toolbar linear layout view
+     */
+    fun removeToolbarIconLayout(){
+        lnrViewToolbar.removeAllViews()
     }
 
     /**
      * Maintain calendar icon visibility
      */
     fun setToolbarIconVisibility(allow: Boolean){
-        if (allow)
+        /*if (allow)
             imgToolbarRightIcon.visibility = View.VISIBLE
-        else imgToolbarRightIcon.visibility = View.GONE
+        else imgToolbarRightIcon.visibility = View.GONE*/
     }
-
 
     /**
      * Set toolbar visibility

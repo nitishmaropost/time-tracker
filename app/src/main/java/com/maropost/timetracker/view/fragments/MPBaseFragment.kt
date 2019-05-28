@@ -3,7 +3,6 @@ package com.maropost.timetracker.view.fragments
 import android.support.v4.app.Fragment
 import android.view.View
 import com.maropost.timetracker.view.activities.MPBaseActivity
-import kotlinx.android.synthetic.main.app_bar_main.*
 
 open class MPBaseFragment : Fragment() {
 
@@ -25,6 +24,20 @@ open class MPBaseFragment : Fragment() {
 
     fun setToolbarIconVisibility(allow: Boolean){
         (activity as MPBaseActivity).setToolbarIconVisibility(allow)
+    }
+
+    /**
+     * Set Toolbar linear layout view dynamically
+     */
+    fun setToolbarIconLayout(view: View){
+        (activity as MPBaseActivity).setToolbarIconLayout(view)
+    }
+
+    /**
+     * Remove Toolbar linear layout view
+     */
+    fun removeToolbarIconLayout(){
+        (activity as MPBaseActivity).removeToolbarIconLayout()
     }
 
     /**
