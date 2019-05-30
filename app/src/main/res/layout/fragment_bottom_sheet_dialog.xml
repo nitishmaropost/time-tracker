@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/design_bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:behavior_hideable="false"
+        app:behavior_peekHeight="0dp"
+        android:background="@color/colorWhite"
+        app:elevation="@dimen/dp_4"
+        android:orientation="vertical"
+        app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
+        tools:ignore="MissingPrefix">
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <LinearLayout
+                android:id="@+id/lnrStartDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="@dimen/dp_10"
+                android:layout_gravity="center"
+                android:layout_toStartOf="@id/view">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_18"
+                    android:text="@string/start_date"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorRed"/>
+            <TextView
+                    android:id="@+id/txtStartDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_15"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:textColor="@color/colorBlack"/>
+        </LinearLayout>
+
+        <View
+                android:id="@+id/view"
+                android:layout_width=".5dp"
+                android:layout_height="@dimen/dp_40"
+                android:background="@color/colorBlack"
+                android:layout_centerInParent="true"/>
+
+        <LinearLayout
+                android:id="@+id/lnrEndDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_toEndOf="@id/view"
+                android:padding="@dimen/dp_10">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_18"
+                    android:text="@string/end_date"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorRed"/>
+            <TextView
+                    android:id="@+id/txtEndDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_15"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:textStyle="bold"
+                    android:text=""
+                    android:textColor="@color/colorBlack"/>
+        </LinearLayout>
+    </RelativeLayout>
+    <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <Button
+                android:id="@+id/btnClear"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:text="@string/clear"
+                android:textColor="@color/colorWhite"
+                android:background="#cc0000"
+                android:paddingEnd="@dimen/dp_point_5"
+                android:layout_weight="1" tools:ignore="RtlSymmetry"/>
+        <Button
+                android:id="@+id/btnSet"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:background="@color/colorGreen_900"
+                android:paddingStart="@dimen/dp_point_5"
+                android:text="@string/set"
+
+                android:layout_weight="1" tools:ignore="RtlSymmetry"/>
+
+    </LinearLayout>
+</LinearLayout>

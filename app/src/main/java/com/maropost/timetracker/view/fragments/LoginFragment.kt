@@ -67,7 +67,7 @@ class LoginFragment : MPBaseFragment() {
                 LoginViewModel.LoginApiStatus.SUCCESS -> {
                     setViewVisibilty(false,false,true)
                     lottieView.playAnimation()
-                    handler.postDelayed({replaceFragment(HomeFragment(),true)},2000)
+                    handler.postDelayed({replaceFragment(HomeFragment(),true)},1500)
                 }
                 LoginViewModel.LoginApiStatus.FAILURE -> {
                     setViewVisibilty(true,false,false)

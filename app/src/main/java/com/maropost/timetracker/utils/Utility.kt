@@ -3,7 +3,6 @@ package com.maropost.timetracker.utils
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
-import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.text.TextUtils
@@ -14,14 +13,10 @@ import android.view.Window
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import android.app.DatePickerDialog
-import android.widget.DatePicker
 import java.text.SimpleDateFormat
 import java.util.*
-import android.support.v4.content.ContextCompat.getSystemService
 import android.net.ConnectivityManager
 import com.maropost.timetracker.application.MyApplication
-
 
 class Utility()  {
     var alertDialog : AlertDialog ?= null
@@ -148,6 +143,17 @@ class Utility()  {
      fun isNetworkConnected(): Boolean {
         val cm = MyApplication.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
         return cm!!.activeNetworkInfo != null
+    }
+
+    fun convertDateToMillis(date: String): Long {
+        val sdf = SimpleDateFormat("dd-MM-yyyy")
+        try {
+            val mDate = sdf.parse(date)
+            return mDate.time
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return 0
     }
 }
 

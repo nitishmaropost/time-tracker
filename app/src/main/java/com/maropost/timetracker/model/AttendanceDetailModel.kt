@@ -8,6 +8,7 @@ import com.maropost.timetracker.clients.WebServiceClient
 import com.maropost.timetracker.pojomodels.AttendanceDetails
 import com.maropost.timetracker.pojomodels.Rows
 import com.maropost.timetracker.utils.Constants
+import com.maropost.timetracker.utils.Utility
 import org.json.JSONObject
 
 
@@ -21,8 +22,25 @@ class AttendanceDetailModel(private val attendanceDetailModelCallback: Attendanc
      * Fetch all the punch records till date
      */
     fun fetchAttendanceDetails() {
+        callLogsApi(Constants.ATTENDANCE_DETAIL_API)
+    }
+
+    /**
+     * Get filtered records according to start date and end date
+     */
+    fun getFilteredAttendanceDetails(startDate: String, endDate: String) {
+        val startTimeInMillis = Utility.getInstance().convertDateToMillis(startDate)
+        val endTimeInMillis = Utility.getInstance().convertDateToMillis(endDate)
+        callLogsApi(Constants.ATTENDANCE_DETAIL_API
+                + "?" + "start_date=" +startTimeInMillis +"&"+ "end_date="+endTimeInMillis)
+    }
+
+    /**
+     * Hit web service
+     */
+    private fun callLogsApi(apiRequestUrl: String){
         val payload = JSONObject()
-        webServiceClient.callWebService(payload, Constants.ATTENDANCE_DETAIL_API, Constants.REQUEST.GET,
+        webServiceClient.callWebService(payload,apiRequestUrl , Constants.REQUEST.GET,
             object: WebServiceClient.WebServiceClientCallback{
                 override fun onSuccess(response: String) {
                     try {
@@ -30,12 +48,6 @@ class AttendanceDetailModel(private val attendanceDetailModelCallback: Attendanc
                             Thread(Runnable {
                                 val json = JSONObject(response)
                                 val attendanceDetails=  Gson().fromJson(json.toString(), AttendanceDetails::class.java)
-                                /*for (i in 0 until attendanceDetails.rows.size){
-                                    attendanceDetails.rows[i].pinTypeText = (attendanceDetails.pin_type_text as JsonObject)
-                                        .get(attendanceDetails.rows[i].pin_type.toString()).asString
-                                    arrayList.add(attendanceDetails.rows[i])
-                                }*/
-                               // arrayList.addAll(attendanceDetails.rows)
                                 handler.post{attendanceDetailModelCallback.onSuccess(attendanceDetails)}
                             }).start()
                         }

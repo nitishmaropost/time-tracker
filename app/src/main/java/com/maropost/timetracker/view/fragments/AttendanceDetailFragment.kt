@@ -20,12 +20,14 @@ import com.maropost.timetracker.viewmodel.AttendanceDetailViewModel
 import kotlinx.android.synthetic.main.attendance_detail_fragment.*
 import java.util.*
 
-class AttendanceDetailFragment : MPBaseFragment() {
+class AttendanceDetailFragment : MPBaseFragment(), BottomSheetFragment.BottomSheetCallbacks {
+
     private var mView: View? = null
     private var attendanceDetailAdapter: AttendanceDetailAdapter? = null
     private var arrayList: ArrayList<Rows>? = null
     private var attendanceDetailViewModel: AttendanceDetailViewModel? = null
     private var mLastClickTime: Long = 0
+    private var bottomSheetFragment :BottomSheetFragment ?= null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (mView == null)
@@ -36,11 +38,11 @@ class AttendanceDetailFragment : MPBaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showToolbar(true)
-      //  setToolbarIconVisibility(false)
         removeOldToolbarIcons()
         setToolbarIcon()
         setTitle(getString(R.string.time_logs))
-        shimmer_view_container.startShimmerAnimation()
+
+        startShimmerAnimation()
         if (attendanceDetailViewModel == null) {
             attendanceDetailViewModel = AttendanceDetailViewModel()
             attendanceDetailViewModel = ViewModelProviders.of(this).get(AttendanceDetailViewModel::class.java)
@@ -48,40 +50,7 @@ class AttendanceDetailFragment : MPBaseFragment() {
             arrayList = ArrayList<Rows>()
             initializeRecyclerView()
             fetchAttendanceDetails()
-            setBottomSheet()
         }
-    }
-
-    private fun setBottomSheet() {
-        val behavior = BottomSheetBehavior.from<View>(design_bottom_sheet)
-        behavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                when (newState) {
-                    BottomSheetBehavior.STATE_DRAGGING -> Log.i(
-                        "BottomSheetCallback",
-                        "BottomSheetBehavior.STATE_DRAGGING"
-                    )
-                    BottomSheetBehavior.STATE_SETTLING -> Log.i(
-                        "BottomSheetCallback",
-                        "BottomSheetBehavior.STATE_SETTLING"
-                    )
-                    BottomSheetBehavior.STATE_EXPANDED -> Log.i(
-                        "BottomSheetCallback",
-                        "BottomSheetBehavior.STATE_EXPANDED"
-                    )
-                    BottomSheetBehavior.STATE_COLLAPSED -> Log.i(
-                        "BottomSheetCallback",
-                        "BottomSheetBehavior.STATE_COLLAPSED"
-                    )
-                    BottomSheetBehavior.STATE_HIDDEN -> Log.i("BottomSheetCallback", "BottomSheetBehavior.STATE_HIDDEN")
-                }
-            }
-
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                Log.i("BottomSheetCallback", "slideOffset: $slideOffset")
-            }
-        })
-
     }
 
     /**
@@ -104,9 +73,11 @@ class AttendanceDetailFragment : MPBaseFragment() {
         image.setOnClickListener{
             if (SystemClock.elapsedRealtime() - mLastClickTime > 1000) {
                 mLastClickTime = SystemClock.elapsedRealtime()
-                if(arrayList!!.isEmpty())
-                    showSnackAlert(getString(R.string.no_record_found))
-
+                if(bottomSheetFragment == null) {
+                    bottomSheetFragment = BottomSheetFragment()
+                    bottomSheetFragment?.setCallback(this)
+                }
+                bottomSheetFragment!!.show(fragmentManager, "TAG")
             }
         }
     }
@@ -117,14 +88,15 @@ class AttendanceDetailFragment : MPBaseFragment() {
     private fun observeLiveData() {
         attendanceDetailViewModel?.failedResponse?.observe(this, Observer { loginFailedResponse ->
             if(!TextUtils.isEmpty(loginFailedResponse))
-            showSnackAlert(loginFailedResponse)
+                showSnackAlert(loginFailedResponse)
             stopShimmerAnimation()
         })
 
         attendanceDetailViewModel?.arrayList?.observe(this, Observer { attendanceDetails ->
-            if (attendanceDetails?.rows!!.isNotEmpty())
-                this.arrayList?.addAll(attendanceDetails.rows)
-            attendanceDetailAdapter?.setModel(attendanceDetails)
+            //if (attendanceDetails?.rows!!.isNotEmpty())
+            this.arrayList?.clear()
+            this.arrayList?.addAll(attendanceDetails!!.rows)
+            attendanceDetailAdapter?.setModel(attendanceDetails!!)
             attendanceDetailAdapter?.notifyDataSetChanged()
             stopShimmerAnimation()
         })
@@ -149,6 +121,14 @@ class AttendanceDetailFragment : MPBaseFragment() {
     }
 
     /**
+     * Start shimmer animation
+     */
+    private fun startShimmerAnimation(){
+        shimmer_view_container.startShimmerAnimation()
+        shimmer_view_container.visibility = View.VISIBLE
+    }
+
+    /**
      * Stop shimmer animation
      */
     private fun stopShimmerAnimation(){
@@ -157,5 +137,11 @@ class AttendanceDetailFragment : MPBaseFragment() {
         if(arrayList!!.isEmpty())
             txtNoRecord.visibility = View.VISIBLE
         else txtNoRecord.visibility = View.GONE
+    }
+
+    override fun onDateSelected(startDate: String, endDate: String) {
+        if(bottomSheetFragment != null)
+            bottomSheetFragment?.dismiss()
+        attendanceDetailViewModel?.getFilteredAttendanceDetails(startDate,endDate)
     }
 }

@@ -26,4 +26,8 @@ class AttendanceDetailViewModel : ViewModel(), AttendanceDetailModel.AttendanceD
     override fun onFailure(failureMessage: String) {
         this.failedResponse.value = failureMessage
     }
+
+    fun getFilteredAttendanceDetails(startDate: String, endDate: String) {
+        attendanceDetailModel.getFilteredAttendanceDetails(startDate, endDate)
+    }
 }
