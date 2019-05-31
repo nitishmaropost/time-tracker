@@ -94,7 +94,7 @@ class AttendanceDetailFragment : MPBaseFragment(), BottomSheetFragment.BottomShe
 
         attendanceDetailViewModel?.arrayList?.observe(this, Observer { attendanceDetails ->
             this.arrayList?.clear()
-            //this.arrayList?.addAll(attendanceDetails!!.rows)
+            this.arrayList?.addAll(attendanceDetails!!.rows)
             attendanceDetailAdapter?.setModel(attendanceDetails!!)
             attendanceDetailAdapter?.notifyDataSetChanged()
             stopShimmerAnimation()

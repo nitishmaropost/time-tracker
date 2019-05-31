@@ -47,11 +47,11 @@
 
         <ImageView
                 android:id="@+id/txtNoRecord"
-                android:layout_width="219dp"
+                android:layout_width="220dp"
                 android:layout_height="220dp"
                 android:layout_centerInParent="true"
                 android:layout_marginStart="@dimen/dp_38"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:src="@drawable/no_result_found"/>
 
     </RelativeLayout>
