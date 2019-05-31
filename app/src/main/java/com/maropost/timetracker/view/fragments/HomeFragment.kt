@@ -1,5 +1,6 @@
 package com.maropost.timetracker.view.fragments
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.os.SystemClock
@@ -55,7 +56,7 @@ class HomeFragment : MPBaseFragment() {
             initialiseListener()
             showNavigationDrawer(true)
             setCurrentDate()
-            initializeRecyclerView()
+            //initializeRecyclerView()
             demoBarChart()
         }
     }
@@ -103,6 +104,7 @@ class HomeFragment : MPBaseFragment() {
     /**
      * Set current date on launch
      */
+    @SuppressLint("SimpleDateFormat")
     private fun setCurrentDate(){
         val c = Calendar.getInstance()
         val df = SimpleDateFormat("dd-MM-yyyy")
@@ -113,45 +115,42 @@ class HomeFragment : MPBaseFragment() {
     /**
      * Set selected date from picker
      */
+    @SuppressLint("SimpleDateFormat")
     fun setCalenderDetails(year: Int, month: Int, day: Int){
         val calendar = Calendar.getInstance()
         calendar.set(year, month, day)
         val sdf = SimpleDateFormat("dd-MM-yyyy")
-        val formattedDate: String= sdf.format(calendar.getTime())
+        val formattedDate: String= sdf.format(calendar.time)
         formatToTodayYesterday(formattedDate)
-
     }
 
     /*
     Display today/yesterday against date
     */
+    @SuppressLint("SimpleDateFormat")
     fun formatToTodayYesterday(formattedDate: String){
         val currentDate = Date(System.currentTimeMillis())
         val mydate = Date(System.currentTimeMillis() - 1000 * 60 * 60 * 24)
         val dateFormat = SimpleDateFormat("dd-MM-yyyy")
         val today: String= dateFormat.format(currentDate)
         val yesterday: String = dateFormat.format(mydate)
-
-        if(formattedDate.equals(yesterday)){
-            tvDay.text= "Yesterday, $formattedDate"
+        when {
+            formattedDate == yesterday -> tvDay.text= "Yesterday, $formattedDate"
+            formattedDate == today -> tvDay.text= "Today, $formattedDate"
+            else -> tvDay.text= "$formattedDate"
         }
-        else if(formattedDate.equals(today)){
-            tvDay.text= "Today, $formattedDate"
-        }
-        else
-            tvDay.text= "$formattedDate"
     }
 
 
     /*
     * Initialize recyclerview and set adapter
     */
-    private fun initializeRecyclerView(){
+    /*private fun initializeRecyclerView(){
         val layoutManager= LinearLayoutManager(activity!!, LinearLayoutManager.HORIZONTAL,false)
         timeDetailsAdapter = TimeDetailsAdapter(timeDetailsList, activity!!)
         timeDetailsRecyclerview.layoutManager = layoutManager
         timeDetailsRecyclerview.adapter = timeDetailsAdapter
-    }
+    }*/
 
     fun demoBarChart() {
         val labels = ArrayList<String>()
@@ -163,7 +162,7 @@ class HomeFragment : MPBaseFragment() {
         labels.add("Fri")
         labels.add("Sat")
 
-        var arrayList = ArrayList<BarEntry>()
+        val arrayList = ArrayList<BarEntry>()
         arrayList.add(BarEntry(9f, 0))
         arrayList.add(BarEntry(8.5f, 1))
         arrayList.add(BarEntry(2f, 2))
@@ -190,6 +189,5 @@ class HomeFragment : MPBaseFragment() {
         barchart.axisRight.setDrawGridLines(false)
         barchart.xAxis.position = XAxis.XAxisPosition.BOTTOM
         barchart.animateY(3000)
-
     }
 }

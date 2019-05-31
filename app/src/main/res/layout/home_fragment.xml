@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="@dimen/dp_5"
-                app:cardElevation="@dimen/dp_8"
+                app:cardElevation="@dimen/dp_4"
                 app:cardUseCompatPadding="true"
                 android:layout_marginTop="@dimen/dp_10"
                 android:layout_gravity="center">
@@ -125,11 +125,130 @@
         </RelativeLayout>
 
 
-        <android.support.v7.widget.RecyclerView
-                android:id="@+id/timeDetailsRecyclerview"
+        <!--   <android.support.v7.widget.RecyclerView
+                   android:id="@+id/timeDetailsRecyclerview"
+                   android:layout_width="match_parent"
+                   android:layout_marginTop="@dimen/dp_5"
+                   android:layout_height="wrap_content"/>-->
+
+        <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/dp_5"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/dp_10">
+
+            <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="@dimen/dp_5"
+                    app:cardElevation="@dimen/dp_4"
+                    android:layout_weight="1"
+                    app:cardUseCompatPadding="true">
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="@drawable/card1_gradient"
+                        android:paddingTop="@dimen/dp_25"
+                        android:paddingBottom="@dimen/dp_25">
+                    <TextView
+                            android:id="@+id/tvInTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_16"
+                            android:layout_gravity="center"
+                            android:textColor="@color/colorWhite"
+                            android:text="Today"
+                            android:textStyle="bold"
+                            android:padding="@dimen/dp_5"/>
+                    <TextView
+                            android:id="@+id/tvOutTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_15"
+                            android:layout_gravity="center"
+                            android:text="8 Hrs"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorWhite"
+                            android:padding="@dimen/dp_5"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="@dimen/dp_5"
+                    app:cardElevation="@dimen/dp_4"
+                    android:layout_weight="1"
+                    app:cardUseCompatPadding="true">
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="@drawable/card2_gradient"
+                        android:paddingTop="@dimen/dp_25"
+                        android:paddingBottom="@dimen/dp_25">
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_16"
+                            android:layout_gravity="center"
+                            android:textColor="@color/colorWhite"
+                            android:text="This Week"
+                            android:textStyle="bold"
+                            android:padding="@dimen/dp_5"/>
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_15"
+                            android:layout_gravity="center"
+                            android:text="40 Hrs"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorWhite"
+                            android:padding="@dimen/dp_5"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="@dimen/dp_5"
+                    app:cardElevation="@dimen/dp_4"
+                    android:layout_weight="1"
+                    app:cardUseCompatPadding="true">
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="@drawable/card3_gradient"
+                        android:paddingTop="@dimen/dp_25"
+                        android:paddingBottom="@dimen/dp_25">
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_16"
+                            android:layout_gravity="center"
+                            android:textColor="@color/colorWhite"
+                            android:text="This Month"
+                            android:textStyle="bold"
+                            android:padding="@dimen/dp_5"/>
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_15"
+                            android:layout_gravity="center"
+                            android:text="200 Hrs"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorWhite"
+                            android:padding="@dimen/dp_5"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+
+
 
         <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/barchart"
