@@ -21,7 +21,8 @@
             tools:targetApi="m">
 
         <activity android:name="com.maropost.timetracker.view.activities.MainActivity"
-                  android:theme="@style/AppTheme.NoActionBar">
+                  android:theme="@style/AppTheme.NoActionBar"
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

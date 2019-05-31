@@ -43,8 +43,8 @@ class MainActivity : MPBaseActivity() {
      * Display the initial splash view
      */
     private fun launchInitialView() {
-        //replaceFragment(SplashFragment(),false)
-        replaceFragment(HomeFragment(),true)
+        replaceFragment(SplashFragment(),false)
+        //replaceFragment(HomeFragment(),true)
     }
 
     /**

@@ -50,6 +50,14 @@ class AttendanceDetailFragment : MPBaseFragment(), BottomSheetFragment.BottomShe
             arrayList = ArrayList<Rows>()
             initializeRecyclerView()
             fetchAttendanceDetails()
+            initialiseListeners()
+        }
+    }
+
+    private fun initialiseListeners() {
+        txtRetry.setOnClickListener{
+            startShimmerAnimation()
+            fetchAttendanceDetails()
         }
     }
 
@@ -125,6 +133,8 @@ class AttendanceDetailFragment : MPBaseFragment(), BottomSheetFragment.BottomShe
     private fun startShimmerAnimation(){
         shimmer_view_container.startShimmerAnimation()
         shimmer_view_container.visibility = View.VISIBLE
+        imgNoResultFound.visibility = View.GONE
+        txtRetry.visibility = View.GONE
     }
 
     /**
@@ -133,9 +143,14 @@ class AttendanceDetailFragment : MPBaseFragment(), BottomSheetFragment.BottomShe
     private fun stopShimmerAnimation(){
         shimmer_view_container.stopShimmerAnimation()
         shimmer_view_container.visibility = View.GONE
-        if(arrayList!!.isEmpty())
-            txtNoRecord.visibility = View.VISIBLE
-        else txtNoRecord.visibility = View.GONE
+        if(arrayList!!.isEmpty()) {
+            imgNoResultFound.visibility = View.VISIBLE
+            txtRetry.visibility = View.VISIBLE
+        }
+        else {
+            imgNoResultFound.visibility = View.GONE
+            txtRetry.visibility = View.GONE
+        }
     }
 
     override fun onDateSelected(startDate: String, endDate: String) {

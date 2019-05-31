@@ -27,6 +27,7 @@
     <string name="set">Set</string>
     <string name="end_date">End Date</string>
     <string name="start_date">Start Date</string>
+    <string name="try_again">Try Again!</string>
 
     <array name="menuOptions">
         <item>Home</item>
