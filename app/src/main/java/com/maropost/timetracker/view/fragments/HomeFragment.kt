@@ -1,5 +1,6 @@
 package com.maropost.timetracker.view.fragments
 
+import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -16,10 +17,10 @@ import com.maropost.timetracker.R
 import com.maropost.timetracker.pojomodels.TimeUtils
 import com.maropost.timetracker.view.adapters.TimeDetailsAdapter
 import com.maropost.timetracker.viewmodel.HomeViewModel
+import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout
 import kotlinx.android.synthetic.main.home_fragment.*
 import java.text.SimpleDateFormat
 import java.util.*
-
 
 class HomeFragment : MPBaseFragment() {
 
@@ -62,6 +63,15 @@ class HomeFragment : MPBaseFragment() {
             }
             false
         })
+
+        //Pull to refresh
+        swipeRefresh.setWaveRGBColor(211,211,211)
+        swipeRefresh.setShadowRadius(0)
+        swipeRefresh.setOnRefreshListener(WaveSwipeRefreshLayout.OnRefreshListener() {
+            Task().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+        })
+
+
     }
 
     /**
@@ -155,5 +165,17 @@ class HomeFragment : MPBaseFragment() {
         barchart.xAxis.position = XAxis.XAxisPosition.BOTTOM
         barchart.animateY(3000)
 
+    }
+
+    private inner class Task :AsyncTask<Void, Void, String>() {
+        override fun doInBackground(vararg params: Void?): String {
+            return ""
+        }
+
+        override fun onPostExecute(responseBody: String) {
+            // Call setRefreshing(false) when the screen has been refreshed.
+            swipeRefresh.setRefreshing(false);
+            super.onPostExecute(responseBody);
+        }
     }
 }

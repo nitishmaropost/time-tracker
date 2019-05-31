@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.splash_fragment.*
 
 class SplashFragment : MPBaseFragment() {
     private var mView : View?= null
-    private val handler = Handler()
+    private var handler : Handler ?= null
     private var animationDrawable: AnimationDrawable? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -23,6 +23,7 @@ class SplashFragment : MPBaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        handler= Handler()
         showNavigationDrawer(false)
         showToolbar(false)
         //setupTransitionAnimation()
@@ -69,7 +70,7 @@ class SplashFragment : MPBaseFragment() {
      * If unavailable - Open Login screen
      */
     private fun launchView() {
-        handler.postDelayed({
+        handler?.postDelayed({
             //stopAnimation()
             replaceFragment(LoginFragment(),false)
         }, 4000)

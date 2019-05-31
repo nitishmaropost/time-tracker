@@ -2,7 +2,6 @@ package com.maropost.timetracker.view.activities
 
 import android.os.Bundle
 import com.maropost.timetracker.application.MyApplication
-import com.maropost.timetracker.view.fragments.AttendanceDetailFragment
 import com.maropost.timetracker.view.fragments.HomeFragment
 import com.maropost.timetracker.view.fragments.SplashFragment
 
@@ -18,9 +17,10 @@ class MainActivity : MPBaseActivity() {
     /**
      * Display the initial splash view
      */
-    private fun launchInitialView() {
+    fun launchInitialView() {
         replaceFragment(SplashFragment(),false)
         //replaceFragment(AttendanceDetailFragment(),true)
+        //Log.e("awew","wqeqw")
     }
 
     /**
@@ -42,5 +42,8 @@ class MainActivity : MPBaseActivity() {
         // Remove all app instances from memory
         android.os.Process.killProcess(android.os.Process.myPid())
     }
+
+
+
 }
 
