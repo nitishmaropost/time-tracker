@@ -29,6 +29,14 @@ class AttendanceDetailFragment : MPBaseFragment(), BottomSheetFragment.BottomShe
     private var bottomSheetFragment :BottomSheetFragment ?= null
     private var startDate = ""
     private var endDate = ""
+    private var dateType = DATETYPE.NONE
+
+    enum class DATETYPE{
+        NONE,
+        TODAY,
+        WEEKLY,
+        MONTHLY
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (mView == null)
@@ -178,5 +186,12 @@ class AttendanceDetailFragment : MPBaseFragment(), BottomSheetFragment.BottomShe
         this.startDate = startDate
         this.endDate = endDate
         attendanceDetailViewModel?.getFilteredAttendanceDetails(startDate,endDate)
+    }
+
+    /**
+     * Set date type selected from home screen
+     */
+    fun setDateType(dateType: DATETYPE) {
+        this.dateType = dateType
     }
 }

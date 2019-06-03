@@ -47,7 +47,6 @@ class HomeFragment : MPBaseFragment() {
 
         setTitle(getString(R.string.app_name))
         showToolbar(true)
-        //setToolbarIconVisibility(true)
         removeOldToolbarIcons()
         setToolbarIcon()
 
@@ -99,6 +98,21 @@ class HomeFragment : MPBaseFragment() {
 
     private fun initialiseListener() {
         imgDetails.setOnClickListener{replaceFragment(AttendanceDetailFragment(),true)}
+        lnrTodayBubble.setOnClickListener{
+            val attendanceDetailFragment = AttendanceDetailFragment()
+            attendanceDetailFragment.setDateType(AttendanceDetailFragment.DATETYPE.TODAY)
+            replaceFragment(attendanceDetailFragment,true)
+        }
+        lnrWeekBubble.setOnClickListener{
+            val attendanceDetailFragment = AttendanceDetailFragment()
+            attendanceDetailFragment.setDateType(AttendanceDetailFragment.DATETYPE.WEEKLY)
+            replaceFragment(attendanceDetailFragment,true)
+        }
+        lnrMonthBubble.setOnClickListener{
+            val attendanceDetailFragment = AttendanceDetailFragment()
+            attendanceDetailFragment.setDateType(AttendanceDetailFragment.DATETYPE.MONTHLY)
+            replaceFragment(attendanceDetailFragment,true)
+        }
     }
 
     /**

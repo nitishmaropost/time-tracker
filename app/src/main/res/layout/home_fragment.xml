@@ -148,6 +148,7 @@
                     android:layout_weight="1"
                     app:cardUseCompatPadding="true">
                 <LinearLayout
+                        android:id="@+id/lnrTodayBubble"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
@@ -185,6 +186,7 @@
                     android:layout_weight="1"
                     app:cardUseCompatPadding="true">
                 <LinearLayout
+                        android:id="@+id/lnrWeekBubble"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
@@ -220,6 +222,7 @@
                     android:layout_weight="1"
                     app:cardUseCompatPadding="true">
                 <LinearLayout
+                        android:id="@+id/lnrMonthBubble"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
