@@ -125,7 +125,7 @@ class Utility()  {
     }
 
     /**
-     * Convert date to epoch time
+     * Get date from specific date format
      */
     @SuppressLint("SimpleDateFormat")
     fun getEpochTime(date: String) : String {
@@ -140,11 +140,17 @@ class Utility()  {
         return output.format(d)
     }
 
+    /**
+     * Check if internet is connected or not
+     */
      fun isNetworkConnected(): Boolean {
         val cm = MyApplication.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
         return cm!!.activeNetworkInfo != null
     }
 
+    /**
+     * Get milli seconds from date string
+     */
     fun convertDateToMillis(date: String): Long {
         val sdf = SimpleDateFormat("dd-MM-yyyy")
         try {
@@ -156,10 +162,14 @@ class Utility()  {
         return 0
     }
 
-     fun getFormattedDate(calendar: Calendar):String{
+    /**
+     * Convert date string acc to specific format
+     */
+     fun getCurrentDate(calendar: Calendar):String{
         val sdf = SimpleDateFormat("dd-MM-yyyy")
         return sdf.format(calendar.time)
     }
+
 }
 
 

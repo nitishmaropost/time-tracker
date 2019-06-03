@@ -5,11 +5,8 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.os.SystemClock
 import android.support.v4.widget.DrawerLayout
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
-import android.view.View.OnTouchListener
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.github.mikephil.charting.components.XAxis
@@ -18,9 +15,7 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.maropost.timetracker.R
-import com.maropost.timetracker.application.MyApplication
-import com.maropost.timetracker.pojomodels.TimeUtils
-import com.maropost.timetracker.view.adapters.TimeDetailsAdapter
+import com.maropost.timetracker.utils.Utility
 import com.maropost.timetracker.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.home_fragment.*
 import java.text.SimpleDateFormat
@@ -31,8 +26,8 @@ class HomeFragment : MPBaseFragment() {
 
     private var mView : View?= null
     private var homeViewModel : HomeViewModel? = null
-    private var timeDetailsAdapter : TimeDetailsAdapter?= null
-    private var timeDetailsList = ArrayList<TimeUtils>()
+    /*private var timeDetailsAdapter : TimeDetailsAdapter?= null
+    private var timeDetailsList = ArrayList<TimeUtils>()*/
     private var mLastClickTime: Long = 0
 
 
@@ -86,7 +81,7 @@ class HomeFragment : MPBaseFragment() {
                 val month = c.get(Calendar.MONTH)
                 val day = c.get(Calendar.DAY_OF_MONTH)
                 val datePickerDialog = DatePickerDialog(
-                    activity,
+                    activity!!,
                     DatePickerDialog.OnDateSetListener { datePicker, mYear, mMonth, mDay ->
                         setCalenderDetails(mYear, mMonth, mDay)
                     }, year, month, day
@@ -96,34 +91,32 @@ class HomeFragment : MPBaseFragment() {
         }
     }
 
+    /**
+     * Setup listeners
+     */
     private fun initialiseListener() {
         imgDetails.setOnClickListener{replaceFragment(AttendanceDetailFragment(),true)}
-        lnrTodayBubble.setOnClickListener{
-            val attendanceDetailFragment = AttendanceDetailFragment()
-            attendanceDetailFragment.setDateType(AttendanceDetailFragment.DATETYPE.TODAY)
-            replaceFragment(attendanceDetailFragment,true)
-        }
-        lnrWeekBubble.setOnClickListener{
-            val attendanceDetailFragment = AttendanceDetailFragment()
-            attendanceDetailFragment.setDateType(AttendanceDetailFragment.DATETYPE.WEEKLY)
-            replaceFragment(attendanceDetailFragment,true)
-        }
-        lnrMonthBubble.setOnClickListener{
-            val attendanceDetailFragment = AttendanceDetailFragment()
-            attendanceDetailFragment.setDateType(AttendanceDetailFragment.DATETYPE.MONTHLY)
-            replaceFragment(attendanceDetailFragment,true)
-        }
+        lnrTodayBubble.setOnClickListener{ changeFragment(AttendanceDetailFragment.DATETYPE.TODAY) }
+        lnrWeekBubble.setOnClickListener{ changeFragment(AttendanceDetailFragment.DATETYPE.WEEKLY) }
+        lnrMonthBubble.setOnClickListener{ changeFragment(AttendanceDetailFragment.DATETYPE.MONTHLY)}
+    }
+
+    /**
+     * Replace current frag to AttendanceDetailFragment along with date type
+     */
+    private fun changeFragment(dateType: AttendanceDetailFragment.DATETYPE){
+        val attendanceDetailFragment = AttendanceDetailFragment()
+        attendanceDetailFragment.setDateType(dateType)
+        replaceFragment(attendanceDetailFragment,true)
     }
 
     /**
      * Set current date on launch
      */
-    @SuppressLint("SimpleDateFormat")
+    @SuppressLint("SetTextI18n")
     private fun setCurrentDate(){
-        val c = Calendar.getInstance()
-        val df = SimpleDateFormat("dd-MM-yyyy")
-        val formattedDate = df.format(c.time)
-        tvDay.text= "Today, "+formattedDate
+        val calendar = Calendar.getInstance()
+        tvDay.text = getString(R.string.today) + " " + Utility.getInstance().getCurrentDate(calendar)
     }
 
     /**

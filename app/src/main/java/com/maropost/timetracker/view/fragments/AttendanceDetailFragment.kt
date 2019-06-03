@@ -50,7 +50,6 @@ class AttendanceDetailFragment : MPBaseFragment(), BottomSheetFragment.BottomShe
         removeOldToolbarIcons()
         setToolbarIcon()
         setTitle(getString(R.string.time_logs))
-
         startShimmerAnimation()
         if (attendanceDetailViewModel == null) {
             attendanceDetailViewModel = AttendanceDetailViewModel()
@@ -58,9 +57,31 @@ class AttendanceDetailFragment : MPBaseFragment(), BottomSheetFragment.BottomShe
             observeLiveData()
             arrayList = ArrayList()
             initializeRecyclerView()
-            getCurrentWeekDateValues()
+            validateDateType()
             initialiseListeners()
         }
+    }
+
+    /**
+     * Get result based on date type
+     */
+    private fun validateDateType(){
+        when(dateType){
+            DATETYPE.NONE    -> getCurrentWeekDateValues()
+            DATETYPE.TODAY   -> getCurrentDayDateValues()
+            DATETYPE.WEEKLY  -> getCurrentWeekDateValues()
+            DATETYPE.MONTHLY -> getCurrentMonthDateValues()
+        }
+    }
+
+    /**
+     * Start date and End date = current date
+     */
+    private fun getCurrentDayDateValues() {
+        val calendar = Calendar.getInstance()
+        startDate = Utility.getInstance().getCurrentDate(calendar)
+        endDate = startDate
+        onDateSelected(startDate,endDate)
     }
 
     /**
@@ -69,9 +90,21 @@ class AttendanceDetailFragment : MPBaseFragment(), BottomSheetFragment.BottomShe
     private fun getCurrentWeekDateValues() {
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.DAY_OF_WEEK,calendar.firstDayOfWeek)
-        startDate = Utility.getInstance().getFormattedDate(calendar)
+        startDate = Utility.getInstance().getCurrentDate(calendar)
         calendar.add(Calendar.DAY_OF_WEEK, 6)
-        endDate = Utility.getInstance().getFormattedDate(calendar)
+        endDate = Utility.getInstance().getCurrentDate(calendar)
+        onDateSelected(startDate,endDate)
+    }
+
+    /**
+     * Start date and End date = current month first and last date
+     */
+    private fun getCurrentMonthDateValues() {
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.DAY_OF_MONTH,1)
+        startDate = Utility.getInstance().getCurrentDate(calendar)
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH))
+        endDate = Utility.getInstance().getCurrentDate(calendar)
         onDateSelected(startDate,endDate)
     }
 

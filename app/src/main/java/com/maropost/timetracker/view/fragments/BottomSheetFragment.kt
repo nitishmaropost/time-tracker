@@ -98,9 +98,9 @@ class BottomSheetFragment() : BottomSheetDialogFragment() {
     private fun setCurrentWeekDateValues() {
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.DAY_OF_WEEK,calendar.firstDayOfWeek)
-        startDate = Utility.getInstance().getFormattedDate(calendar)
+        startDate = Utility.getInstance().getCurrentDate(calendar)
         calendar.add(Calendar.DAY_OF_WEEK, 6)
-        endDate = Utility.getInstance().getFormattedDate(calendar)
+        endDate = Utility.getInstance().getCurrentDate(calendar)
         setupCalendar()
     }
 
@@ -127,7 +127,7 @@ class BottomSheetFragment() : BottomSheetDialogFragment() {
     private fun setCalenderDetails(year: Int, month: Int, day: Int){
         val calendar = Calendar.getInstance()
         calendar.set(year, month, day)
-        selectedDate = Utility.getInstance().getFormattedDate(calendar)
+        selectedDate = Utility.getInstance().getCurrentDate(calendar)
         setCalendarToSpecificDate(selectedDate)
         when(dateType){
             DATETYPE.START -> txtStartDate.text = selectedDate

@@ -1,12 +1,8 @@
 package com.maropost.timetracker.view.activities
 
 import android.os.Bundle
-import android.util.Log
 import com.maropost.timetracker.application.MyApplication
-import com.maropost.timetracker.view.fragments.AttendanceDetailFragment
-import com.maropost.timetracker.view.fragments.HomeFragment
 import com.maropost.timetracker.view.fragments.SplashFragment
-import android.util.DisplayMetrics
 
 class MainActivity : MPBaseActivity() {
 
