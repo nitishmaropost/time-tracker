@@ -155,6 +155,11 @@ class Utility()  {
         }
         return 0
     }
+
+     fun getFormattedDate(calendar: Calendar):String{
+        val sdf = SimpleDateFormat("dd-MM-yyyy")
+        return sdf.format(calendar.time)
+    }
 }
 
 

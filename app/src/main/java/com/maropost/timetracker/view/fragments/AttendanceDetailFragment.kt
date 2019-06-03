@@ -4,17 +4,16 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.os.SystemClock
-import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.maropost.timetracker.R
 import com.maropost.timetracker.pojomodels.Rows
+import com.maropost.timetracker.utils.Utility
 import com.maropost.timetracker.view.adapters.AttendanceDetailAdapter
 import com.maropost.timetracker.viewmodel.AttendanceDetailViewModel
 import kotlinx.android.synthetic.main.attendance_detail_fragment.*
@@ -28,6 +27,8 @@ class AttendanceDetailFragment : MPBaseFragment(), BottomSheetFragment.BottomShe
     private var attendanceDetailViewModel: AttendanceDetailViewModel? = null
     private var mLastClickTime: Long = 0
     private var bottomSheetFragment :BottomSheetFragment ?= null
+    private var startDate = ""
+    private var endDate = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (mView == null)
@@ -47,17 +48,34 @@ class AttendanceDetailFragment : MPBaseFragment(), BottomSheetFragment.BottomShe
             attendanceDetailViewModel = AttendanceDetailViewModel()
             attendanceDetailViewModel = ViewModelProviders.of(this).get(AttendanceDetailViewModel::class.java)
             observeLiveData()
-            arrayList = ArrayList<Rows>()
+            arrayList = ArrayList()
             initializeRecyclerView()
-            fetchAttendanceDetails()
+            getCurrentWeekDateValues()
             initialiseListeners()
         }
     }
 
+    /**
+     * Get first and last date of current week
+     */
+    private fun getCurrentWeekDateValues() {
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.DAY_OF_WEEK,calendar.firstDayOfWeek)
+        startDate = Utility.getInstance().getFormattedDate(calendar)
+        calendar.add(Calendar.DAY_OF_WEEK, 6)
+        endDate = Utility.getInstance().getFormattedDate(calendar)
+        onDateSelected(startDate,endDate)
+    }
+
+    /**
+     * Setup listeners
+     */
     private fun initialiseListeners() {
         txtRetry.setOnClickListener{
             startShimmerAnimation()
-            fetchAttendanceDetails()
+            if(!TextUtils.isEmpty(startDate) && !TextUtils.isEmpty(endDate))
+                attendanceDetailViewModel?.getFilteredAttendanceDetails(startDate,endDate)
+            else getCurrentWeekDateValues()
         }
     }
 
@@ -85,6 +103,7 @@ class AttendanceDetailFragment : MPBaseFragment(), BottomSheetFragment.BottomShe
                     bottomSheetFragment = BottomSheetFragment()
                     bottomSheetFragment?.setCallback(this)
                 }
+                bottomSheetFragment?.setDate(startDate,endDate)
                 bottomSheetFragment!!.show(fragmentManager, "TAG")
             }
         }
@@ -156,6 +175,8 @@ class AttendanceDetailFragment : MPBaseFragment(), BottomSheetFragment.BottomShe
     override fun onDateSelected(startDate: String, endDate: String) {
         if(bottomSheetFragment != null)
             bottomSheetFragment?.dismiss()
+        this.startDate = startDate
+        this.endDate = endDate
         attendanceDetailViewModel?.getFilteredAttendanceDetails(startDate,endDate)
     }
 }
