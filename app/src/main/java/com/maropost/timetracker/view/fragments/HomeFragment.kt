@@ -95,7 +95,7 @@ class HomeFragment : MPBaseFragment() {
      * Setup listeners
      */
     private fun initialiseListener() {
-        imgDetails.setOnClickListener{replaceFragment(AttendanceDetailFragment(),true)}
+        imgDetails.setOnClickListener{changeFragment(AttendanceDetailFragment.DATETYPE.NONE)}
         lnrTodayBubble.setOnClickListener{ changeFragment(AttendanceDetailFragment.DATETYPE.TODAY) }
         lnrWeekBubble.setOnClickListener{ changeFragment(AttendanceDetailFragment.DATETYPE.WEEKLY) }
         lnrMonthBubble.setOnClickListener{ changeFragment(AttendanceDetailFragment.DATETYPE.MONTHLY)}

@@ -2,6 +2,7 @@ package com.maropost.timetracker.view.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -70,15 +71,14 @@ class AttendanceDetailAdapter(private var arrayList: ArrayList<Rows>, val contex
 
         holder.txtTimeOfPunch?.text = strTime + " " + strAmOrPm.toUpperCase()
 
-        /*when(arrayList[position].pin_type){
-            1   -> holder.txtPunchType?.text = context.getString(R.string.in_fingerprint)
-            4   -> holder.txtPunchType?.text = context.getString(R.string.in_card)
-            101 -> holder.txtPunchType?.text = context.getString(R.string.out_fingerprint)
-            104 -> holder.txtPunchType?.text = context.getString(R.string.out_card)
-        }*/
-        if(attendanceDetails != null)
+        if(attendanceDetails != null) {
             holder.txtPunchType?.text = attendanceDetails!!.pinTypeTextMap?.get(arrayList[position].pin_type.toString())
-
+            when {
+                holder.txtPunchType?.text!!.contains("In") -> holder.txtPunchType?.setTextColor(ContextCompat.getColor(context, R.color.colorGreen_900))
+                holder.txtPunchType?.text!!.contains("Out") -> holder.txtPunchType?.setTextColor(ContextCompat.getColor(context, R.color.colorRed))
+                else -> holder.txtPunchType?.setTextColor(ContextCompat.getColor(context, R.color.colorBlack))
+            }
+        }
     }
 
     /**

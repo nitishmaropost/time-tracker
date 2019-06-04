@@ -16,7 +16,7 @@
 
     <!-- 3rd Gradient color -->
     <color name="colorGreen_A400">#00E676</color>
-    <color name="colorGreen_900">#1B5E20</color>
+    <color name="colorGreen_900">#27951d</color>
 
     <!-- 4th Gradient color -->
     <color name="colorRed_A400">#FF1744</color>
@@ -44,6 +44,7 @@
     <color name="colorBlack">#000000</color>
     <color name="colorShadow">#80DCDCDC</color>
     <color name="colorOrange">#ff530e</color>
+    <color name="colorOrangeLight">#B3ff530e</color>
     <color name="colorBlue">#02c0f4</color>
     <color name="colorRed">#e92c0c</color>
     <color name="placeholder_bg">#dddddd</color>

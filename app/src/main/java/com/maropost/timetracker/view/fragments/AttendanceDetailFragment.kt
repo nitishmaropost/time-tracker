@@ -67,7 +67,7 @@ class AttendanceDetailFragment : MPBaseFragment(), BottomSheetFragment.BottomShe
      */
     private fun validateDateType(){
         when(dateType){
-            DATETYPE.NONE    -> getCurrentWeekDateValues()
+            DATETYPE.NONE    -> fetchAttendanceDetails()
             DATETYPE.TODAY   -> getCurrentDayDateValues()
             DATETYPE.WEEKLY  -> getCurrentWeekDateValues()
             DATETYPE.MONTHLY -> getCurrentMonthDateValues()
@@ -78,10 +78,17 @@ class AttendanceDetailFragment : MPBaseFragment(), BottomSheetFragment.BottomShe
      * Start date and End date = current date
      */
     private fun getCurrentDayDateValues() {
+        getCurrentDate()
+        onDateSelected(startDate,endDate)
+    }
+
+    /**
+     * Get the date for the same day
+     */
+    private fun getCurrentDate() {
         val calendar = Calendar.getInstance()
         startDate = Utility.getInstance().getCurrentDate(calendar)
         endDate = startDate
-        onDateSelected(startDate,endDate)
     }
 
     /**
@@ -185,6 +192,7 @@ class AttendanceDetailFragment : MPBaseFragment(), BottomSheetFragment.BottomShe
      */
     private fun fetchAttendanceDetails() {
         attendanceDetailViewModel?.fetchAttendanceDetails()
+        getCurrentDate()
     }
 
     /**

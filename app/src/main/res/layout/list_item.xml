@@ -18,7 +18,7 @@
             android:id="@+id/txtItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/sp_16"
+            android:textSize="@dimen/_12ssp"
             android:textStyle="bold"
             android:textColor="@color/colorBlack"
             android:layout_gravity="center_vertical"
