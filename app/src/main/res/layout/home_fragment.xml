@@ -17,7 +17,7 @@
                 android:id="@+id/tvDay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_20ssp"
+                android:textSize="@dimen/_19ssp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
                 android:textColor="@color/colorBlack"

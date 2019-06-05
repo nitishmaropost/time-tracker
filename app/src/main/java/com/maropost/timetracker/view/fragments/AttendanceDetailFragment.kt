@@ -18,6 +18,9 @@ import com.maropost.timetracker.view.adapters.AttendanceDetailAdapter
 import com.maropost.timetracker.viewmodel.AttendanceDetailViewModel
 import kotlinx.android.synthetic.main.attendance_detail_fragment.*
 import java.util.*
+import com.bumptech.glide.Glide
+
+
 
 class AttendanceDetailFragment : MPBaseFragment(), BottomSheetFragment.BottomSheetCallbacks {
 
@@ -213,6 +216,10 @@ class AttendanceDetailFragment : MPBaseFragment(), BottomSheetFragment.BottomShe
         shimmer_view_container.visibility = View.GONE
         if(arrayList!!.isEmpty()) {
             imgNoResultFound.visibility = View.VISIBLE
+            Glide
+                .with(activity!!)
+                .load(R.drawable.no_result)
+                .into(imgNoResultFound)
             txtRetry.visibility = View.VISIBLE
         }
         else {

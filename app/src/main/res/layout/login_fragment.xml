@@ -165,9 +165,9 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/lnrCredentials"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/dp_40"
+            android:layout_marginBottom="@dimen/_32ssp"
             android:text="@string/login"
-            android:textSize="@dimen/_30ssp"
+            android:textSize="@dimen/_25ssp"
             android:textColor="@color/colorBlack"
             android:textStyle="bold"/>
 
