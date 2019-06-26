@@ -33,8 +33,9 @@ class LoginModel(private val loginTokenModelCallback: LoginTokenModelCallback) {
 
                             //sharedpreference & cache variable
                             val login = Gson().fromJson(response.toString(), Login::class.java)
-                            MyApplication.getInstance().accessToken = login.token
-                            saveLoginTokenInPreference(login.token)
+                            MyApplication.getInstance().accessToken = login.token //access token
+                            MyApplication.getInstance().user_role = login.user_info!!.user_role //user_role
+                            saveLoginTokenInPreference(login.token,login.user_info!!.user_role)
                             loginTokenModelCallback.onLoginSuccess()
                         }
                     } catch (e: Exception) {
@@ -51,10 +52,13 @@ class LoginModel(private val loginTokenModelCallback: LoginTokenModelCallback) {
     /**
      * Save login token in preference
      */
-    private fun saveLoginTokenInPreference(loginToken: String?) {
+    private fun saveLoginTokenInPreference(loginToken: String, user_role: String) {
         SharedPreferenceHelper.getInstance()
             .setSharedPreference(MyApplication.getInstance(),
-                MyApplication.getInstance().getString(R.string.login_token), loginToken!!)
+                MyApplication.getInstance().getString(R.string.login_token), loginToken)
+        SharedPreferenceHelper.getInstance()
+            .setSharedPreference(MyApplication.getInstance(),
+                MyApplication.getInstance().getString(R.string.user_role), user_role)
     }
 
     interface LoginTokenModelCallback {
