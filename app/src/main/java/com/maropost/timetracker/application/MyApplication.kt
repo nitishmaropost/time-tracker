@@ -10,7 +10,6 @@ class MyApplication : Application() {
 
     private lateinit var actiity: MainActivity
     var accessToken = ""
-    var user_role = ""
     var user_type= USER_TYPE.EMPLOYEE
 
     /**
@@ -68,20 +67,14 @@ class MyApplication : Application() {
      */
     private fun checkIfUserTypeAvailable() {
         val userRole = SharedPreferenceHelper.getInstance().getSharedPreference(
-            this,
-            getString(R.string.user_role),
-            SharedPreferenceHelper.PreferenceDataType.STRING
+            this, getString(R.string.user_role), SharedPreferenceHelper.PreferenceDataType.STRING
         ) as String
 
-        user_role= userRole
-
-        if (!TextUtils.isEmpty(user_role)){
-
-            if(user_role== "employee")
-                user_type= USER_TYPE.EMPLOYEE
-            if(user_role== "admin")
-                user_type= USER_TYPE.ADMIN
-
+        if (!TextUtils.isEmpty(userRole)){
+            when(userRole){
+                "employee" -> user_type= USER_TYPE.EMPLOYEE
+                "admin" -> user_type= USER_TYPE.ADMIN
+            }
         }
     }
 }
