@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.design.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            xmlns:shimmer="http://schemas.android.com/apk/res-auto">
+
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_view_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                shimmer:duration="800">
+
+            <!-- Adding rows of placeholders -->
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                <include layout="@layout/shimmer_item_attendance_fragment" />
+                <include layout="@layout/shimmer_item_attendance_fragment" />
+                <include layout="@layout/shimmer_item_attendance_fragment" />
+                <include layout="@layout/shimmer_item_attendance_fragment" />
+                <include layout="@layout/shimmer_item_attendance_fragment" />
+
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/attendanceRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/dp_10"
+                android:layout_height="wrap_content"/>
+
+        <ImageView
+                android:id="@+id/imgNoResultFound"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="-50dp"
+                android:visibility="gone"/>
+
+        <TextView
+                android:id="@+id/txtRetry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/try_again"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/dp_40"
+                android:paddingStart="@dimen/dp_40"
+                android:paddingEnd="@dimen/dp_40"
+                android:paddingTop="@dimen/dp_10"
+                android:paddingBottom="@dimen/dp_10"
+                android:visibility="gone"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:background="@drawable/rect_with_rounded_corners"/>
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

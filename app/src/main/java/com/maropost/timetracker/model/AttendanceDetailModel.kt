@@ -15,7 +15,6 @@ import org.json.JSONObject
 class AttendanceDetailModel(private val attendanceDetailModelCallback: AttendanceDetailModelCallback) {
 
     private val webServiceClient = WebServiceClient(OkhttpClient())
-    private var arrayList = ArrayList<Rows>()
     private val handler = Handler()
 
     /**

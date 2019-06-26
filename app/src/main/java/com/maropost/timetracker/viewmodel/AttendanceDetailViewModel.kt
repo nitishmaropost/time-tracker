@@ -27,6 +27,9 @@ class AttendanceDetailViewModel : ViewModel(), AttendanceDetailModel.AttendanceD
         this.failedResponse.value = failureMessage
     }
 
+    /**
+     * Get data according to date selected from calendar
+     */
     fun getFilteredAttendanceDetails(startDate: String, endDate: String) {
         attendanceDetailModel.getFilteredAttendanceDetails(startDate, endDate)
     }

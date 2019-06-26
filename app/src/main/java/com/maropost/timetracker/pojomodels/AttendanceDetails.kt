@@ -5,7 +5,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 class AttendanceDetails {
-    var length : Long = 0
+
     var rows = ArrayList<Rows>()
     @SerializedName("pin_type_text")
     @Expose
