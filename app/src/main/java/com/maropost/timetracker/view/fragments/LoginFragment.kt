@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.os.Handler
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -77,7 +78,9 @@ class LoginFragment : MPBaseFragment() {
 
         // Login failure observer
         loginViewModel?.loginFailedResponse?.observe(this, Observer { loginFailedResponse ->
+            if(!TextUtils.isEmpty(loginFailedResponse))
             showSnackAlert(loginFailedResponse)
+            else  showSnackAlert("Error")
         })
     }
 

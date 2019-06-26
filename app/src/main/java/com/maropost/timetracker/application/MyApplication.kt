@@ -3,7 +3,6 @@ package com.maropost.timetracker.application
 import android.app.Application
 import android.text.TextUtils
 import com.maropost.timetracker.R
-import com.maropost.timetracker.pojomodels.Login
 import com.maropost.timetracker.utils.SharedPreferenceHelper
 import com.maropost.timetracker.view.activities.MainActivity
 
@@ -34,10 +33,6 @@ class MyApplication : Application() {
     fun setMainActivityInstance(actiity: MainActivity){
         this.actiity = actiity
     }
-
-    /*fun setCalenderDetails(year: Int, month: Int, day: Int) {
-        actiity.setCalenderDetails(year,month,day)
-    }*/
 
     /**
      * Check if login token is present in preference or not

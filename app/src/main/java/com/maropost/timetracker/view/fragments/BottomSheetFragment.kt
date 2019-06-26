@@ -4,10 +4,12 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.support.design.widget.BottomSheetDialogFragment
 import android.support.v4.content.ContextCompat
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.widget.CalendarView
 import android.widget.TextView
 import com.maropost.timetracker.R
+import com.maropost.timetracker.utils.Utility
 import kotlinx.android.synthetic.main.fragment_bottom_sheet_dialog.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -20,6 +22,8 @@ class BottomSheetFragment() : BottomSheetDialogFragment() {
     private lateinit var txtEndDate : TextView
     private lateinit var calendarView : CalendarView
     private lateinit var bottomSheetCallbacks: BottomSheetCallbacks
+    private var startDate = ""
+    private var endDate = ""
 
     enum class DATETYPE{
         START,
@@ -35,24 +39,29 @@ class BottomSheetFragment() : BottomSheetDialogFragment() {
         txtEndDate = view.findViewById(R.id.txtEndDate)
         calendarView = view.findViewById(R.id.calendarView)
         initialiseListeners(dialog)
-        getCurrentWeekDateValues()
-
+        setupCalendar()
     }
 
     /**
-     * Set first and last date of current week
+     * Get startDate and endDate calculated from AttendanceDetail fragment
      */
-    private fun getCurrentWeekDateValues() {
+    fun setDate(startDate: String, endDate: String){
+        this.startDate = startDate
+        this.endDate = endDate
+    }
+
+    /**
+     * Set values in calendar view
+     */
+    private fun setupCalendar() {
         dateType = DATETYPE.START
-        val calendar = Calendar.getInstance()
-        calendar.set(Calendar.DAY_OF_WEEK,calendar.firstDayOfWeek)
-        val firstDayOfWeek = getFormattedDate(calendar)
-        txtStartDate.text = firstDayOfWeek
-        calendar.add(Calendar.DAY_OF_WEEK, 6)
-        val lastDayOfWeek = getFormattedDate(calendar)
-        txtEndDate.text = lastDayOfWeek
-        setupInfo()
-        setCalendarToSpecificDate(firstDayOfWeek)
+        // Check if startDate and endDate values are assigned coming from attendance detail fragment
+        if(!TextUtils.isEmpty(startDate) && !TextUtils.isEmpty(endDate)) {
+            txtStartDate.text = startDate
+            txtEndDate.text = endDate
+            setCalanderDateTextColors()
+            setCalendarToSpecificDate(startDate)
+        }
     }
 
     /**
@@ -64,7 +73,7 @@ class BottomSheetFragment() : BottomSheetDialogFragment() {
         }
 
         dialog?.btnClear?.setOnClickListener{
-            getCurrentWeekDateValues()
+            setCurrentWeekDateValues()
         }
         dialog?.btnSet?.setOnClickListener {
             bottomSheetCallbacks.onDateSelected(txtStartDate.text.toString(),txtEndDate.text.toString())
@@ -72,18 +81,33 @@ class BottomSheetFragment() : BottomSheetDialogFragment() {
 
         dialog?.lnrStartDate?.setOnClickListener{
             dateType = DATETYPE.START
-            setupInfo()
+            setCalanderDateTextColors()
             setCalendarToSpecificDate(txtStartDate.text.toString())
         }
 
         dialog?.lnrEndDate?.setOnClickListener{
             dateType = DATETYPE.END
-            setupInfo()
+            setCalanderDateTextColors()
             setCalendarToSpecificDate(txtEndDate.text.toString())
         }
     }
 
-    private fun setupInfo() {
+    /**
+     * When user clears the filter, set the calendar to first and last day of week
+     */
+    private fun setCurrentWeekDateValues() {
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.DAY_OF_WEEK,calendar.firstDayOfWeek)
+        startDate = Utility.getInstance().getCurrentDate(calendar)
+        calendar.add(Calendar.DAY_OF_WEEK, 6)
+        endDate = Utility.getInstance().getCurrentDate(calendar)
+        setupCalendar()
+    }
+
+    /**
+     * Change text colors for start date and end date
+     */
+    private fun setCalanderDateTextColors() {
         when(dateType){
             DATETYPE.START -> {
                 txtStartDate.setTextColor(ContextCompat.getColor(activity!!, R.color.colorBlack))
@@ -103,17 +127,12 @@ class BottomSheetFragment() : BottomSheetDialogFragment() {
     private fun setCalenderDetails(year: Int, month: Int, day: Int){
         val calendar = Calendar.getInstance()
         calendar.set(year, month, day)
-        selectedDate = getFormattedDate(calendar)
+        selectedDate = Utility.getInstance().getCurrentDate(calendar)
         setCalendarToSpecificDate(selectedDate)
         when(dateType){
             DATETYPE.START -> txtStartDate.text = selectedDate
             DATETYPE.END -> txtEndDate.text = selectedDate
         }
-    }
-
-    private fun getFormattedDate(calendar: Calendar):String{
-        val sdf = SimpleDateFormat("dd-MM-yyyy")
-        return sdf.format(calendar.time)
     }
 
     /**
@@ -123,6 +142,9 @@ class BottomSheetFragment() : BottomSheetDialogFragment() {
         calendarView.setDate ( SimpleDateFormat("dd-MM-yyyy").parse(strDate).time, true, true)
     }
 
+    /**
+     * Initialise callback
+     */
     fun setCallback(bottomSheetCallbacks: BottomSheetCallbacks) {
         this.bottomSheetCallbacks = bottomSheetCallbacks
     }
