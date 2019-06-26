@@ -30,6 +30,11 @@
     <string name="start_date">Start Date</string>
     <string name="try_again">Try Again!</string>
     <string name="today">Today,</string>
+    <string name="home">Home</string>
+    <string name="attendance">Attendance</string>
+    <string name="timesheet">Timesheet</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
 
     <array name="menuOptions">
         <item>Home</item>

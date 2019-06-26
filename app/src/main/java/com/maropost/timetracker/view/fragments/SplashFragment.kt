@@ -3,19 +3,21 @@ package com.maropost.timetracker.view.fragments
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.os.Handler
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.maropost.timetracker.R
+import com.maropost.timetracker.application.MyApplication
 import kotlinx.android.synthetic.main.splash_fragment.*
 
 class SplashFragment : MPBaseFragment() {
-    private var mView : View?= null
+    private var mView: View? = null
     private val handler = Handler()
     private var animationDrawable: AnimationDrawable? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        if(mView == null)
+        if (mView == null)
             mView = inflater.inflate(R.layout.splash_fragment, container, false)
         return mView
     }
@@ -46,22 +48,22 @@ class SplashFragment : MPBaseFragment() {
     /**
      * Start transition element animation
      */
-   /* private fun startAnimation(){
-        if (animationDrawable != null && !animationDrawable!!.isRunning) {
-            // start the animation
-            animationDrawable?.start();
-        }
-    }
-*/
+    /* private fun startAnimation(){
+         if (animationDrawable != null && !animationDrawable!!.isRunning) {
+             // start the animation
+             animationDrawable?.start();
+         }
+     }
+ */
     /**
      * Stop transition element animation
      */
-  /*  private fun stopAnimation(){
-        if (animationDrawable != null && animationDrawable!!.isRunning) {
-            // stop the animation
-            animationDrawable?.stop();
-        }
-    }*/
+    /*  private fun stopAnimation(){
+          if (animationDrawable != null && animationDrawable!!.isRunning) {
+              // stop the animation
+              animationDrawable?.stop();
+          }
+      }*/
 
     /**
      * Display the screen depending on user key present in preference or not
@@ -71,7 +73,9 @@ class SplashFragment : MPBaseFragment() {
     private fun launchView() {
         handler.postDelayed({
             //stopAnimation()
-            replaceFragment(LoginFragment(),false)
+            if (!TextUtils.isEmpty(MyApplication.getInstance().accessToken))
+                replaceFragment(HomeFragment(), true)
+            else replaceFragment(LoginFragment(), false)
         }, 4000)
     }
 

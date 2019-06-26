@@ -21,6 +21,7 @@ class NavigationAdapter(private val arrayList : ArrayList<NavigationItem>, priva
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
        holder.itemView.txtItem.text = arrayList[position].itemName
+       holder.itemView.imgItem.setImageResource(arrayList[position].itemImage)
         /*
         holder.itemView.imgFruit.setOnClickListener{
             fruitAdapterCallbacks.onItemClick(holder.itemView.imgFruit,arrayList[position])
