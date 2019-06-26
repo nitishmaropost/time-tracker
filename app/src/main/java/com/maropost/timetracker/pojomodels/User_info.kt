@@ -6,4 +6,5 @@ class User_info {
     var last_name: String= ""
     var email_id: String= ""
     var emp_code: String= ""
+    var user_role: String= ""
 }

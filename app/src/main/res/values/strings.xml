@@ -13,6 +13,7 @@
     <string name="login">Login</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="login_token">LOGIN_TOKEN</string>
+    <string name="user_role">USER_ROLE</string>
     <string name="enter_email">Enter email</string>
     <string name="enter_password">Enter password</string>
     <string name="enter_valid_email">Enter valid email</string>
