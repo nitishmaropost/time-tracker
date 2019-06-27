@@ -75,4 +75,8 @@ class MyApplication : Application() {
             }
         }
     }
+
+    fun navigationItemTapped(menuItem: String){
+        this.actiity.checkMenuItemTapped(menuItem)
+    }
 }

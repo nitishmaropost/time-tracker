@@ -52,34 +52,53 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
 
         setSupportActionBar(toolbar)
         initialiseListener()
+        //loadNavigationData()
     }
 
     private fun setupRecyclerView(){
         // Creates a vertical Layout Manager
         val navigationItem = NavigationItem()
-        navigationItem.itemName = "Home"
-        navigationItem.itemImage = R.drawable.ic_calendar
+        navigationItem.itemName = getString(R.string.home)
+        navigationItem.itemImage = R.drawable.ic_home
         itemList.add(navigationItem)
 
         val navigationItem2 = NavigationItem()
-        navigationItem2.itemName = "Calendar"
-        navigationItem2.itemImage = R.drawable.ic_calendar
+        navigationItem2.itemName = getString(R.string.attendance)
+        navigationItem2.itemImage = R.drawable.ic_calendar_check_o
         itemList.add(navigationItem2)
 
         val navigationItem3 = NavigationItem()
-        navigationItem3.itemName = "About Us"
-        navigationItem3.itemImage = R.drawable.ic_calendar
+        navigationItem3.itemName = getString(R.string.timesheet)
+        navigationItem3.itemImage = R.drawable.ic_calendar_o
         itemList.add(navigationItem3)
 
         val navigationItem4 = NavigationItem()
-        navigationItem4.itemName = "Logout"
-        navigationItem4.itemImage = R.drawable.ic_calendar
+        navigationItem4.itemName = getString(R.string.settings)
+        navigationItem4.itemImage = R.drawable.ic_gears
         itemList.add(navigationItem4)
+
+        val navigationItem5 = NavigationItem()
+        navigationItem5.itemName = getString(R.string.logout)
+        navigationItem5.itemImage = R.drawable.ic_power_off
+        itemList.add(navigationItem5)
 
 
         recyclerNavigation.layoutManager = LinearLayoutManager(this)
         navigationAdapter = NavigationAdapter(itemList, this,this)
         recyclerNavigation.adapter = navigationAdapter
+    }
+
+    fun hideMenu(){
+        if(slidingRootNav != null){
+            slidingRootNav?.closeMenu()
+            slidingRootNav == null
+            slidingRootNav = SlidingRootNavBuilder(this)
+                .withContentClickableWhenMenuOpened(false)
+                .withMenuLayout(R.layout.menu_left_drawer)
+                .withDragDistance(0)
+
+                .inject()
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -93,11 +112,11 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
             .withDragDistance(0)
             .inject()
 
-        Glide
+        /*Glide
             .with(this)
             .load(R.drawable.profilepic)
             .apply(RequestOptions.circleCropTransform())
-            .into(navigationImageView)
+            .into(navigationImageView)*/
 
         try {
             val pInfo = packageManager.getPackageInfo(packageName, 0)
@@ -339,6 +358,9 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
         else progressBar.visibility = View.GONE
     }
 
+    override fun onItemClick(menuItem: String) {
+        MyApplication.getInstance().navigationItemTapped(menuItem)
+    }
 }
 
 
