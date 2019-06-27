@@ -1,8 +1,17 @@
 package com.maropost.timetracker.view.activities
 
 import android.os.Bundle
+import com.maropost.timetracker.R
 import com.maropost.timetracker.application.MyApplication
+import com.maropost.timetracker.view.fragments.HomeFragment
 import com.maropost.timetracker.view.fragments.SplashFragment
+import android.text.method.TextKeyListener.clear
+import android.R.id.edit
+import android.content.Context
+import android.content.SharedPreferences
+import com.maropost.timetracker.utils.SharedPreferenceHelper
+import com.maropost.timetracker.view.fragments.LoginFragment
+
 
 class MainActivity : MPBaseActivity() {
 
@@ -39,6 +48,16 @@ class MainActivity : MPBaseActivity() {
         super.onDestroy()
         // Remove all app instances from memory
         android.os.Process.killProcess(android.os.Process.myPid())
+    }
+
+    fun checkMenuItemTapped(menuItem: String){
+        when(menuItem){
+            getString(R.string.logout)-> {
+hideMenu()
+                SharedPreferenceHelper.getInstance().clearSharedPreference(this,"PREF")
+                replaceFragment(LoginFragment(), false)
+            }
+        }
     }
 }
 

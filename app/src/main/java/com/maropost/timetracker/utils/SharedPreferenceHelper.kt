@@ -61,4 +61,13 @@ class SharedPreferenceHelper {
             PreferenceDataType.BOOLEAN -> settings.getBoolean(key, false)
         }
     }
+
+    /*
+    Clear Shared Preferences file*/
+    fun clearSharedPreference(context: Context, prefFile: String) {
+        val myPref = context.getSharedPreferences(prefFile, 0)
+        val editor = myPref.edit()
+        editor.clear()
+        editor.apply()
+    }
 }
