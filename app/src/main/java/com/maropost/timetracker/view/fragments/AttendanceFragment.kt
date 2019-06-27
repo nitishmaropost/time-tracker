@@ -10,13 +10,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.maropost.timetracker.R
+import com.maropost.timetracker.application.MyApplication
 import com.maropost.timetracker.pojomodels.Attendance
+import com.maropost.timetracker.pojomodels.RowShifts
 import com.maropost.timetracker.view.adapters.AttendanceAdapter
 import com.maropost.timetracker.viewmodel.AttendanceViewModel
-import kotlinx.android.synthetic.main.attendance_detail_fragment.*
-import kotlinx.android.synthetic.main.attendance_fragment.imgNoResultFound
-import kotlinx.android.synthetic.main.attendance_fragment.shimmer_view_container
-import kotlinx.android.synthetic.main.attendance_fragment.txtRetry
+import kotlinx.android.synthetic.main.attendance_fragment.*
 import java.util.*
 
 class AttendanceFragment : MPBaseFragment(){
@@ -24,7 +23,7 @@ class AttendanceFragment : MPBaseFragment(){
     private var mView: View? = null
     private var attendanceViewModel: AttendanceViewModel? = null
     private var attendanceAdapter: AttendanceAdapter? = null
-    private var arrayList: ArrayList<Attendance>? = null
+    private var arrayList: ArrayList<RowShifts>? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (mView == null)
@@ -61,8 +60,7 @@ class AttendanceFragment : MPBaseFragment(){
 
         attendanceViewModel?.arrayList?.observe(this, Observer { attendanceDetails ->
             this.arrayList?.clear()
-          //  this.arrayList?.addAll(attendanceDetails!!.rows)
-            attendanceAdapter?.setModel(attendanceDetails!!)
+            this.arrayList?.addAll(attendanceDetails!!)
             attendanceAdapter?.notifyDataSetChanged()
             stopShimmerAnimation()
         })
@@ -114,9 +112,9 @@ class AttendanceFragment : MPBaseFragment(){
     private fun initializeRecyclerView() {
         val layoutManager = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
         attendanceAdapter = AttendanceAdapter(arrayList!!, activity!!)
-        detailRecyclerView.layoutManager = layoutManager
-        detailRecyclerView.adapter?.setHasStableIds(true)
-        detailRecyclerView.adapter = attendanceAdapter
+        attendanceRecyclerView.layoutManager = layoutManager
+        attendanceRecyclerView.adapter?.setHasStableIds(true)
+        attendanceRecyclerView.adapter = attendanceAdapter
     }
 
     /**
@@ -124,6 +122,7 @@ class AttendanceFragment : MPBaseFragment(){
      * else fetch particular user records
      */
     private fun validateUserAttendanceRecord() {
+        if(MyApplication.getInstance().user_type == MyApplication.USER_TYPE.ADMIN)
         attendanceViewModel?.fetchUserList()
     }
 }

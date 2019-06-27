@@ -6,12 +6,11 @@ import com.google.gson.Gson
 import com.maropost.timetracker.clients.OkhttpClient
 import com.maropost.timetracker.clients.WebServiceClient
 import com.maropost.timetracker.pojomodels.Attendance
-import com.maropost.timetracker.pojomodels.AttendanceDetails
-import com.maropost.timetracker.pojomodels.Rows
+import com.maropost.timetracker.pojomodels.RowShifts
 import com.maropost.timetracker.utils.Constants
 import org.json.JSONObject
 
-class AttendanceModel(private val attendanceModelCallback: AttendanceModel.AttendanceModelCallback) {
+class AttendanceModel(private val attendanceModelCallback: AttendanceModelCallback) {
 
     private val webServiceClient = WebServiceClient(OkhttpClient())
     private val handler = Handler()
@@ -19,9 +18,11 @@ class AttendanceModel(private val attendanceModelCallback: AttendanceModel.Atten
     /**
      * Get users for admin
      */
-    fun fetchUserList() {
+    fun fetchUserList(/*emp_code: String, startDate: String, endDate: String*/) {
         val payload = JSONObject()
-        webServiceClient.callWebService(payload,"apiRequestUrl" , Constants.REQUEST.GET,
+        val apiRequestUrl = Constants.FETCH_SHIFT_RECORDS_API + /*"?emp_code=" +
+                "176" + */ "?&start_date=" + "1558204200000" + "&end_date=" + "1558722600000"
+        webServiceClient.callWebService(payload, apiRequestUrl, Constants.REQUEST.GET,
             object: WebServiceClient.WebServiceClientCallback{
                 override fun onSuccess(response: String) {
                     try {
@@ -29,7 +30,7 @@ class AttendanceModel(private val attendanceModelCallback: AttendanceModel.Atten
                             Thread(Runnable {
                                 val json = JSONObject(response)
                                 val attendance =  Gson().fromJson(json.toString(), Attendance::class.java)
-                                handler.post{attendanceModelCallback.onSuccess(attendance)}
+                                handler.post{attendanceModelCallback.onSuccess(attendance.rowShifts)}
                             }).start()
                         }
                     } catch (e: Exception) {
@@ -43,7 +44,7 @@ class AttendanceModel(private val attendanceModelCallback: AttendanceModel.Atten
     }
 
     interface AttendanceModelCallback{
-        fun onSuccess(attendance: Attendance)
+        fun onSuccess(arrayList: ArrayList<RowShifts>)
         fun onFailure(failureMessage : String)
     }
 }

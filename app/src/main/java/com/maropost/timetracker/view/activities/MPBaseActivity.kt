@@ -86,10 +86,11 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
     private fun loadNavigationData(){
 
         slidingRootNav = SlidingRootNavBuilder(this)
-            .withToolbarMenuToggle(toolbar)
+            //.withToolbarMenuToggle(toolbar)
             .withMenuOpened(false)
             .withContentClickableWhenMenuOpened(false)
             .withMenuLayout(R.layout.menu_left_drawer)
+            .withDragDistance(0)
             .inject()
 
         Glide

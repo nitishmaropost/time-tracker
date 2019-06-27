@@ -67,13 +67,11 @@ class MyApplication : Application() {
      */
     private fun checkIfUserTypeAvailable() {
         val userRole = SharedPreferenceHelper.getInstance().getSharedPreference(
-            this, getString(R.string.user_role), SharedPreferenceHelper.PreferenceDataType.STRING
-        ) as String
-
+            this, getString(R.string.user_role), SharedPreferenceHelper.PreferenceDataType.STRING) as String
         if (!TextUtils.isEmpty(userRole)){
             when(userRole){
-                "employee" -> user_type= USER_TYPE.EMPLOYEE
-                "admin" -> user_type= USER_TYPE.ADMIN
+                "employee" -> user_type = USER_TYPE.EMPLOYEE
+                "admin"    -> user_type = USER_TYPE.ADMIN
             }
         }
     }

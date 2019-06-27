@@ -61,6 +61,15 @@
                     android:textStyle="bold"
                     android:text="Emp Code"/>
 
+            <TextView
+                    android:id="@+id/txtEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_12ssp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textStyle="bold"
+                    android:text="Email"/>
+
         </LinearLayout>
     </android.support.v7.widget.CardView>
 

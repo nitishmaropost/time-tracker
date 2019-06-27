@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 class Attendance {
 
-    @SerializedName("users")
+    @SerializedName("rows")
     @Expose
-    var users : Map<String, String> ?= null
+    var rowShifts = ArrayList<RowShifts>()
 }
