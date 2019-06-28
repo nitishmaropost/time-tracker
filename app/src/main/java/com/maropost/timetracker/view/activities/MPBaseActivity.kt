@@ -52,7 +52,6 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
 
         setSupportActionBar(toolbar)
         initialiseListener()
-        //loadNavigationData()
     }
 
     private fun setupRecyclerView(){
@@ -86,19 +85,6 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
         recyclerNavigation.layoutManager = LinearLayoutManager(this)
         navigationAdapter = NavigationAdapter(itemList, this,this)
         recyclerNavigation.adapter = navigationAdapter
-    }
-
-    fun hideMenu(){
-        if(slidingRootNav != null){
-            slidingRootNav?.closeMenu()
-            slidingRootNav == null
-            slidingRootNav = SlidingRootNavBuilder(this)
-                .withContentClickableWhenMenuOpened(false)
-                .withMenuLayout(R.layout.menu_left_drawer)
-                .withDragDistance(0)
-
-                .inject()
-        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -359,6 +345,7 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
 
     override fun onItemClick(menuItem: String) {
         MyApplication.getInstance().navigationItemTapped(menuItem)
+        slidingRootNav?.closeMenu()
     }
 }
 

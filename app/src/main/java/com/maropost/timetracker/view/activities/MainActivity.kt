@@ -11,6 +11,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.maropost.timetracker.utils.SharedPreferenceHelper
 import com.maropost.timetracker.view.fragments.LoginFragment
+import com.maropost.timetracker.view.fragments.SettingsFragment
 
 
 class MainActivity : MPBaseActivity() {
@@ -53,10 +54,11 @@ class MainActivity : MPBaseActivity() {
     fun checkMenuItemTapped(menuItem: String){
         when(menuItem){
             getString(R.string.logout)-> {
-hideMenu()
                 SharedPreferenceHelper.getInstance().clearSharedPreference(this,"PREF")
                 replaceFragment(LoginFragment(), false)
             }
+            getString(R.string.settings)-> {
+                replaceFragment(SettingsFragment(), true)}
         }
     }
 }
