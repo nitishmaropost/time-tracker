@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.maropost.timetracker.R
 import com.maropost.timetracker.application.MyApplication
-import kotlinx.android.synthetic.main.splash_fragment.*
 
 class SplashFragment : MPBaseFragment() {
     private var mView: View? = null
@@ -25,7 +24,7 @@ class SplashFragment : MPBaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        showNavigationDrawer(false)
+        lockNavigationDrawer(false)
         showToolbar(false)
         //setupTransitionAnimation()
         launchView()

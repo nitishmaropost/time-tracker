@@ -91,7 +91,7 @@ open class MPBaseFragment : Fragment() {
     /**
      * Control navigation drawer visibility
      */
-    fun showNavigationDrawer(allow:Boolean){
+    fun lockNavigationDrawer(allow:Boolean){
         (activity as MPBaseActivity).showNavigationDrawer(allow)
     }
 

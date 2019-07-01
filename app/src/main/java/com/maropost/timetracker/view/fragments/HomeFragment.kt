@@ -41,6 +41,7 @@ class HomeFragment : MPBaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setTitle(getString(R.string.app_name))
+        lockNavigationDrawer(false)
         showToolbar(true)
         removeOldToolbarIcons()
         setToolbarIcon()
@@ -48,7 +49,6 @@ class HomeFragment : MPBaseFragment() {
         if(homeViewModel == null) {
             homeViewModel = HomeViewModel()
             initialiseListener()
-            showNavigationDrawer(true)
             setCurrentDate()
             //initializeRecyclerView()
             demoBarChart()

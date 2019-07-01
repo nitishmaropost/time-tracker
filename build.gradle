@@ -26,3 +26,14 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext {
+    userOrg = 'yarolegovich'
+    groupId = 'com.yarolegovich'
+    uploadName = 'SlidingRootNav'
+    description = 'DrawerLayout-like ViewGroup, where a "drawer" is hidden under the content view, which can be shifted to make the drawer visible.'
+    publishVersion = '1.1.0'
+    licences = ['Apache-2.0']
+
+    supportLibVersion = '26.0.0'
+}

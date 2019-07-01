@@ -15,6 +15,7 @@ import android.support.v4.widget.DrawerLayout.LOCK_MODE_UNLOCKED
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import android.view.DragEvent
 import android.view.View
 import android.widget.Button
 import com.bumptech.glide.Glide
@@ -27,6 +28,8 @@ import com.maropost.timetracker.view.adapters.NavigationAdapterCallbacks
 import com.maropost.timetracker.view.fragments.HomeFragment
 import com.yarolegovich.slidingrootnav.SlidingRootNav
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder
+import com.yarolegovich.slidingrootnav.SlidingRootNavLayout
+import com.yarolegovich.slidingrootnav.callback.DragListener
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -37,7 +40,7 @@ import kotlin.collections.ArrayList
 
 open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
 
-    private var slidingRootNav: SlidingRootNav? = null
+    private var slidingRootNav: SlidingRootNav ?= null
     private var navigationAdapter:NavigationAdapter ? = null
     private var itemList  = ArrayList<NavigationItem>()
     private var mLastClickTime: Long = 0
@@ -52,7 +55,8 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
 
         setSupportActionBar(toolbar)
         initialiseListener()
-        //loadNavigationData()
+        loadNavigationData()
+        setupRecyclerView()
     }
 
     private fun setupRecyclerView(){
@@ -89,27 +93,20 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
     }
 
     fun hideMenu(){
-        if(slidingRootNav != null){
-            slidingRootNav?.closeMenu()
-            slidingRootNav == null
-            slidingRootNav = SlidingRootNavBuilder(this)
-                .withContentClickableWhenMenuOpened(false)
-                .withMenuLayout(R.layout.menu_left_drawer)
-                .withDragDistance(0)
+        slidingRootNav?.closeMenu()
+        slidingRootNav?.isMenuLocked = true
 
-                .inject()
-        }
     }
 
     @SuppressLint("SetTextI18n")
     private fun loadNavigationData(){
 
         slidingRootNav = SlidingRootNavBuilder(this)
-            //.withToolbarMenuToggle(toolbar)
+            .withToolbarMenuToggle(toolbar)
             .withMenuOpened(false)
             .withContentClickableWhenMenuOpened(false)
             .withMenuLayout(R.layout.menu_left_drawer)
-            .withDragDistance(0)
+            .withMenuLocked(false)
             .inject()
 
         /*Glide
@@ -124,12 +121,6 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
             txtVersion.text = "Version $version"
         } catch (e: PackageManager.NameNotFoundException) {
             e.printStackTrace()
-        }
-
-
-
-        navigationImageView.setOnClickListener{
-            Log.e("navigationImageView","")
         }
     }
 
@@ -340,13 +331,7 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
      * Control navigation drawer visibility
      */
     fun showNavigationDrawer(allow: Boolean) {
-        if (allow) {
-            mDrawerLayout.setDrawerLockMode(LOCK_MODE_UNLOCKED)
-            loadNavigationData()
-            setupRecyclerView()
-        }
-        else
-            mDrawerLayout.setDrawerLockMode(LOCK_MODE_LOCKED_CLOSED)
+        slidingRootNav?.isMenuLocked = allow
     }
 
     /**

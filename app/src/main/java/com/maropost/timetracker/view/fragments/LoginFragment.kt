@@ -1,7 +1,6 @@
 package com.maropost.timetracker.view.fragments
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.os.Handler
@@ -35,7 +34,7 @@ class LoginFragment : MPBaseFragment() {
             observeLiveData()
             initialiseListeners()
         }
-        showNavigationDrawer(false)
+        lockNavigationDrawer(true)
         showToolbar(false)
     }
 

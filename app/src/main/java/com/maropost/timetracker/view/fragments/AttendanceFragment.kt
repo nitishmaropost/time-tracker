@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.maropost.timetracker.R
 import com.maropost.timetracker.application.MyApplication
-import com.maropost.timetracker.pojomodels.Attendance
 import com.maropost.timetracker.pojomodels.RowShifts
 import com.maropost.timetracker.view.adapters.AttendanceAdapter
 import com.maropost.timetracker.viewmodel.AttendanceViewModel
@@ -34,6 +33,7 @@ class AttendanceFragment : MPBaseFragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showToolbar(true)
+        lockNavigationDrawer(true)
         removeToolbarIconLayout()
         setTitle("")
         startShimmerAnimation()
