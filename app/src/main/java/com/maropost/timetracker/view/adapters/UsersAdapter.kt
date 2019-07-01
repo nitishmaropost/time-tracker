@@ -9,20 +9,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.maropost.timetracker.R
-import com.maropost.timetracker.pojomodels.Attendance
 import com.maropost.timetracker.pojomodels.RowShifts
-import kotlinx.android.synthetic.main.item_attendance_fragment.view.*
+import kotlinx.android.synthetic.main.item_users_fragment.view.*
 import java.util.*
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.text.SpannableString
 import android.graphics.Color
+import android.widget.LinearLayout
 
 
-class AttendanceAdapter (private var arrayList: ArrayList<RowShifts>, val context: Context) : RecyclerView.Adapter<AttendanceViewHolder>() {
+class UsersAdapter (private var arrayList: ArrayList<RowShifts>, val context: Context,
+                         private val attendanceAdapterCallbacks: UsersAdapterCallbacks) : RecyclerView.Adapter<UsersViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AttendanceViewHolder {
-        return AttendanceViewHolder(LayoutInflater.from(context).inflate(R.layout.item_attendance_fragment, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UsersViewHolder {
+        return UsersViewHolder(LayoutInflater.from(context).inflate(R.layout.item_users_fragment, parent, false))
     }
 
     override fun getItemCount(): Int {
@@ -34,7 +35,7 @@ class AttendanceAdapter (private var arrayList: ArrayList<RowShifts>, val contex
     }
 
     @SuppressLint("SetTextI18n", "SimpleDateFormat")
-    override fun onBindViewHolder(holder: AttendanceViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: UsersViewHolder, position: Int) {
 
         // Emp name
         holder.txtEmpName?.text = arrayList[position].user_data?.full_name
@@ -62,13 +63,23 @@ class AttendanceAdapter (private var arrayList: ArrayList<RowShifts>, val contex
             holder.txtDepartment?.text = arrayList[position].user_data?.department
             holder.txtDepartment?.visibility = View.VISIBLE
         }else holder.txtDepartment?.visibility = View.GONE
+
+        //Card touch event
+        holder.lnrCard?.setOnClickListener{
+            attendanceAdapterCallbacks.onItemClick(arrayList[position])
+        }
     }
 }
 
-class AttendanceViewHolder(view: View): RecyclerView.ViewHolder(view) {
+interface UsersAdapterCallbacks{
+    fun onItemClick(rowShifts: RowShifts)
+}
+
+class UsersViewHolder(view: View): RecyclerView.ViewHolder(view) {
     var txtEmpName: TextView? = view.txtEmpName
     var txtPosition: TextView? = view.txtPosition
     var txtDepartment : TextView? = view.txtDepartment
     var txtEmpCode : TextView? = view.txtEmpCode
     var txtEmail : TextView? = view.txtEmail
+    var lnrCard : LinearLayout? = view.lnrCard
 }

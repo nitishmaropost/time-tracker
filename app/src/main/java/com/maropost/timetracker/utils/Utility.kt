@@ -140,6 +140,18 @@ class Utility()  {
         return output.format(d)
     }
 
+    fun getDateFromString(date: String) : String {
+        val input = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+        val output = SimpleDateFormat("dd/MM/yyyy")
+        var d: Date? = null
+        try {
+            d = input.parse(date)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return output.format(d)
+    }
+
     /**
      * Check if internet is connected or not
      */

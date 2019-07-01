@@ -45,6 +45,7 @@ class HomeFragment : MPBaseFragment() {
         showToolbar(true)
         removeOldToolbarIcons()
         setToolbarIcon()
+        setSearchVisibility(false)
 
         if(homeViewModel == null) {
             homeViewModel = HomeViewModel()
@@ -99,7 +100,7 @@ class HomeFragment : MPBaseFragment() {
         lnrTodayBubble.setOnClickListener{ changeFragment(AttendanceDetailFragment.DATETYPE.TODAY) }
         lnrWeekBubble.setOnClickListener{ changeFragment(AttendanceDetailFragment.DATETYPE.WEEKLY) }
         lnrMonthBubble.setOnClickListener{ /*changeFragment(AttendanceDetailFragment.DATETYPE.MONTHLY)*/
-        replaceFragment(AttendanceFragment(),true)}
+        replaceFragment(UsersFragment(),true)}
     }
 
     /**

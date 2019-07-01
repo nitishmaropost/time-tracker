@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Emp Name"
+        android:textStyle="bold"
+        android:textSize="@dimen/_18ssp"
+        android:textColor="@color/colorRed"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_10sdp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_10sdp">
+        <TextView
+            android:id="@+id/txtWorkTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Work Time"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:textColor="@color/colorWhite"
+            android:background="@color/dark_gray"
+            android:padding="@dimen/_8sdp"/>
+        <TextView
+            android:id="@+id/txtPremisisTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="@dimen/_8sdp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:textColor="@color/colorWhite"
+            android:background="@color/dark_gray"
+            android:text="Premises Time"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_10sdp">
+        <TextView
+            android:id="@+id/txtPresents"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Presents"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:textColor="@color/colorWhite"
+            android:background="@color/dark_gray"
+            android:padding="@dimen/_8sdp"/>
+        <TextView
+            android:id="@+id/txtAbsents"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="@dimen/_8sdp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:textColor="@color/colorWhite"
+            android:background="@color/dark_gray"
+            android:text="Absents"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/shiftsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_10sdp"/>
+
+</LinearLayout>

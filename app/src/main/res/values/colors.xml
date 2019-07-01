@@ -48,6 +48,8 @@
     <color name="colorBlue">#02c0f4</color>
     <color name="colorRed">#e92c0c</color>
     <color name="placeholder_bg">#dddddd</color>
+    <color name="blue">#0000ff</color>
+
 
     <color name="colorWhite">#FFFFFF</color>
 </resources>

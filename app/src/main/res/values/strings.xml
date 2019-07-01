@@ -35,6 +35,13 @@
     <string name="timesheet">Timesheet</string>
     <string name="settings">Settings</string>
     <string name="logout">Logout</string>
+    <string name="shifts">Shifts</string>
+    <string name="work_time">Work Time:</string>
+    <string name="premisis_time">Premisis Time:</string>
+    <string name="presents">Presents:</string>
+    <string name="absents">Absents:</string>
+    <string name="hrs">hrs</string>
+
 
     <array name="menuOptions">
         <item>Home</item>

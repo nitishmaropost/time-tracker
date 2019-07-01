@@ -12,21 +12,22 @@ import com.bumptech.glide.Glide
 import com.maropost.timetracker.R
 import com.maropost.timetracker.application.MyApplication
 import com.maropost.timetracker.pojomodels.RowShifts
-import com.maropost.timetracker.view.adapters.AttendanceAdapter
-import com.maropost.timetracker.viewmodel.AttendanceViewModel
-import kotlinx.android.synthetic.main.attendance_fragment.*
+import com.maropost.timetracker.view.adapters.UsersAdapter
+import com.maropost.timetracker.view.adapters.UsersAdapterCallbacks
+import com.maropost.timetracker.viewmodel.UsersViewModel
+import kotlinx.android.synthetic.main.users_fragment.*
 import java.util.*
 
-class AttendanceFragment : MPBaseFragment(){
+class UsersFragment : MPBaseFragment(), UsersAdapterCallbacks {
 
     private var mView: View? = null
-    private var attendanceViewModel: AttendanceViewModel? = null
-    private var attendanceAdapter: AttendanceAdapter? = null
+    private var usersViewModel: UsersViewModel? = null
+    private var usersAdapter: UsersAdapter? = null
     private var arrayList: ArrayList<RowShifts>? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (mView == null)
-            mView = inflater.inflate(R.layout.attendance_fragment, container, false)
+            mView = inflater.inflate(R.layout.users_fragment, container, false)
         return mView
     }
 
@@ -35,12 +36,13 @@ class AttendanceFragment : MPBaseFragment(){
         showToolbar(true)
         lockNavigationDrawer(true)
         removeToolbarIconLayout()
-        setTitle("")
-        startShimmerAnimation()
-        if (attendanceViewModel == null) {
-            attendanceViewModel = AttendanceViewModel()
-            attendanceViewModel = ViewModelProviders.of(this).get(AttendanceViewModel::class.java)
+        setSearchVisibility(true)
+        setTitle("Users")
+        if (usersViewModel == null) {
+            usersViewModel = UsersViewModel()
+            usersViewModel = ViewModelProviders.of(this).get(UsersViewModel::class.java)
             observeLiveData()
+            startShimmerAnimation()
             arrayList = ArrayList()
             initializeRecyclerView()
             initialiseListeners()
@@ -52,16 +54,16 @@ class AttendanceFragment : MPBaseFragment(){
      * Observe live data values
      */
     private fun observeLiveData() {
-        attendanceViewModel?.failedResponse?.observe(this, Observer { loginFailedResponse ->
+        usersViewModel?.failedResponse?.observe(this, Observer { loginFailedResponse ->
             if(!TextUtils.isEmpty(loginFailedResponse))
                 showSnackAlert(loginFailedResponse)
             stopShimmerAnimation()
         })
 
-        attendanceViewModel?.arrayList?.observe(this, Observer { attendanceDetails ->
+        usersViewModel?.arrayList?.observe(this, Observer { attendanceDetails ->
             this.arrayList?.clear()
             this.arrayList?.addAll(attendanceDetails!!)
-            attendanceAdapter?.notifyDataSetChanged()
+            usersAdapter?.notifyDataSetChanged()
             stopShimmerAnimation()
         })
     }
@@ -111,10 +113,10 @@ class AttendanceFragment : MPBaseFragment(){
     */
     private fun initializeRecyclerView() {
         val layoutManager = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
-        attendanceAdapter = AttendanceAdapter(arrayList!!, activity!!)
+        usersAdapter = UsersAdapter(arrayList!!, activity!!,this)
         attendanceRecyclerView.layoutManager = layoutManager
         attendanceRecyclerView.adapter?.setHasStableIds(true)
-        attendanceRecyclerView.adapter = attendanceAdapter
+        attendanceRecyclerView.adapter = usersAdapter
     }
 
     /**
@@ -123,6 +125,12 @@ class AttendanceFragment : MPBaseFragment(){
      */
     private fun validateUserAttendanceRecord() {
         if(MyApplication.getInstance().user_type == MyApplication.USER_TYPE.ADMIN)
-        attendanceViewModel?.fetchUserList()
+        usersViewModel?.fetchUserList()
+    }
+
+    override fun onItemClick(rowShifts: RowShifts) {
+        val shiftsFragment = ShiftsFragment()
+        shiftsFragment.setShiftsData(rowShifts)
+        replaceFragment(shiftsFragment,true)
     }
 }

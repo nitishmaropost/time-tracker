@@ -10,7 +10,7 @@ import com.maropost.timetracker.pojomodels.RowShifts
 import com.maropost.timetracker.utils.Constants
 import org.json.JSONObject
 
-class AttendanceModel(private val attendanceModelCallback: AttendanceModelCallback) {
+class UsersModel(private val attendanceModelCallback: AttendanceModelCallback) {
 
     private val webServiceClient = WebServiceClient(OkhttpClient())
     private val handler = Handler()

@@ -95,6 +95,10 @@ open class MPBaseFragment : Fragment() {
         (activity as MPBaseActivity).showNavigationDrawer(allow)
     }
 
+    fun setSearchVisibility(isSearchAllow: Boolean){
+        (activity as MPBaseActivity).setSearchVisibility(isSearchAllow)
+    }
+
     /**
      * Set toolbar visibility
      */

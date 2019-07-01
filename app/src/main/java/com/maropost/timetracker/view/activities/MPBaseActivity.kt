@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.DragEvent
+import android.view.Menu
 import android.view.View
 import android.widget.Button
 import com.bumptech.glide.Glide
@@ -26,12 +27,14 @@ import com.maropost.timetracker.pojomodels.NavigationItem
 import com.maropost.timetracker.view.adapters.NavigationAdapter
 import com.maropost.timetracker.view.adapters.NavigationAdapterCallbacks
 import com.maropost.timetracker.view.fragments.HomeFragment
+import com.miguelcatalan.materialsearchview.MaterialSearchView
 import com.yarolegovich.slidingrootnav.SlidingRootNav
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder
 import com.yarolegovich.slidingrootnav.SlidingRootNavLayout
 import com.yarolegovich.slidingrootnav.callback.DragListener
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.app_bar_main.view.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.menu_left_drawer.*
 import java.util.*
@@ -44,6 +47,7 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
     private var navigationAdapter:NavigationAdapter ? = null
     private var itemList  = ArrayList<NavigationItem>()
     private var mLastClickTime: Long = 0
+    private var isSearchAllow: Boolean = false
 
     enum class TransactionType {
         REPLACE, ADD
@@ -56,6 +60,7 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
         setSupportActionBar(toolbar)
         initialiseListener()
         loadNavigationData()
+        setSearchListener()
         setupRecyclerView()
     }
 
@@ -125,6 +130,40 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
     }
 
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu);
+        val item = menu!!.findItem(R.id.action_search)
+        search_view.setMenuItem(item)
+        item.isVisible = isSearchAllow
+        return true
+    }
+
+    fun setSearchVisibility(isSearchAllow: Boolean){
+        this.isSearchAllow = isSearchAllow
+        invalidateOptionsMenu()
+    }
+
+    /**
+     * Listen to search events
+     */
+     fun setSearchListener() {
+        search_view.setVoiceSearch(false); //or false
+
+        /**
+         * Detect on text changed for search view
+         */
+        search_view.setOnQueryTextListener(object : MaterialSearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
+            }
+        })
+    }
+
+
     private fun initialiseListener() {
      /*  imgToolbarRightIcon.setOnClickListener{
 
@@ -191,6 +230,8 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
     override fun onBackPressed() {
         if (getCurrentFragment() is HomeFragment)
             finish()
+        else if(search_view.isSearchOpen)
+            search_view.closeSearch()
         else
             super.onBackPressed()
     }

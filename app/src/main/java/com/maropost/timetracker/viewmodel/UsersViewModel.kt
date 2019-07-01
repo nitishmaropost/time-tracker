@@ -2,13 +2,12 @@ package com.maropost.timetracker.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.maropost.timetracker.model.AttendanceModel
-import com.maropost.timetracker.pojomodels.Attendance
+import com.maropost.timetracker.model.UsersModel
 import com.maropost.timetracker.pojomodels.RowShifts
 
-class AttendanceViewModel : ViewModel(), AttendanceModel.AttendanceModelCallback {
+class UsersViewModel : ViewModel(), UsersModel.AttendanceModelCallback {
 
-    private var attendanceModel = AttendanceModel(this)
+    private var usersModel = UsersModel(this)
     var arrayList = MutableLiveData<ArrayList<RowShifts>>()
     var failedResponse = MutableLiveData<String>()
 
@@ -16,7 +15,7 @@ class AttendanceViewModel : ViewModel(), AttendanceModel.AttendanceModelCallback
      * Fetch all users
      */
     fun fetchUserList(){
-        attendanceModel.fetchUserList()
+        usersModel.fetchUserList()
     }
 
     override fun onSuccess(arrayList: ArrayList<RowShifts>) {
