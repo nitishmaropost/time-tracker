@@ -19,7 +19,12 @@ import android.net.ConnectivityManager
 import com.maropost.timetracker.application.MyApplication
 
 class Utility()  {
-    var alertDialog : AlertDialog ?= null
+    private var alertDialog : AlertDialog ?= null
+    private val outputDateFormat = SimpleDateFormat("dd/MM/yyyy hh:mm a")
+    private val input = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+    private val output = SimpleDateFormat("dd/MM/yyyy")
+    private val sdf = SimpleDateFormat("dd-MM-yyyy")
+    private val calendar = Calendar.getInstance()
 
     companion object {
         private var instance: Utility? = null
@@ -127,10 +132,17 @@ class Utility()  {
     /**
      * Get date from specific date format
      */
-    @SuppressLint("SimpleDateFormat")
     fun getEpochTime(date: String) : String {
-        val input = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
-        val output = SimpleDateFormat("dd/MM/yyyy hh:mm a")
+        var d: Date? = null
+        try {
+            d = input.parse(date)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return outputDateFormat.format(d)
+    }
+
+    fun getDateWithoutTime(date: String) : String {
         var d: Date? = null
         try {
             d = input.parse(date)
@@ -140,16 +152,19 @@ class Utility()  {
         return output.format(d)
     }
 
-    fun getDateFromString(date: String) : String {
-        val input = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
-        val output = SimpleDateFormat("dd/MM/yyyy")
-        var d: Date? = null
+    /**
+     * Convert date string to date object
+     */
+    fun getDateFromString(strDate: String) : Int {
+        var date: Date? = null
         try {
-            d = input.parse(date)
+            date = input.parse(strDate)
+            calendar.time = date
+            return calendar.get(Calendar.DAY_OF_WEEK)
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        return output.format(d)
+        return 0
     }
 
     /**
@@ -164,7 +179,6 @@ class Utility()  {
      * Get milli seconds from date string
      */
     fun convertDateToMillis(date: String): Long {
-        val sdf = SimpleDateFormat("dd-MM-yyyy")
         try {
             val mDate = sdf.parse(date)
             return mDate.time
@@ -178,7 +192,6 @@ class Utility()  {
      * Convert date string acc to specific format
      */
      fun getCurrentDate(calendar: Calendar):String{
-        val sdf = SimpleDateFormat("dd-MM-yyyy")
         return sdf.format(calendar.time)
     }
 

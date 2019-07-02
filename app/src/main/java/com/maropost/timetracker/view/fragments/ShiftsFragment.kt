@@ -35,6 +35,7 @@ class ShiftsFragment : MPBaseFragment(), ShiftsAdapterCallbacks {
         setTitle(getString(R.string.shifts))
         initializeRecyclerView()
         updateShiftData()
+        setSearchVisibility(false)
     }
 
     /**
