@@ -19,8 +19,9 @@ import android.graphics.Color
 import android.widget.LinearLayout
 
 
-class UsersAdapter (private var arrayList: ArrayList<RowShifts>, val context: Context,
-                         private val attendanceAdapterCallbacks: UsersAdapterCallbacks) : RecyclerView.Adapter<UsersViewHolder>() {
+
+class UsersAdapter(private var arrayList: ArrayList<RowShifts>, val context: Context, private val attendanceAdapterCallbacks: UsersAdapterCallbacks) : RecyclerView.Adapter<UsersViewHolder>(){
+    private var arrayListFiltered: ArrayList<RowShifts>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UsersViewHolder {
         return UsersViewHolder(LayoutInflater.from(context).inflate(R.layout.item_users_fragment, parent, false))
@@ -53,33 +54,33 @@ class UsersAdapter (private var arrayList: ArrayList<RowShifts>, val context: Co
         holder.txtEmail?.setText(builder, TextView.BufferType.SPANNABLE)
 
         // Emp position
-        if(!TextUtils.isEmpty(arrayList[position].user_data?.position)) {
+        if (!TextUtils.isEmpty(arrayList[position].user_data?.position)) {
             holder.txtPosition?.text = arrayList[position].user_data?.position
             holder.txtPosition?.visibility = View.VISIBLE
-        }else holder.txtPosition?.visibility = View.GONE
+        } else holder.txtPosition?.visibility = View.GONE
 
         // Emp department
-        if(!TextUtils.isEmpty(arrayList[position].user_data?.department)) {
+        if (!TextUtils.isEmpty(arrayList[position].user_data?.department)) {
             holder.txtDepartment?.text = arrayList[position].user_data?.department
             holder.txtDepartment?.visibility = View.VISIBLE
-        }else holder.txtDepartment?.visibility = View.GONE
+        } else holder.txtDepartment?.visibility = View.GONE
 
         //Card touch event
-        holder.lnrCard?.setOnClickListener{
+        holder.lnrCard?.setOnClickListener {
             attendanceAdapterCallbacks.onItemClick(arrayList[position])
         }
     }
 }
 
-interface UsersAdapterCallbacks{
+interface UsersAdapterCallbacks {
     fun onItemClick(rowShifts: RowShifts)
 }
 
-class UsersViewHolder(view: View): RecyclerView.ViewHolder(view) {
+class UsersViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     var txtEmpName: TextView? = view.txtEmpName
     var txtPosition: TextView? = view.txtPosition
-    var txtDepartment : TextView? = view.txtDepartment
-    var txtEmpCode : TextView? = view.txtEmpCode
-    var txtEmail : TextView? = view.txtEmail
-    var lnrCard : LinearLayout? = view.lnrCard
+    var txtDepartment: TextView? = view.txtDepartment
+    var txtEmpCode: TextView? = view.txtEmpCode
+    var txtEmail: TextView? = view.txtEmail
+    var lnrCard: LinearLayout? = view.lnrCard
 }

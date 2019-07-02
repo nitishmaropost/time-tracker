@@ -8,7 +8,7 @@ import com.maropost.timetracker.view.activities.MainActivity
 
 class MyApplication : Application() {
 
-    private lateinit var actiity: MainActivity
+    private lateinit var mainActivity: MainActivity
     var accessToken = ""
     var user_type= USER_TYPE.EMPLOYEE
 
@@ -37,12 +37,12 @@ class MyApplication : Application() {
         if (instance == null)
             instance = this
         checkIfLoginTokenAvailable()
-        checkIfUserTypeAvailable()
+        checkForUserType()
     }
 
 
     fun setMainActivityInstance(actiity: MainActivity) {
-        this.actiity = actiity
+        this.mainActivity = actiity
     }
 
     /**
@@ -65,7 +65,7 @@ class MyApplication : Application() {
      * If present assign it in Login Model which will be used as cache till the time app is being viewed.
      * No need to access it time and again from preference.
      */
-    private fun checkIfUserTypeAvailable() {
+    fun checkForUserType() {
         val userRole = SharedPreferenceHelper.getInstance().getSharedPreference(
             this, getString(R.string.user_role), SharedPreferenceHelper.PreferenceDataType.STRING) as String
         if (!TextUtils.isEmpty(userRole)){
@@ -77,6 +77,10 @@ class MyApplication : Application() {
     }
 
     fun navigationItemTapped(menuItem: String){
-        this.actiity.checkMenuItemTapped(menuItem)
+       mainActivity.checkMenuItemTapped(menuItem)
+    }
+
+    fun onQueryTextChange(newText: String) {
+        mainActivity.onQueryTextChange(newText)
     }
 }

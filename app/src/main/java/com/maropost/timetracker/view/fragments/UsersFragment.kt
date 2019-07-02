@@ -15,8 +15,11 @@ import com.maropost.timetracker.pojomodels.RowShifts
 import com.maropost.timetracker.view.adapters.UsersAdapter
 import com.maropost.timetracker.view.adapters.UsersAdapterCallbacks
 import com.maropost.timetracker.viewmodel.UsersViewModel
+import com.miguelcatalan.materialsearchview.MaterialSearchView
+import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.users_fragment.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 class UsersFragment : MPBaseFragment(), UsersAdapterCallbacks {
 
@@ -24,6 +27,8 @@ class UsersFragment : MPBaseFragment(), UsersAdapterCallbacks {
     private var usersViewModel: UsersViewModel? = null
     private var usersAdapter: UsersAdapter? = null
     private var arrayList: ArrayList<RowShifts>? = null
+    private var arrayListTemp: ArrayList<RowShifts>? = null
+    //private var arrayListFiltered: ArrayList<RowShifts>? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (mView == null)
@@ -36,13 +41,14 @@ class UsersFragment : MPBaseFragment(), UsersAdapterCallbacks {
         showToolbar(true)
         lockNavigationDrawer(true)
         removeToolbarIconLayout()
-        setSearchVisibility(true)
         setTitle("Users")
+        setSearchVisibility(true)
         if (usersViewModel == null) {
             usersViewModel = UsersViewModel()
             usersViewModel = ViewModelProviders.of(this).get(UsersViewModel::class.java)
             observeLiveData()
             startShimmerAnimation()
+            arrayListTemp = ArrayList()
             arrayList = ArrayList()
             initializeRecyclerView()
             initialiseListeners()
@@ -59,10 +65,10 @@ class UsersFragment : MPBaseFragment(), UsersAdapterCallbacks {
                 showSnackAlert(loginFailedResponse)
             stopShimmerAnimation()
         })
-
         usersViewModel?.arrayList?.observe(this, Observer { attendanceDetails ->
             this.arrayList?.clear()
             this.arrayList?.addAll(attendanceDetails!!)
+            arrayListTemp?.addAll(attendanceDetails!!)
             usersAdapter?.notifyDataSetChanged()
             stopShimmerAnimation()
         })
@@ -127,6 +133,30 @@ class UsersFragment : MPBaseFragment(), UsersAdapterCallbacks {
         if(MyApplication.getInstance().user_type == MyApplication.USER_TYPE.ADMIN)
         usersViewModel?.fetchUserList()
     }
+
+    /*
+    Filter list
+    */
+    fun filterList(text: String) {
+       // var filteredList = ArrayList<RowShifts>()
+       // temp= this.arrayList
+        arrayList?.clear()
+
+        if(TextUtils.isEmpty(text)){
+            arrayList?.addAll(arrayListTemp!!)
+        }
+        else {
+
+            for (row in arrayListTemp!!) {
+                if (row.user_data?.full_name?.toLowerCase()!!.contains(text.toLowerCase()))
+                    arrayList?.add(row)
+            }
+        }
+
+        usersAdapter?.notifyDataSetChanged()
+    }
+
+
 
     override fun onItemClick(rowShifts: RowShifts) {
         val shiftsFragment = ShiftsFragment()

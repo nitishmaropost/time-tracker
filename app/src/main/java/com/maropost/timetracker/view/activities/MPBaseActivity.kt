@@ -27,6 +27,7 @@ import com.maropost.timetracker.pojomodels.NavigationItem
 import com.maropost.timetracker.view.adapters.NavigationAdapter
 import com.maropost.timetracker.view.adapters.NavigationAdapterCallbacks
 import com.maropost.timetracker.view.fragments.HomeFragment
+import com.maropost.timetracker.view.fragments.UsersFragment
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 import com.yarolegovich.slidingrootnav.SlidingRootNav
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder
@@ -147,6 +148,7 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
      * Listen to search events
      */
      fun setSearchListener() {
+
         search_view.setVoiceSearch(false); //or false
 
         /**
@@ -154,11 +156,13 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
          */
         search_view.setOnQueryTextListener(object : MaterialSearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                return false
+                MyApplication.getInstance().onQueryTextChange(query)
+                return true
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                return false
+                MyApplication.getInstance().onQueryTextChange(newText)
+                return true
             }
         })
     }
