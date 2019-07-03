@@ -28,7 +28,6 @@ class UsersFragment : MPBaseFragment(), UsersAdapterCallbacks {
     private var usersAdapter: UsersAdapter? = null
     private var arrayList: ArrayList<RowShifts>? = null
     private var arrayListTemp: ArrayList<RowShifts>? = null
-    //private var arrayListFiltered: ArrayList<RowShifts>? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (mView == null)
@@ -41,7 +40,7 @@ class UsersFragment : MPBaseFragment(), UsersAdapterCallbacks {
         showToolbar(true)
         lockNavigationDrawer(true)
         removeToolbarIconLayout()
-        setTitle("Users")
+        setTitle(getString(R.string.users))
         setSearchVisibility(true)
         if (usersViewModel == null) {
             usersViewModel = UsersViewModel()
@@ -138,25 +137,17 @@ class UsersFragment : MPBaseFragment(), UsersAdapterCallbacks {
     Filter list
     */
     fun filterList(text: String) {
-       // var filteredList = ArrayList<RowShifts>()
-       // temp= this.arrayList
         arrayList?.clear()
-
-        if(TextUtils.isEmpty(text)){
+        if(TextUtils.isEmpty(text))
             arrayList?.addAll(arrayListTemp!!)
-        }
         else {
-
             for (row in arrayListTemp!!) {
                 if (row.user_data?.full_name?.toLowerCase()!!.contains(text.toLowerCase()))
                     arrayList?.add(row)
             }
         }
-
         usersAdapter?.notifyDataSetChanged()
     }
-
-
 
     override fun onItemClick(rowShifts: RowShifts) {
         val shiftsFragment = ShiftsFragment()
