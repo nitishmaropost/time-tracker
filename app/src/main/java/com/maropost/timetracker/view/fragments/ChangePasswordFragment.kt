@@ -1,21 +1,16 @@
 package com.maropost.timetracker.view.fragments
 
-
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.app.Fragment
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.maropost.timetracker.R
 import com.maropost.timetracker.viewmodel.ChangePasswordViewModel
-import com.maropost.timetracker.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.fragment_change_password.*
-import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.login_fragment.*
 
 class ChangePasswordFragment : MPBaseFragment() {
@@ -66,7 +61,8 @@ class ChangePasswordFragment : MPBaseFragment() {
                     getString(R.string.enter_password)
                 ChangePasswordViewModel.ValidationStatus.INCOMPLETE_CONFIRM_PASSWORD -> edtConfirmPassword.error =
                     getString(R.string.enter_password)
-
+                ChangePasswordViewModel.ValidationStatus.PASSWORDS_UNMATCHED -> edtConfirmPassword.error =
+                    getString(R.string.password_unmatched)
                 ChangePasswordViewModel.ValidationStatus.VALID -> consumeChangePasswordApi()
             }
         })
@@ -110,7 +106,7 @@ class ChangePasswordFragment : MPBaseFragment() {
             changePasswordViewModel?.performChangePasswordOperation(
                 edtOldPassword.text.toString().trim(),
                 edtNewPassword.text.toString().trim(),
-                "1"
+                "0"
             )
         }, 1000)
 

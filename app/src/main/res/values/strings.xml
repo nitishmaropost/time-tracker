@@ -16,6 +16,7 @@
     <string name="user_role">USER_ROLE</string>
     <string name="enter_email">Enter email</string>
     <string name="enter_password">Enter password</string>
+    <string name="password_unmatched">Password do not match</string>
     <string name="enter_valid_email">Enter valid email</string>
     <string name="in_fingerprint">In Fingerprint</string>
     <string name="in_card">In Card</string>

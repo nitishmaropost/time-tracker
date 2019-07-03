@@ -19,6 +19,7 @@ class ChangePasswordViewModel: ViewModel(), ChangePasswordModel.ChangePasswordMo
         INCOMPLETE_OLD_PASSWORD,
         INCOMPLETE_NEW_PASSWORD,
         INCOMPLETE_CONFIRM_PASSWORD,
+        PASSWORDS_UNMATCHED,
         VALID
     }
 
@@ -40,16 +41,18 @@ class ChangePasswordViewModel: ViewModel(), ChangePasswordModel.ChangePasswordMo
             validationStatus.value = ValidationStatus.INCOMPLETE_NEW_PASSWORD
         else if(TextUtils.isEmpty(confirmpassword) )
             validationStatus.value = ValidationStatus.INCOMPLETE_CONFIRM_PASSWORD
-        else  validationStatus.value = ValidationStatus.VALID
+        else validateNewPassword(newpassword,confirmpassword)
     }
 
     /**
      * Check if new and confirm password match or not
      */
-    fun validateNewPassword(newPassword: String, confirmPassword: String): Boolean{
-        if (newPassword.equals(confirmPassword))
-            return true
-        return false
+    fun validateNewPassword(newPassword: String, confirmPassword: String){
+        if (newPassword.equals(confirmPassword,false))
+            validationStatus.value = ValidationStatus.VALID
+        else
+            validationStatus.value= ValidationStatus.PASSWORDS_UNMATCHED
+
     }
 
     /**
