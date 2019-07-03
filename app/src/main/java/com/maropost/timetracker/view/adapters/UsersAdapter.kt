@@ -20,8 +20,8 @@ import android.widget.LinearLayout
 
 
 
-class UsersAdapter(private var arrayList: ArrayList<RowShifts>, val context: Context, private val attendanceAdapterCallbacks: UsersAdapterCallbacks) : RecyclerView.Adapter<UsersViewHolder>(){
-    private var arrayListFiltered: ArrayList<RowShifts>? = null
+class UsersAdapter(private var arrayList: ArrayList<RowShifts>, val context: Context,
+                   private val attendanceAdapterCallbacks: UsersAdapterCallbacks) : RecyclerView.Adapter<UsersViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UsersViewHolder {
         return UsersViewHolder(LayoutInflater.from(context).inflate(R.layout.item_users_fragment, parent, false))
