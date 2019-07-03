@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="simple_fragment_transition">simple_fragment_transition</string>
+    <string name="login_token">LOGIN_TOKEN</string>
+    <string name="user_role">USER_ROLE</string>
+    <string name="holiday">holiday</string>
+    <string name="absent">absent</string>
+    <string name="present">present</string>
+
+</resources>

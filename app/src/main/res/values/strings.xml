@@ -4,7 +4,6 @@
     <string name="nav_calendar">Calendar View</string>
     <string name="nav_create_pin">Create Pin</string>
     <string name="nav_logout">Logout</string>
-    <string name="simple_fragment_transition">simple_fragment_transition</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="email_address">Email Address</string>
@@ -12,15 +11,13 @@
     <string name="details">View All</string>
     <string name="login">Login</string>
     <string name="forgot_password">Forgot password?</string>
-    <string name="login_token">LOGIN_TOKEN</string>
-    <string name="user_role">USER_ROLE</string>
-    <string name="enter_email">Enter email</string>
-    <string name="enter_password">Enter password</string>
-    <string name="enter_valid_email">Enter valid email</string>
     <string name="in_fingerprint">In Fingerprint</string>
     <string name="in_card">In Card</string>
     <string name="out_fingerprint">Out Fingerprint</string>
     <string name="out_card">Out Card</string>
+    <string name="enter_email">Enter email</string>
+    <string name="enter_password">Enter password</string>
+    <string name="enter_valid_email">Enter valid email</string>
     <string name="time_logs">Time Logs</string>
     <string name="no_internet">Internet connection unavailable !!</string>
     <string name="no_record_found">No record found !</string>
@@ -41,13 +38,17 @@
     <string name="presents">Presents:</string>
     <string name="absents">Absents:</string>
     <string name="hrs">hrs</string>
+    <string name="Holiday">Holiday</string>
+    <string name="Absent">Absent</string>
+    <string name="emp_code_">Emp Code:</string>
+    <string name="email_">Email:</string>
+    <string name="unknown">Unknown</string>
+    <string name="sunday">Sunday</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
 
-
-    <array name="menuOptions">
-        <item>Home</item>
-        <item>Personal</item>
-        <item>High scores</item>
-        <item>Settings</item>
-        <item>About</item>
-    </array>
 </resources>

@@ -42,12 +42,12 @@ class UsersAdapter(private var arrayList: ArrayList<RowShifts>, val context: Con
         holder.txtEmpName?.text = arrayList[position].user_data?.full_name
 
         // Emp Code
-        holder.txtEmpCode?.text = "Emp Code: " + arrayList[position].user_data?.emp_code
+        holder.txtEmpCode?.text = context.getString(R.string.emp_code_) + " " + arrayList[position].user_data?.emp_code
 
         // Emp email
         val email = arrayList[position].user_data?.email_id
         val builder = SpannableStringBuilder()
-        builder.append("Email: ")
+        builder.append(context.getString(R.string.email_)+" ")
         val spannable = SpannableString(email)
         spannable.setSpan(ForegroundColorSpan(Color.BLUE), 0, email!!.length, 0)
         builder.append(spannable)

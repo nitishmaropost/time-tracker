@@ -38,6 +38,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/_11ssp"
                         android:layout_gravity="center_horizontal"
                         android:text="2019"/>
                     <TextView
@@ -46,6 +47,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorWhite"
                         android:visibility="visible"
+                        android:textSize="@dimen/_11ssp"
                         android:layout_marginTop="@dimen/_3sdp"
                         android:layout_gravity="center_horizontal"
                         android:text="Sunday"/>
@@ -69,6 +71,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/_11ssp"
                         android:text="Work Time"/>
                     <TextView
                         android:id="@+id/txtPremisisTime"
@@ -76,6 +79,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_3sdp"
                         android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/_11ssp"
                         android:text="Premises Time"/>
                 </LinearLayout>
             </RelativeLayout>
