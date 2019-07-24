@@ -9,20 +9,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.maropost.timetracker.R
-import com.maropost.timetracker.pojomodels.AttendanceDetails
+import com.maropost.timetracker.pojomodels.TimeLogs
 import com.maropost.timetracker.pojomodels.Rows
 import com.maropost.timetracker.utils.Utility
 import kotlinx.android.synthetic.main.item_attendance_detail.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class AttendanceDetailAdapter(private var arrayList: ArrayList<Rows>, val context: Context) : RecyclerView.Adapter<AttendanceDetailViewHolder>() {
+class TimeLogsAdapter(private var arrayList: ArrayList<Rows>, val context: Context) : RecyclerView.Adapter<TimeLogsViewHolder>() {
 
     private var formatter :  SimpleDateFormat ?= null
-    private var attendanceDetails: AttendanceDetails ? = null
+    private var attendanceDetails: TimeLogs ? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AttendanceDetailViewHolder {
-        return AttendanceDetailViewHolder(LayoutInflater.from(context).inflate(R.layout.item_attendance_detail, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimeLogsViewHolder {
+        return TimeLogsViewHolder(LayoutInflater.from(context).inflate(R.layout.item_attendance_detail, parent, false))
     }
 
     override fun getItemCount(): Int {
@@ -34,7 +34,7 @@ class AttendanceDetailAdapter(private var arrayList: ArrayList<Rows>, val contex
     }
 
     @SuppressLint("SetTextI18n", "SimpleDateFormat")
-    override fun onBindViewHolder(holder: AttendanceDetailViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TimeLogsViewHolder, position: Int) {
 
         if(formatter == null)
             formatter = SimpleDateFormat("dd/MM/yyyy")
@@ -84,12 +84,12 @@ class AttendanceDetailAdapter(private var arrayList: ArrayList<Rows>, val contex
     /**
      * Set the model framed from the response obtained from Gson
      */
-    fun setModel(attendanceDetails: AttendanceDetails) {
+    fun setModel(attendanceDetails: TimeLogs) {
         this.attendanceDetails = attendanceDetails
     }
 }
 
-class AttendanceDetailViewHolder(view: View): RecyclerView.ViewHolder(view) {
+class TimeLogsViewHolder(view: View): RecyclerView.ViewHolder(view) {
     var txtTimeOfPunch: TextView? = view.txtTimeOfPunch
     var txtPunchType: TextView? = view.txtPunchType
     var txtDateHeader : TextView? = view.txtDateHeader

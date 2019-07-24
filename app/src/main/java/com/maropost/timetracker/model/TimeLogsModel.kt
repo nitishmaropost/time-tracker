@@ -5,14 +5,13 @@ import android.text.TextUtils
 import com.google.gson.Gson
 import com.maropost.timetracker.clients.OkhttpClient
 import com.maropost.timetracker.clients.WebServiceClient
-import com.maropost.timetracker.pojomodels.AttendanceDetails
-import com.maropost.timetracker.pojomodels.Rows
+import com.maropost.timetracker.pojomodels.TimeLogs
 import com.maropost.timetracker.utils.Constants
 import com.maropost.timetracker.utils.Utility
 import org.json.JSONObject
 
 
-class AttendanceDetailModel(private val attendanceDetailModelCallback: AttendanceDetailModelCallback) {
+class TimeLogsModel(private val attendanceDetailModelCallback: AttendanceDetailModelCallback) {
 
     private val webServiceClient = WebServiceClient(OkhttpClient())
     private val handler = Handler()
@@ -21,7 +20,7 @@ class AttendanceDetailModel(private val attendanceDetailModelCallback: Attendanc
      * Fetch all the punch records till date
      */
     fun fetchAttendanceDetails() {
-        callLogsApi(Constants.ATTENDANCE_DETAIL_API)
+        callLogsApi(Constants.FETCH_TIME_LOGS)
     }
 
     /**
@@ -29,8 +28,8 @@ class AttendanceDetailModel(private val attendanceDetailModelCallback: Attendanc
      */
     fun getFilteredAttendanceDetails(startDate: String, endDate: String) {
         val startTimeInMillis = Utility.getInstance().convertDateToMillis(startDate)
-        val endTimeInMillis = Utility.getInstance().convertDateToMillis(endDate)
-        callLogsApi(Constants.ATTENDANCE_DETAIL_API
+        val endTimeInMillis = startTimeInMillis + 86400000 // 24 hrs to millis
+        callLogsApi(Constants.FETCH_TIME_LOGS
                 + "?" + "start_date=" +startTimeInMillis +"&"+ "end_date="+endTimeInMillis)
     }
 
@@ -46,8 +45,8 @@ class AttendanceDetailModel(private val attendanceDetailModelCallback: Attendanc
                         if(!TextUtils.isEmpty(response)) {
                             Thread(Runnable {
                                 val json = JSONObject(response)
-                                val attendanceDetails=  Gson().fromJson(json.toString(), AttendanceDetails::class.java)
-                                handler.post{attendanceDetailModelCallback.onSuccess(attendanceDetails)}
+                                val timeLogs=  Gson().fromJson(json.toString(), TimeLogs::class.java)
+                                handler.post{attendanceDetailModelCallback.onSuccess(timeLogs)}
                             }).start()
                         }
                     } catch (e: Exception) {
@@ -61,7 +60,7 @@ class AttendanceDetailModel(private val attendanceDetailModelCallback: Attendanc
     }
 
     interface AttendanceDetailModelCallback{
-        fun onSuccess(attendanceDetails: AttendanceDetails)
+        fun onSuccess(timeLogs: TimeLogs)
         fun onFailure(failureMessage : String)
     }
 }

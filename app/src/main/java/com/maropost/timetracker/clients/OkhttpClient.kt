@@ -1,11 +1,13 @@
 package com.maropost.timetracker.clients
 
+import android.annotation.SuppressLint
 import okhttp3.*
 import org.json.JSONObject
 import android.os.AsyncTask
 import android.text.TextUtils
 import com.maropost.timetracker.application.MyApplication
 import com.maropost.timetracker.utils.Constants
+import com.maropost.timetracker.utils.Utility
 
 class OkhttpClient {
     private val client = OkHttpClient()
@@ -76,7 +78,7 @@ class OkhttpClient {
     inner class WebServiceAsync(private val webServiceCallback: WebServiceCallback) : AsyncTask<Void, Void, String>() {
         override fun doInBackground(vararg params: Void): String? {
             try {
-                response = client.newCall(request).execute()
+                response = client.newCall(request!!).execute()
                 return if(response != null)
                     response!!.body()!!.string()
                 else ""
@@ -87,11 +89,18 @@ class OkhttpClient {
         }
         override fun onPostExecute(responseBody: String) {
             super.onPostExecute(responseBody)
-            if (!TextUtils.isEmpty(responseBody) && response != null && response!!.isSuccessful)
+            if (!TextUtils.isEmpty(responseBody) && response != null && response!!.isSuccessful) {
+                Utility.getInstance().printLog("Response Success -> ",responseBody)
                 webServiceCallback.onSuccess(responseBody)
-            else if(!TextUtils.isEmpty(responseBody) && response != null && !response!!.isSuccessful)
+            }
+            else if(!TextUtils.isEmpty(responseBody) && response != null && !response!!.isSuccessful) {
+                Utility.getInstance().printLog("Response Failure -> ",responseBody)
                 webServiceCallback.onFailure(responseBody)
-            else webServiceCallback.onFailure("")
+            }
+            else {
+                Utility.getInstance().printLog("Response Failure -> "," -- ")
+                webServiceCallback.onFailure("")
+            }
         }
     }
 

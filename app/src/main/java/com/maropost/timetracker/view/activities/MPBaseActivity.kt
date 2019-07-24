@@ -98,10 +98,9 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
         recyclerNavigation.adapter = navigationAdapter
     }
 
-    fun hideMenu(){
+    fun lockNavigationMenu(lockMenu: Boolean){
         slidingRootNav?.closeMenu()
-        slidingRootNav?.isMenuLocked = true
-
+        slidingRootNav?.isMenuLocked = lockMenu
     }
 
     @SuppressLint("SetTextI18n")

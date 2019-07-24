@@ -43,8 +43,8 @@ class HomeFragment : MPBaseFragment() {
         setTitle(getString(R.string.app_name))
         lockNavigationDrawer(false)
         showToolbar(true)
-        removeOldToolbarIcons()
-        setToolbarIcon()
+        removeToolbarIconLayout()
+        //setToolbarIcon()
         setSearchVisibility(false)
 
         if(homeViewModel == null) {
@@ -57,16 +57,9 @@ class HomeFragment : MPBaseFragment() {
     }
 
     /**
-     * Remove any item icon in toolbar
-     */
-    private fun removeOldToolbarIcons() {
-        removeToolbarIconLayout()
-    }
-
-    /**
      * Add calendar icon
      */
-    private fun setToolbarIcon() {
+  /*  private fun setToolbarIcon() {
         val params = DrawerLayout.LayoutParams(DrawerLayout.LayoutParams.WRAP_CONTENT, DrawerLayout.LayoutParams.WRAP_CONTENT)
         val image = ImageView(activity)
         image.layoutParams = params
@@ -90,27 +83,27 @@ class HomeFragment : MPBaseFragment() {
                 datePickerDialog.show()
             }
         }
-    }
+    }*/
 
     /**
      * Setup listeners
      */
     private fun initialiseListener() {
-        imgDetails.setOnClickListener{changeFragment(AttendanceDetailFragment.DATETYPE.NONE)}
-        lnrTodayBubble.setOnClickListener{ changeFragment(AttendanceDetailFragment.DATETYPE.TODAY) }
-        lnrWeekBubble.setOnClickListener{ changeFragment(AttendanceDetailFragment.DATETYPE.WEEKLY) }
-        lnrMonthBubble.setOnClickListener{ /*changeFragment(AttendanceDetailFragment.DATETYPE.MONTHLY)*/
-        replaceFragment(UsersFragment(),true)}
+        /*imgDetails.setOnClickListener{changeFragment(TimeLogsFragment.DATETYPE.NONE)}
+        lnrTodayBubble.setOnClickListener{ changeFragment(TimeLogsFragment.DATETYPE.TODAY) }
+        lnrWeekBubble.setOnClickListener{ changeFragment(TimeLogsFragment.DATETYPE.WEEKLY) }
+        lnrMonthBubble.setOnClickListener{ *//*changeFragment(TimeLogsFragment.DATETYPE.MONTHLY)*//*
+        replaceFragment(UsersFragment(),true)}*/
     }
 
     /**
-     * Replace current frag to AttendanceDetailFragment along with date type
+     * Replace current frag to TimeLogsFragment along with date type
      */
-    private fun changeFragment(dateType: AttendanceDetailFragment.DATETYPE){
-        val attendanceDetailFragment = AttendanceDetailFragment()
+   /* private fun changeFragment(dateType: TimeLogsFragment.DATETYPE){
+        val attendanceDetailFragment = TimeLogsFragment()
         attendanceDetailFragment.setDateType(dateType)
         replaceFragment(attendanceDetailFragment,true)
-    }
+    }*/
 
     /**
      * Set current date on launch

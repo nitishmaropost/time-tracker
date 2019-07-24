@@ -2,24 +2,23 @@ package com.maropost.timetracker.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.maropost.timetracker.model.AttendanceDetailModel
-import com.maropost.timetracker.pojomodels.AttendanceDetails
-import com.maropost.timetracker.pojomodels.Rows
+import com.maropost.timetracker.model.TimeLogsModel
+import com.maropost.timetracker.pojomodels.TimeLogs
 
-class AttendanceDetailViewModel : ViewModel(), AttendanceDetailModel.AttendanceDetailModelCallback {
+class TimeLogsViewModel : ViewModel(), TimeLogsModel.AttendanceDetailModelCallback {
 
-    private var attendanceDetailModel = AttendanceDetailModel(this)
-    var arrayList = MutableLiveData<AttendanceDetails>()
+    private var timeLogsModel = TimeLogsModel(this)
+    var arrayList = MutableLiveData<TimeLogs>()
     var failedResponse = MutableLiveData<String>()
 
     /**
      * Fetch all the punch records till date
      */
     fun fetchAttendanceDetails() {
-        attendanceDetailModel.fetchAttendanceDetails()
+        timeLogsModel.fetchAttendanceDetails()
     }
 
-    override fun onSuccess(attendanceDetails: AttendanceDetails) {
+    override fun onSuccess(attendanceDetails: TimeLogs) {
     this.arrayList.value = attendanceDetails
     }
 
@@ -31,6 +30,6 @@ class AttendanceDetailViewModel : ViewModel(), AttendanceDetailModel.AttendanceD
      * Get data according to date selected from calendar
      */
     fun getFilteredAttendanceDetails(startDate: String, endDate: String) {
-        attendanceDetailModel.getFilteredAttendanceDetails(startDate, endDate)
+        timeLogsModel.getFilteredAttendanceDetails(startDate, endDate)
     }
 }

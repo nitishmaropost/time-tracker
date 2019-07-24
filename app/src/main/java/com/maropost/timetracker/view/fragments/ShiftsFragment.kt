@@ -60,7 +60,7 @@ class ShiftsFragment : MPBaseFragment(), ShiftsAdapterCallbacks {
         val layoutManager = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
         shiftsAdapter = ShiftsAdapter(shiftsList, activity!!,this)
         shiftsRecyclerView.layoutManager = layoutManager
-        shiftsRecyclerView.adapter?.setHasStableIds(true)
+        //shiftsRecyclerView.adapter?.setHasStableIds(true)
         shiftsRecyclerView.adapter = shiftsAdapter
     }
 
@@ -72,7 +72,9 @@ class ShiftsFragment : MPBaseFragment(), ShiftsAdapterCallbacks {
     }
 
     override fun onItemClick(shifts: Shifts) {
-
+    val timeLogsFragment = TimeLogsFragment()
+        timeLogsFragment.setShifts(shifts)
+        replaceFragment(timeLogsFragment,true)
     }
 
 }

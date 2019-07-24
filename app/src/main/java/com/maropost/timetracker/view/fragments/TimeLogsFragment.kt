@@ -3,47 +3,44 @@ package com.maropost.timetracker.view.fragments
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.os.SystemClock
-import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import com.bumptech.glide.Glide
 import com.maropost.timetracker.R
 import com.maropost.timetracker.pojomodels.Rows
-import com.maropost.timetracker.utils.Utility
-import com.maropost.timetracker.view.adapters.AttendanceDetailAdapter
-import com.maropost.timetracker.viewmodel.AttendanceDetailViewModel
-import kotlinx.android.synthetic.main.attendance_detail_fragment.*
+import com.maropost.timetracker.pojomodels.Shifts
+import com.maropost.timetracker.view.adapters.TimeLogsAdapter
+import com.maropost.timetracker.viewmodel.TimeLogsViewModel
+import kotlinx.android.synthetic.main.time_logs_fragment.*
 import java.util.*
-import com.bumptech.glide.Glide
 
 
-
-class AttendanceDetailFragment : MPBaseFragment(), BottomSheetFragment.BottomSheetCallbacks {
+class TimeLogsFragment : MPBaseFragment(), BottomSheetFragment.BottomSheetCallbacks {
 
     private var mView: View? = null
-    private var attendanceDetailAdapter: AttendanceDetailAdapter? = null
+    private var timeLogsAdapter: TimeLogsAdapter? = null
     private var arrayList: ArrayList<Rows>? = null
-    private var attendanceDetailViewModel: AttendanceDetailViewModel? = null
+    private var timeLogsViewModel: TimeLogsViewModel? = null
     private var mLastClickTime: Long = 0
     private var bottomSheetFragment :BottomSheetFragment ?= null
     private var startDate = ""
     private var endDate = ""
-    private var dateType = DATETYPE.NONE
+    private var shifts: Shifts ?= null
+    //private var dateType = DATETYPE.NONE
 
-    enum class DATETYPE{
+   /* enum class DATETYPE{
         NONE,
         TODAY,
         WEEKLY,
         MONTHLY
-    }
+    }*/
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (mView == null)
-            mView = inflater.inflate(R.layout.attendance_detail_fragment, container, false)
+            mView = inflater.inflate(R.layout.time_logs_fragment, container, false)
         return mView
     }
 
@@ -51,73 +48,84 @@ class AttendanceDetailFragment : MPBaseFragment(), BottomSheetFragment.BottomShe
         super.onViewCreated(view, savedInstanceState)
         showToolbar(true)
         removeOldToolbarIcons()
-        setToolbarIcon()
+        //setToolbarIcon()
         setSearchVisibility(false)
         setTitle(getString(R.string.time_logs))
-        if (attendanceDetailViewModel == null) {
-            attendanceDetailViewModel = AttendanceDetailViewModel()
-            attendanceDetailViewModel = ViewModelProviders.of(this).get(AttendanceDetailViewModel::class.java)
+        if (timeLogsViewModel == null) {
+            timeLogsViewModel = TimeLogsViewModel()
+            timeLogsViewModel = ViewModelProviders.of(this).get(TimeLogsViewModel::class.java)
             observeLiveData()
             startShimmerAnimation()
             arrayList = ArrayList()
             initializeRecyclerView()
-            validateDateType()
+            //validateDateType()
             initialiseListeners()
+            fetchTimeLogs()
+        }
+    }
+
+    /**
+     * Fetch time logs for a particular day based on start date and end date from Shifts model
+     */
+    private fun fetchTimeLogs() {
+        if(shifts != null && !TextUtils.isEmpty(shifts!!.dated_str)) {
+            startDate = shifts!!.dated_str
+            timeLogsViewModel?.getFilteredAttendanceDetails(startDate, "")
         }
     }
 
     /**
      * Get result based on date type
      */
-    private fun validateDateType(){
+   /* private fun validateDateType(){
         when(dateType){
             DATETYPE.NONE    -> fetchAttendanceDetails()
             DATETYPE.TODAY   -> getCurrentDayDateValues()
             DATETYPE.WEEKLY  -> getCurrentWeekDateValues()
             DATETYPE.MONTHLY -> getCurrentMonthDateValues()
         }
-    }
+    }*/
 
     /**
      * Start date and End date = current date
      */
-    private fun getCurrentDayDateValues() {
+    /*private fun getCurrentDayDateValues() {
         getCurrentDate()
         onDateSelected(startDate,endDate)
-    }
+    }*/
 
     /**
      * Get the date for the same day
      */
-    private fun getCurrentDate() {
+   /* private fun getCurrentDate() {
         val calendar = Calendar.getInstance()
         startDate = Utility.getInstance().getCurrentDate(calendar)
         endDate = startDate
-    }
+    }*/
 
     /**
      * Get first and last date of current week
      */
-    private fun getCurrentWeekDateValues() {
+    /*private fun getCurrentWeekDateValues() {
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.DAY_OF_WEEK,calendar.firstDayOfWeek)
         startDate = Utility.getInstance().getCurrentDate(calendar)
         calendar.add(Calendar.DAY_OF_WEEK, 6)
         endDate = Utility.getInstance().getCurrentDate(calendar)
         onDateSelected(startDate,endDate)
-    }
+    }*/
 
     /**
      * Start date and End date = current month first and last date
      */
-    private fun getCurrentMonthDateValues() {
+    /*private fun getCurrentMonthDateValues() {
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.DAY_OF_MONTH,1)
         startDate = Utility.getInstance().getCurrentDate(calendar)
         calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH))
         endDate = Utility.getInstance().getCurrentDate(calendar)
         onDateSelected(startDate,endDate)
-    }
+    }*/
 
     /**
      * Setup listeners
@@ -126,8 +134,8 @@ class AttendanceDetailFragment : MPBaseFragment(), BottomSheetFragment.BottomShe
         txtRetry.setOnClickListener{
             startShimmerAnimation()
             if(!TextUtils.isEmpty(startDate) && !TextUtils.isEmpty(endDate))
-                attendanceDetailViewModel?.getFilteredAttendanceDetails(startDate,endDate)
-            else getCurrentWeekDateValues()
+                timeLogsViewModel?.getFilteredAttendanceDetails(startDate,endDate)
+            //else getCurrentWeekDateValues()
         }
     }
 
@@ -141,7 +149,7 @@ class AttendanceDetailFragment : MPBaseFragment(), BottomSheetFragment.BottomShe
     /**
      * Add calendar icon
      */
-    private fun setToolbarIcon() {
+   /* private fun setToolbarIcon() {
         val params = DrawerLayout.LayoutParams(DrawerLayout.LayoutParams.WRAP_CONTENT, DrawerLayout.LayoutParams.WRAP_CONTENT)
         val image = ImageView(activity)
         image.layoutParams = params
@@ -159,23 +167,23 @@ class AttendanceDetailFragment : MPBaseFragment(), BottomSheetFragment.BottomShe
                 bottomSheetFragment!!.show(fragmentManager, "TAG")
             }
         }
-    }
+    }*/
 
     /**
      * Observe live data values
      */
     private fun observeLiveData() {
-        attendanceDetailViewModel?.failedResponse?.observe(this, Observer { loginFailedResponse ->
+        timeLogsViewModel?.failedResponse?.observe(this, Observer { loginFailedResponse ->
             if(!TextUtils.isEmpty(loginFailedResponse))
                 showSnackAlert(loginFailedResponse)
             stopShimmerAnimation()
         })
 
-        attendanceDetailViewModel?.arrayList?.observe(this, Observer { attendanceDetails ->
+        timeLogsViewModel?.arrayList?.observe(this, Observer { attendanceDetails ->
             this.arrayList?.clear()
             this.arrayList?.addAll(attendanceDetails!!.rows)
-            attendanceDetailAdapter?.setModel(attendanceDetails!!)
-            attendanceDetailAdapter?.notifyDataSetChanged()
+            timeLogsAdapter?.setModel(attendanceDetails!!)
+            timeLogsAdapter?.notifyDataSetChanged()
             stopShimmerAnimation()
         })
     }
@@ -185,19 +193,19 @@ class AttendanceDetailFragment : MPBaseFragment(), BottomSheetFragment.BottomShe
     */
     private fun initializeRecyclerView() {
         val layoutManager = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
-        attendanceDetailAdapter = AttendanceDetailAdapter(arrayList!!, activity!!)
+        timeLogsAdapter = TimeLogsAdapter(arrayList!!, activity!!)
         detailRecyclerView.layoutManager = layoutManager
         detailRecyclerView.adapter?.setHasStableIds(true)
-        detailRecyclerView.adapter = attendanceDetailAdapter
+        detailRecyclerView.adapter = timeLogsAdapter
     }
 
     /**
      * Fetch all the punch records till date
      */
-    private fun fetchAttendanceDetails() {
-        attendanceDetailViewModel?.fetchAttendanceDetails()
+    /*private fun fetchAttendanceDetails() {
+        timeLogsViewModel?.fetchAttendanceDetails()
         getCurrentDate()
-    }
+    }*/
 
     /**
      * Start shimmer animation
@@ -234,13 +242,17 @@ class AttendanceDetailFragment : MPBaseFragment(), BottomSheetFragment.BottomShe
             bottomSheetFragment?.dismiss()
         this.startDate = startDate
         this.endDate = endDate
-        attendanceDetailViewModel?.getFilteredAttendanceDetails(startDate,endDate)
+        timeLogsViewModel?.getFilteredAttendanceDetails(startDate,endDate)
+    }
+
+    fun setShifts(shifts: Shifts) {
+        this.shifts = shifts
     }
 
     /**
      * Set date type selected from home screen
      */
-    fun setDateType(dateType: DATETYPE) {
+    /*fun setDateType(dateType: DATETYPE) {
         this.dateType = dateType
-    }
+    }*/
 }

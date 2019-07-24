@@ -9,13 +9,20 @@
         android:orientation="vertical">
 
     <TextView
-            android:layout_width="@dimen/dp_140"
+            android:layout_width="@dimen/dp_220"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_15"
             android:background="@color/placeholder_bg"/>
 
     <TextView
-            android:layout_width="@dimen/dp_140"
+            android:layout_width="@dimen/dp_190"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp_15"
+            android:background="@color/placeholder_bg"/>
+
+    <TextView
+            android:layout_width="@dimen/dp_250"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
             android:layout_marginStart="@dimen/dp_15"
@@ -26,13 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
             android:layout_marginStart="@dimen/dp_15"
-            android:background="@color/placeholder_bg"/>
-
-    <TextView
-            android:layout_width="@dimen/dp_140"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginStart="@dimen/dp_15"
+        android:visibility="gone"
             android:background="@color/placeholder_bg"/>
 
 </LinearLayout>

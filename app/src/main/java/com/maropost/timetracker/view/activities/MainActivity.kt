@@ -3,12 +3,7 @@ package com.maropost.timetracker.view.activities
 import android.os.Bundle
 import com.maropost.timetracker.R
 import com.maropost.timetracker.application.MyApplication
-import com.maropost.timetracker.view.fragments.HomeFragment
 import com.maropost.timetracker.view.fragments.SplashFragment
-import android.text.method.TextKeyListener.clear
-import android.R.id.edit
-import android.content.Context
-import android.content.SharedPreferences
 import com.maropost.timetracker.utils.SharedPreferenceHelper
 import com.maropost.timetracker.view.fragments.LoginFragment
 import com.maropost.timetracker.view.fragments.UsersFragment
@@ -54,9 +49,13 @@ class MainActivity : MPBaseActivity() {
     fun checkMenuItemTapped(menuItem: String){
         when(menuItem){
             getString(R.string.logout)-> {
-                hideMenu()
+                lockNavigationMenu(true)
                 SharedPreferenceHelper.getInstance().clearSharedPreference(this,"PREF")
                 replaceFragment(LoginFragment(), false)
+            }
+            getString(R.string.attendance)-> {
+                lockNavigationMenu(false)
+                replaceFragment(UsersFragment(), true)
             }
         }
     }
