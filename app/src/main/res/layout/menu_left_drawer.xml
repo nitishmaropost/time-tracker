@@ -48,13 +48,26 @@
             android:layout_below="@id/lnrHeader"
             android:background="@color/colorBlack"/>
 
-    <android.support.v7.widget.RecyclerView
+    <!--<android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerNavigation"
             android:layout_width="@dimen/dp_250"
             android:layout_height="match_parent"
             android:layout_below="@id/view"
             android:layout_above="@id/txtVersion"
             android:layout_marginTop="@dimen/dp_10"/>
+-->
+    <ExpandableListView
+        android:id="@+id/expandableListView"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/txtVersion"
+        android:layout_below="@id/view"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="2dp"
+        android:background="@android:color/white"
+        android:divider="@null"
+        android:groupIndicator="@null"
+        android:scrollbars="none" />
 
     <TextView
             android:id="@+id/txtVersion"

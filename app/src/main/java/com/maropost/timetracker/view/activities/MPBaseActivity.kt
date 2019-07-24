@@ -9,6 +9,7 @@ import android.provider.Settings
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
 import android.support.v4.widget.DrawerLayout.LOCK_MODE_LOCKED_CLOSED
 import android.support.v4.widget.DrawerLayout.LOCK_MODE_UNLOCKED
@@ -16,6 +17,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.DragEvent
+import android.view.Gravity
 import android.view.Menu
 import android.view.View
 import android.widget.Button
@@ -24,8 +26,11 @@ import com.bumptech.glide.request.RequestOptions
 import com.maropost.timetracker.R
 import com.maropost.timetracker.application.MyApplication
 import com.maropost.timetracker.pojomodels.NavigationItem
+import com.maropost.timetracker.pojomodels.NavigationMenuChild
+import com.maropost.timetracker.pojomodels.NavigationMenuGroup
 import com.maropost.timetracker.view.adapters.NavigationAdapter
 import com.maropost.timetracker.view.adapters.NavigationAdapterCallbacks
+import com.maropost.timetracker.view.adapters.NavigationExpandableAdapter
 import com.maropost.timetracker.view.fragments.HomeFragment
 import com.maropost.timetracker.view.fragments.UsersFragment
 import com.miguelcatalan.materialsearchview.MaterialSearchView
@@ -49,6 +54,11 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
     private var itemList  = ArrayList<NavigationItem>()
     private var mLastClickTime: Long = 0
     private var isSearchAllow: Boolean = false
+    private var expandableListAdapter: NavigationExpandableAdapter? = null
+    private var listDataHeader = ArrayList<NavigationMenuGroup>()
+    private var listDataChild = HashMap<String, ArrayList<NavigationMenuChild>>()
+    private var listChild = ArrayList<NavigationMenuChild>()
+
 
     enum class TransactionType {
         REPLACE, ADD
@@ -62,10 +72,74 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
         initialiseListener()
         loadNavigationData()
         setSearchListener()
-        setupRecyclerView()
+        setupNavigationView()
     }
 
-    private fun setupRecyclerView(){
+    /**
+     * Navigation settings and data placement
+     */
+    private fun setupNavigationView() {
+        mDrawerLayout.setStatusBarBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary))
+        prepareMenuData()
+        populateExpandableList()
+        /*initialiseNavigationItemItemListeners()
+        imgToolbarLeftIcon.setOnClickListener { mDrawerLayout.openDrawer(Gravity.START) }*/
+    }
+
+    /*
+    * Expandable List menu */
+    private fun prepareMenuData() {
+        // Adding Group data
+        val groupMenuFirst = NavigationMenuGroup()
+        groupMenuFirst.groupName = getString(R.string.home)
+        groupMenuFirst.groupIcon = R.drawable.ic_home
+        groupMenuFirst.groupArrowStatus = NavigationMenuGroup.GroupStatus.COLLAPSED
+        listDataHeader.add(groupMenuFirst)
+
+        val groupMenuSecond = NavigationMenuGroup()
+        groupMenuSecond.groupName = getString(R.string.attendance)
+        groupMenuSecond.groupIcon = R.drawable.ic_calendar_check_o
+        groupMenuSecond.groupArrowStatus = NavigationMenuGroup.GroupStatus.COLLAPSED
+        listDataHeader.add(groupMenuSecond)
+
+        val groupMenuThird = NavigationMenuGroup()
+        groupMenuThird.groupName = getString(R.string.timesheet)
+        groupMenuThird.groupIcon = R.drawable.ic_calendar_o
+        groupMenuThird.groupArrowStatus = NavigationMenuGroup.GroupStatus.COLLAPSED
+        listDataHeader.add(groupMenuThird)
+
+
+        val groupMenuFourth = NavigationMenuGroup()
+        groupMenuFourth.groupName = getString(R.string.settings)
+        groupMenuFourth.groupIcon = R.drawable.ic_gears
+        groupMenuFourth.groupArrowStatus = NavigationMenuGroup.GroupStatus.COLLAPSED
+        listDataHeader.add(groupMenuFourth)
+
+        val groupMenuFifth = NavigationMenuGroup()
+        groupMenuFifth.groupName = getString(R.string.logout)
+        groupMenuFifth.groupIcon = R.drawable.ic_power_off
+        groupMenuFifth.groupArrowStatus = NavigationMenuGroup.GroupStatus.COLLAPSED
+        listDataHeader.add(groupMenuFifth)
+
+        //Adding child data
+        val childFirst = NavigationMenuChild()
+        childFirst.childName = getString(R.string.change_password)
+        childFirst.childIcon = R.drawable.ic_key
+        listChild.add(childFirst)
+
+        // Header, Child data
+        listDataChild[listDataHeader[3].groupName] = listChild
+    }
+
+    /**
+     * Populate list items in Navigation expandable list view
+     */
+    private fun populateExpandableList() {
+        expandableListAdapter = NavigationExpandableAdapter(this, listDataHeader, listDataChild)
+        expandableListView?.setAdapter(expandableListAdapter)
+    }
+
+    /*private fun setupRecyclerView(){
         // Creates a vertical Layout Manager
         val navigationItem = NavigationItem()
         navigationItem.itemName = getString(R.string.home)
@@ -96,7 +170,7 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
         recyclerNavigation.layoutManager = LinearLayoutManager(this)
         navigationAdapter = NavigationAdapter(itemList, this,this)
         recyclerNavigation.adapter = navigationAdapter
-    }
+    }*/
 
     fun hideMenu(){
         slidingRootNav?.closeMenu()
