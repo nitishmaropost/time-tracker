@@ -1,10 +1,10 @@
-package com.maropost.timetracker.view.activities
+package com.maropost.commons.activities
 
 import android.os.Bundle
 import com.maropost.timetracker.R
 import com.maropost.commons.application.MyApplication
-import com.maropost.timetracker.view.fragments.SplashFragment
 import com.maropost.commons.utils.SharedPreferenceHelper
+import com.maropost.maps.view.fragments.MapFragment
 import com.maropost.timetracker.view.fragments.LoginFragment
 import com.maropost.timetracker.view.fragments.UsersFragment
 
@@ -22,8 +22,8 @@ class MainActivity : MPBaseActivity() {
      * Display the initial splash view
      */
     private fun launchInitialView() {
-        replaceFragment(SplashFragment(),false)
-        //replaceFragment(HomeFragment(),true)
+        //replaceFragment(SplashFragment(),false)
+        replaceFragment(MapFragment(),true)
     }
 
     /**

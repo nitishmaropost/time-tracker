@@ -2,7 +2,7 @@ package com.maropost.commons.fragments
 
 import android.support.v4.app.Fragment
 import android.view.View
-import com.maropost.timetracker.view.activities.MPBaseActivity
+import com.maropost.commons.activities.MPBaseActivity
 
 open class MPBaseFragment : Fragment() {
 

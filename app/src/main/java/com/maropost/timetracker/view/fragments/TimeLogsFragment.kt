@@ -15,6 +15,7 @@ import com.maropost.timetracker.pojomodels.Rows
 import com.maropost.timetracker.pojomodels.Shifts
 import com.maropost.timetracker.view.adapters.TimeLogsAdapter
 import com.maropost.timetracker.viewmodel.TimeLogsViewModel
+import kotlinx.android.synthetic.main.time_logs_fragment.*
 import java.util.*
 
 

@@ -1,4 +1,4 @@
-package com.maropost.timetracker.view.activities
+package com.maropost.commons.activities
 
 import android.annotation.SuppressLint
 import android.content.Intent
