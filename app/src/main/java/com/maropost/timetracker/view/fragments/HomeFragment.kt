@@ -137,8 +137,8 @@ class HomeFragment : MPBaseFragment() {
         val today: String= dateFormat.format(currentDate)
         val yesterday: String = dateFormat.format(mydate)
         when {
-            formattedDate == yesterday -> tvDay.text= "Yesterday, $formattedDate"
-            formattedDate == today -> tvDay.text= "Today, $formattedDate"
+            formattedDate == yesterday -> tvDay.text= resources.getString(R.string.yesterday)+formattedDate
+            formattedDate == today -> tvDay.text= resources.getString(R.string.today)+formattedDate
             else -> tvDay.text= "$formattedDate"
         }
     }

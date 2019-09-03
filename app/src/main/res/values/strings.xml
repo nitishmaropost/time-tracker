@@ -27,6 +27,10 @@
     <string name="start_date">Start Date</string>
     <string name="try_again">Try Again!</string>
     <string name="today">Today,</string>
+    <string name="yesterday">Yesterday,</string>
+    <string name="today_hours">Today</string>
+    <string name="this_week">This week</string>
+    <string name="this_month">This month</string>
     <string name="home">Home</string>
     <string name="attendance">Attendance</string>
     <string name="timesheet">Timesheet</string>

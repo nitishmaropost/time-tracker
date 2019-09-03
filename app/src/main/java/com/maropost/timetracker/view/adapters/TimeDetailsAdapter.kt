@@ -18,12 +18,10 @@ class TimeDetailsAdapter(private var timeDetailList : ArrayList<TimeUtils>, val 
     }
 
     override fun getItemCount(): Int {
-        return 3
+        return timeDetailList.size
     }
 
     override fun onBindViewHolder(holder: TimeDetailsViewHolder, position: Int) {
-        holder.tvInTime?.text= "10:05 AM"
-        holder.tvOutTime?.text= "07:10 PM"
     }
 }
 

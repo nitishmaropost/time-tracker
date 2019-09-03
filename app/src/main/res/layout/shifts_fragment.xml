@@ -9,7 +9,6 @@
         android:id="@+id/txtName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Emp Name"
         android:textStyle="bold"
         android:textSize="@dimen/_18ssp"
         android:textColor="@color/colorRed"
@@ -28,7 +27,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Work Time"
             android:textStyle="bold"
             android:gravity="center"
             android:textSize="@dimen/_11ssp"
@@ -47,8 +45,7 @@
             android:textSize="@dimen/_11ssp"
             android:layout_marginStart="@dimen/_4sdp"
             android:textColor="@color/colorWhite"
-            android:background="@color/dark_gray"
-            android:text="Premises Time"/>
+            android:background="@color/dark_gray"/>
     </LinearLayout>
 
     <LinearLayout
@@ -63,7 +60,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Presents"
             android:textStyle="bold"
             android:textSize="@dimen/_11ssp"
             android:gravity="center"
@@ -82,8 +78,7 @@
             android:textSize="@dimen/_11ssp"
             android:layout_marginStart="@dimen/_4sdp"
             android:textColor="@color/colorWhite"
-            android:background="@color/dark_gray"
-            android:text="Absents"/>
+            android:background="@color/dark_gray"/>
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
