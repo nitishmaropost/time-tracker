@@ -4,7 +4,7 @@ import android.app.Application
 import android.text.TextUtils
 import com.maropost.timetracker.R
 import com.maropost.commons.utils.SharedPreferenceHelper
-import com.maropost.timetracker.view.activities.MainActivity
+import com.maropost.commons.activities.MainActivity
 
 class MyApplication : Application() {
 

@@ -24,7 +24,7 @@
             tools:ignore="GoogleAppIndexingWarning"
             tools:targetApi="m">
 
-        <activity android:name="com.maropost.timetracker.view.activities.MainActivity"
+        <activity android:name="com.maropost.commons.activities.MainActivity"
                   android:theme="@style/AppTheme.NoActionBar"
                   android:screenOrientation="portrait">
             <intent-filter>
@@ -32,6 +32,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/application_key" />
 
     </application>
 

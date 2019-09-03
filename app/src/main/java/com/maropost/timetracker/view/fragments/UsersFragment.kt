@@ -16,6 +16,7 @@ import com.maropost.timetracker.pojomodels.RowShifts
 import com.maropost.timetracker.view.adapters.UsersAdapter
 import com.maropost.timetracker.view.adapters.UsersAdapterCallbacks
 import com.maropost.timetracker.viewmodel.UsersViewModel
+import kotlinx.android.synthetic.main.users_fragment.*
 import kotlin.collections.ArrayList
 
 class UsersFragment : MPBaseFragment(), UsersAdapterCallbacks {

@@ -61,8 +61,8 @@ dependencies {
     // Material Search View
     implementation 'com.miguelcatalan:materialsearchview:1.4.0'
 
-    implementation 'com.google.android.gms:play-services-maps:17.0.0'
-    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation 'com.google.android.gms:play-services-maps:16.1.0' // Don't update to latest version since they use androidx
+    implementation 'com.google.android.gms:play-services-location:16.0.0' // Don't update to latest version since they use androidx
     implementation 'com.android.support:cardview-v7:28.0.0'
 
     // Runtime Permission

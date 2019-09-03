@@ -12,6 +12,7 @@ import com.maropost.timetracker.pojomodels.RowShifts
 import com.maropost.timetracker.pojomodels.Shifts
 import com.maropost.timetracker.view.adapters.ShiftsAdapter
 import com.maropost.timetracker.view.adapters.ShiftsAdapterCallbacks
+import kotlinx.android.synthetic.main.shifts_fragment.*
 import java.util.ArrayList
 
 class ShiftsFragment : MPBaseFragment(), ShiftsAdapterCallbacks {

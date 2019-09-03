@@ -40,10 +40,6 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
     private lateinit var points : ArrayList<LatLng>
     private var firstTimeFlag: Boolean = true
     private val mapsViewModel = MapsViewModel()
-    private var mTxtPickUp: TextView ?= null
-    private var txtDropAt: TextView ?= null
-    private var txtDrop: TextView ?= null
-    private var btnRideNow: Button ? = null
     private var originLatLng : LatLng ?= null
     private var destLatLng : LatLng ?= null
 
@@ -57,10 +53,6 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
             mView = inflater.inflate(R.layout.maps_fragment, container, false)
             points = ArrayList()
             mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-            mTxtPickUp = mView?.findViewById(R.id.txtPickup) as TextView
-            btnRideNow = mView?.findViewById(R.id.btnRideNow) as Button
-            txtDropAt = mView?.findViewById(R.id.txtDropAt) as TextView
-            txtDrop = mView?.findViewById(R.id.txtDrop) as TextView
             mFusedLocationClient = LocationServices.getFusedLocationProviderClient(activity!!)
             geofencingClient = LocationServices.getGeofencingClient(activity!!)
             mapFragment?.getMapAsync(this)
@@ -104,7 +96,6 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
                 originLatLng = LatLng(location!!.latitude, location.longitude)
                 showMarker(originLatLng!!)
                 animateCamera(originLatLng!!)
-                mTxtPickUp?.text= Utility.getInstance().getCompleteAddressString(activity!!,location.latitude,location.longitude)
                 removeLocationUpdates()
             }
         })
@@ -130,7 +121,7 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
 
 
     private fun checkForLocationPermission() {
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(activity!!,
                     Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 //Location Permission already granted
