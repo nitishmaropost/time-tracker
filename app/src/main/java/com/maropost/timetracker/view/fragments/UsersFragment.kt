@@ -1,9 +1,9 @@
 package com.maropost.timetracker.view.fragments
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -115,7 +115,11 @@ class UsersFragment : MPBaseFragment(), UsersAdapterCallbacks {
     * Initialize recycler view and set adapter
     */
     private fun initializeRecyclerView() {
-        val layoutManager = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
+        val layoutManager = LinearLayoutManager(
+            activity!!,
+            LinearLayoutManager.VERTICAL,
+            false
+        )
         usersAdapter = UsersAdapter(arrayList!!, activity!!,this)
         attendanceRecyclerView.layoutManager = layoutManager
         attendanceRecyclerView.adapter?.setHasStableIds(true)

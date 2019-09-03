@@ -2,8 +2,8 @@ package com.maropost.timetracker.view.fragments
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.support.design.widget.BottomSheetDialogFragment
-import android.support.v4.content.ContextCompat
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import androidx.core.content.ContextCompat
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.widget.CalendarView
@@ -31,7 +31,7 @@ class BottomSheetFragment() : BottomSheetDialogFragment() {
     }
 
     @SuppressLint("RestrictedApi")
-    override fun setupDialog(dialog: Dialog?, style: Int) {
+    override fun setupDialog(dialog: Dialog, style: Int) {
         super.setupDialog(dialog, style)
         val view = LayoutInflater.from(context).inflate(R.layout.fragment_bottom_sheet_dialog, null);
         dialog?.setContentView(view)

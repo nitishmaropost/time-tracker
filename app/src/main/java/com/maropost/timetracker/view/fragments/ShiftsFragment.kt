@@ -2,7 +2,7 @@ package com.maropost.timetracker.view.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -58,7 +58,11 @@ class ShiftsFragment : MPBaseFragment(), ShiftsAdapterCallbacks {
   * Initialize recycler view and set adapter
   */
     private fun initializeRecyclerView() {
-        val layoutManager = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
+        val layoutManager = LinearLayoutManager(
+            activity!!,
+            LinearLayoutManager.VERTICAL,
+            false
+        )
         shiftsAdapter = ShiftsAdapter(shiftsList, activity!!,this)
         shiftsRecyclerView.layoutManager = layoutManager
         //shiftsRecyclerView.adapter?.setHasStableIds(true)

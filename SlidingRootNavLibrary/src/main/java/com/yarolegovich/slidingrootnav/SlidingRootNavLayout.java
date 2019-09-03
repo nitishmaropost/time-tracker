@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.v4.view.ViewCompat;
+import androidx.core.view.ViewCompat;
 import android.support.v4.widget.ViewDragHelper;
 import android.view.MotionEvent;
 import android.view.View;

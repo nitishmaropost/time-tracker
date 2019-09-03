@@ -10,7 +10,7 @@ import com.maropost.commons.application.MyApplication
 import junit.framework.Assert.assertEquals
 import org.junit.Test
 import android.content.pm.PackageManager
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 
 
 class LoginFragmentTest {

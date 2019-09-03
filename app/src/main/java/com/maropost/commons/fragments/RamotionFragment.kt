@@ -1,15 +1,12 @@
 package com.maropost.commons.fragments
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
 import com.maropost.timetracker.R
-import com.ramotion.circlemenu.CircleMenuView
-import kotlinx.android.synthetic.main.fragment_ramotion.view.*
 
 class RamotionFragment : Fragment() {
     private var mView: View? = null
@@ -24,13 +21,7 @@ class RamotionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        drawRamotionCircle()
-    }
-
-    fun drawRamotionCircle(){
-        view?.circle_menu?.eventListener
-
-
+        //do something with circle_menu
     }
 }
 

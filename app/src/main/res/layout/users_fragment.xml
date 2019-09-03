@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.design.widget.CoordinatorLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -37,7 +37,7 @@
         </com.facebook.shimmer.ShimmerFrameLayout>
 
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/attendanceRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_margin="@dimen/dp_10"
@@ -70,4 +70,4 @@
 
     </RelativeLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
