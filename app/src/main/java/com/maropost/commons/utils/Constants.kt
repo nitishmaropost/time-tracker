@@ -1,4 +1,4 @@
-package com.maropost.timetracker.utils
+package com.maropost.commons.utils
 
 object Constants {
 

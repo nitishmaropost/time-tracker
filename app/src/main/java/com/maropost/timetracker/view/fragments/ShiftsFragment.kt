@@ -6,12 +6,12 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.maropost.commons.fragments.MPBaseFragment
 import com.maropost.timetracker.R
 import com.maropost.timetracker.pojomodels.RowShifts
 import com.maropost.timetracker.pojomodels.Shifts
 import com.maropost.timetracker.view.adapters.ShiftsAdapter
 import com.maropost.timetracker.view.adapters.ShiftsAdapterCallbacks
-import kotlinx.android.synthetic.main.shifts_fragment.*
 import java.util.ArrayList
 
 class ShiftsFragment : MPBaseFragment(), ShiftsAdapterCallbacks {

@@ -1,9 +1,9 @@
-package com.maropost.timetracker.application
+package com.maropost.commons.application
 
 import android.app.Application
 import android.text.TextUtils
 import com.maropost.timetracker.R
-import com.maropost.timetracker.utils.SharedPreferenceHelper
+import com.maropost.commons.utils.SharedPreferenceHelper
 import com.maropost.timetracker.view.activities.MainActivity
 
 class MyApplication : Application() {

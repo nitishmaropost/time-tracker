@@ -1,4 +1,4 @@
-package com.maropost.timetracker.view.fragments
+package com.maropost.commons.fragments
 
 import android.support.v4.app.Fragment
 import android.view.View
@@ -10,7 +10,7 @@ open class MPBaseFragment : Fragment() {
      * Replace current fragment with new one
      * addToBackStack - true/false keep it in back stack or not
      */
-    fun replaceFragment(fragment: MPBaseFragment,addToBackStack: Boolean) {
+    fun replaceFragment(fragment: MPBaseFragment, addToBackStack: Boolean) {
             (activity as MPBaseActivity).replaceFragment(fragment,addToBackStack)
     }
 

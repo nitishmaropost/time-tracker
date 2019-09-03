@@ -10,35 +10,23 @@ import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.view.ViewCompat
-import android.support.v4.widget.DrawerLayout.LOCK_MODE_LOCKED_CLOSED
-import android.support.v4.widget.DrawerLayout.LOCK_MODE_UNLOCKED
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
-import android.view.DragEvent
 import android.view.Menu
 import android.view.View
 import android.widget.Button
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.maropost.timetracker.R
-import com.maropost.timetracker.application.MyApplication
+import com.maropost.commons.application.MyApplication
 import com.maropost.timetracker.pojomodels.NavigationItem
 import com.maropost.timetracker.view.adapters.NavigationAdapter
 import com.maropost.timetracker.view.adapters.NavigationAdapterCallbacks
 import com.maropost.timetracker.view.fragments.HomeFragment
-import com.maropost.timetracker.view.fragments.UsersFragment
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 import com.yarolegovich.slidingrootnav.SlidingRootNav
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder
-import com.yarolegovich.slidingrootnav.SlidingRootNavLayout
-import com.yarolegovich.slidingrootnav.callback.DragListener
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.app_bar_main.view.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.menu_left_drawer.*
-import java.util.*
 import kotlin.collections.ArrayList
 
 

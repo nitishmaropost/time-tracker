@@ -1,10 +1,10 @@
-package com.maropost.timetracker.utils
+package com.maropost.commons.utils
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.location.Geocoder
 import android.text.TextUtils
 import android.util.Log
 import android.util.Patterns
@@ -16,7 +16,7 @@ import android.widget.Toast
 import java.text.SimpleDateFormat
 import java.util.*
 import android.net.ConnectivityManager
-import com.maropost.timetracker.application.MyApplication
+import com.maropost.commons.application.MyApplication
 
 class Utility()  {
     private var alertDialog : AlertDialog ?= null
@@ -193,6 +193,26 @@ class Utility()  {
      */
      fun getCurrentDate(calendar: Calendar):String{
         return sdf.format(calendar.time)
+    }
+
+    fun getCompleteAddressString(context: Context,latitude: Double, longitude: Double): String {
+        var strAdd = ""
+        val geocoder = Geocoder(context, Locale.getDefault())
+        try {
+            val addresses = geocoder.getFromLocation(latitude, longitude, 1)
+            if (addresses != null) {
+                val returnedAddress = addresses[0]
+                val strReturnedAddress = StringBuilder("")
+
+                for (i in 0..returnedAddress.maxAddressLineIndex) {
+                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
+                }
+                strAdd = strReturnedAddress.toString()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return strAdd
     }
 
 }

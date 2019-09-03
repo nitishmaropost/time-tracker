@@ -9,12 +9,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import com.maropost.commons.fragments.MPBaseFragment
 import com.maropost.timetracker.R
 import com.maropost.timetracker.pojomodels.Rows
 import com.maropost.timetracker.pojomodels.Shifts
 import com.maropost.timetracker.view.adapters.TimeLogsAdapter
 import com.maropost.timetracker.viewmodel.TimeLogsViewModel
-import kotlinx.android.synthetic.main.time_logs_fragment.*
 import java.util.*
 
 

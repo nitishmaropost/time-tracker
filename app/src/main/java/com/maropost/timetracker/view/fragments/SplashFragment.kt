@@ -8,7 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.maropost.timetracker.R
-import com.maropost.timetracker.application.MyApplication
+import com.maropost.commons.application.MyApplication
+import com.maropost.commons.fragments.MPBaseFragment
 
 class SplashFragment : MPBaseFragment() {
     private var mView: View? = null

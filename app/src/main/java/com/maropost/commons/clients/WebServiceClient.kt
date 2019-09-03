@@ -1,9 +1,9 @@
-package com.maropost.timetracker.clients
+package com.maropost.commons.clients
 
 import com.maropost.timetracker.R
-import com.maropost.timetracker.application.MyApplication
-import com.maropost.timetracker.utils.Constants
-import com.maropost.timetracker.utils.Utility
+import com.maropost.commons.application.MyApplication
+import com.maropost.commons.utils.Constants
+import com.maropost.commons.utils.Utility
 import org.json.JSONObject
 
 class WebServiceClient(private var context: Any) {

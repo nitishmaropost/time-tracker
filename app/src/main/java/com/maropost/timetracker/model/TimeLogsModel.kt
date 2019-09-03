@@ -3,11 +3,11 @@ package com.maropost.timetracker.model
 import android.os.Handler
 import android.text.TextUtils
 import com.google.gson.Gson
-import com.maropost.timetracker.clients.OkhttpClient
-import com.maropost.timetracker.clients.WebServiceClient
+import com.maropost.commons.clients.OkhttpClient
+import com.maropost.commons.clients.WebServiceClient
 import com.maropost.timetracker.pojomodels.TimeLogs
-import com.maropost.timetracker.utils.Constants
-import com.maropost.timetracker.utils.Utility
+import com.maropost.commons.utils.Constants
+import com.maropost.commons.utils.Utility
 import org.json.JSONObject
 
 

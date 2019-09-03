@@ -3,11 +3,8 @@ package com.maropost.timetracker.viewmodel
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.text.TextUtils
-import android.util.Log
-import android.widget.Toast
 import com.maropost.timetracker.model.LoginModel
-import com.maropost.timetracker.utils.Utility
-import com.maropost.timetracker.view.activities.MainActivity
+import com.maropost.commons.utils.Utility
 
 class LoginViewModel: ViewModel(), LoginModel.LoginTokenModelCallback {
 

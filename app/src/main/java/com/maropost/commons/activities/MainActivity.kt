@@ -2,9 +2,9 @@ package com.maropost.timetracker.view.activities
 
 import android.os.Bundle
 import com.maropost.timetracker.R
-import com.maropost.timetracker.application.MyApplication
+import com.maropost.commons.application.MyApplication
 import com.maropost.timetracker.view.fragments.SplashFragment
-import com.maropost.timetracker.utils.SharedPreferenceHelper
+import com.maropost.commons.utils.SharedPreferenceHelper
 import com.maropost.timetracker.view.fragments.LoginFragment
 import com.maropost.timetracker.view.fragments.UsersFragment
 

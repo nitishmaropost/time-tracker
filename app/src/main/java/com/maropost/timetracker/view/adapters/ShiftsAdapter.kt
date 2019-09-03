@@ -11,9 +11,9 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.maropost.timetracker.R
-import com.maropost.timetracker.application.MyApplication
+import com.maropost.commons.application.MyApplication
 import com.maropost.timetracker.pojomodels.Shifts
-import com.maropost.timetracker.utils.Utility
+import com.maropost.commons.utils.Utility
 import kotlinx.android.synthetic.main.item_shifts_fragment.view.*
 import java.util.*
 

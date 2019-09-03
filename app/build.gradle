@@ -24,7 +24,6 @@ android {
 
 repositories {
     maven {
-        //MPAndroidChart
         url "https://jitpack.io"
     }
 }
@@ -44,7 +43,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     implementation 'com.yarolegovich:sliding-root-nav:1.1.0'
     implementation 'com.airbnb.android:lottie:2.5.0' // Don't update to latest version since they use androidx
-    implementation 'com.squareup.okhttp3:okhttp:3.12.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.2'
     //for lifecycle and LiveData and ViewModel
     implementation 'android.arch.lifecycle:runtime:1.1.1'
     implementation 'android.arch.lifecycle:extensions:1.1.1'
@@ -61,4 +60,11 @@ dependencies {
     //implementation project(':SlidingRootNavLibrary')
     // Material Search View
     implementation 'com.miguelcatalan:materialsearchview:1.4.0'
+
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation 'com.android.support:cardview-v7:28.0.0'
+
+    // Runtime Permission
+    implementation 'ru.superjob:kotlin-permissions:1.0.2'
 }

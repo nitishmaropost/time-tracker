@@ -1,13 +1,12 @@
-package com.maropost.timetracker.clients
+package com.maropost.commons.clients
 
-import android.annotation.SuppressLint
 import okhttp3.*
 import org.json.JSONObject
 import android.os.AsyncTask
 import android.text.TextUtils
-import com.maropost.timetracker.application.MyApplication
-import com.maropost.timetracker.utils.Constants
-import com.maropost.timetracker.utils.Utility
+import com.maropost.commons.application.MyApplication
+import com.maropost.commons.utils.Constants
+import com.maropost.commons.utils.Utility
 
 class OkhttpClient {
     private val client = OkHttpClient()
@@ -68,7 +67,7 @@ class OkhttpClient {
         request = Request.Builder()
             .url(Constants.WEB_BASE_URL + apiRequestUrl)
             .get()
-            .addHeader("x-access-token",MyApplication.getInstance().accessToken)
+            .addHeader("x-access-token", MyApplication.getInstance().accessToken)
             .build()
     }
 

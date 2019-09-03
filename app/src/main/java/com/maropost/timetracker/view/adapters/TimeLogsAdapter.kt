@@ -11,7 +11,7 @@ import android.widget.TextView
 import com.maropost.timetracker.R
 import com.maropost.timetracker.pojomodels.TimeLogs
 import com.maropost.timetracker.pojomodels.Rows
-import com.maropost.timetracker.utils.Utility
+import com.maropost.commons.utils.Utility
 import kotlinx.android.synthetic.main.item_attendance_detail.view.*
 import java.text.SimpleDateFormat
 import java.util.*

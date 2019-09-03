@@ -3,12 +3,12 @@ package com.maropost.timetracker.model
 import android.text.TextUtils
 import com.google.gson.Gson
 import com.maropost.timetracker.R
-import com.maropost.timetracker.application.MyApplication
-import com.maropost.timetracker.clients.OkhttpClient
-import com.maropost.timetracker.clients.WebServiceClient
+import com.maropost.commons.application.MyApplication
+import com.maropost.commons.clients.OkhttpClient
+import com.maropost.commons.clients.WebServiceClient
 import com.maropost.timetracker.pojomodels.Login
-import com.maropost.timetracker.utils.Constants
-import com.maropost.timetracker.utils.SharedPreferenceHelper
+import com.maropost.commons.utils.Constants
+import com.maropost.commons.utils.SharedPreferenceHelper
 import org.json.JSONObject
 
 class LoginModel(private val loginTokenModelCallback: LoginTokenModelCallback) {
@@ -53,10 +53,12 @@ class LoginModel(private val loginTokenModelCallback: LoginTokenModelCallback) {
      */
     private fun saveLoginTokenInPreference(loginToken: String, user_role: String) {
         SharedPreferenceHelper.getInstance()
-            .setSharedPreference(MyApplication.getInstance(),
+            .setSharedPreference(
+                MyApplication.getInstance(),
                 MyApplication.getInstance().getString(R.string.login_token), loginToken)
         SharedPreferenceHelper.getInstance()
-            .setSharedPreference(MyApplication.getInstance(),
+            .setSharedPreference(
+                MyApplication.getInstance(),
                 MyApplication.getInstance().getString(R.string.user_role), user_role)
     }
 

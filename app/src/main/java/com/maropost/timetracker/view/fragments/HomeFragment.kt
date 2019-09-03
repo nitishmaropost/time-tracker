@@ -1,25 +1,12 @@
 package com.maropost.timetracker.view.fragments
 
-import android.annotation.SuppressLint
-import android.app.DatePickerDialog
 import android.os.Bundle
-import android.os.SystemClock
-import android.support.v4.widget.DrawerLayout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.data.BarData
-import com.github.mikephil.charting.data.BarDataSet
-import com.github.mikephil.charting.data.BarEntry
-import com.github.mikephil.charting.utils.ColorTemplate
+import com.maropost.commons.fragments.MPBaseFragment
 import com.maropost.timetracker.R
-import com.maropost.timetracker.utils.Utility
 import com.maropost.timetracker.viewmodel.HomeViewModel
-import kotlinx.android.synthetic.main.home_fragment.*
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 class HomeFragment : MPBaseFragment() {
@@ -50,9 +37,9 @@ class HomeFragment : MPBaseFragment() {
         if(homeViewModel == null) {
             homeViewModel = HomeViewModel()
             initialiseListener()
-            setCurrentDate()
+            //setCurrentDate()
             //initializeRecyclerView()
-            demoBarChart()
+            //demoBarChart()
         }
     }
 
@@ -108,28 +95,28 @@ class HomeFragment : MPBaseFragment() {
     /**
      * Set current date on launch
      */
-    @SuppressLint("SetTextI18n")
+   /* @SuppressLint("SetTextI18n")
     private fun setCurrentDate(){
         val calendar = Calendar.getInstance()
         tvDay.text = getString(R.string.today) + " " + Utility.getInstance().getCurrentDate(calendar)
-    }
+    }*/
 
     /**
      * Set selected date from picker
      */
-    @SuppressLint("SimpleDateFormat")
+  /*  @SuppressLint("SimpleDateFormat")
     fun setCalenderDetails(year: Int, month: Int, day: Int){
         val calendar = Calendar.getInstance()
         calendar.set(year, month, day)
         val sdf = SimpleDateFormat("dd-MM-yyyy")
         val formattedDate: String= sdf.format(calendar.time)
         formatToTodayYesterday(formattedDate)
-    }
+    }*/
 
     /*
     Display today/yesterday against date
     */
-    @SuppressLint("SimpleDateFormat")
+ /*   @SuppressLint("SimpleDateFormat")
     fun formatToTodayYesterday(formattedDate: String){
         val currentDate = Date(System.currentTimeMillis())
         val mydate = Date(System.currentTimeMillis() - 1000 * 60 * 60 * 24)
@@ -141,7 +128,7 @@ class HomeFragment : MPBaseFragment() {
             formattedDate == today -> tvDay.text= "Today, $formattedDate"
             else -> tvDay.text= "$formattedDate"
         }
-    }
+    }*/
 
 
     /*
@@ -154,7 +141,7 @@ class HomeFragment : MPBaseFragment() {
         timeDetailsRecyclerview.adapter = timeDetailsAdapter
     }*/
 
-    fun demoBarChart() {
+    /*fun demoBarChart() {
         val labels = ArrayList<String>()
         labels.add("Sun")
         labels.add("Mon")
@@ -191,5 +178,5 @@ class HomeFragment : MPBaseFragment() {
         barchart.axisRight.setDrawGridLines(false)
         barchart.xAxis.position = XAxis.XAxisPosition.BOTTOM
         barchart.animateY(3000)
-    }
+    }*/
 }

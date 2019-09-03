@@ -8,9 +8,9 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.maropost.commons.fragments.MPBaseFragment
 import com.maropost.timetracker.R
 import com.maropost.timetracker.viewmodel.LoginViewModel
-import kotlinx.android.synthetic.main.login_fragment.*
 
 class LoginFragment : MPBaseFragment() {
 

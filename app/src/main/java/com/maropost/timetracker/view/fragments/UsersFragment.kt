@@ -10,15 +10,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.maropost.timetracker.R
-import com.maropost.timetracker.application.MyApplication
+import com.maropost.commons.application.MyApplication
+import com.maropost.commons.fragments.MPBaseFragment
 import com.maropost.timetracker.pojomodels.RowShifts
 import com.maropost.timetracker.view.adapters.UsersAdapter
 import com.maropost.timetracker.view.adapters.UsersAdapterCallbacks
 import com.maropost.timetracker.viewmodel.UsersViewModel
-import com.miguelcatalan.materialsearchview.MaterialSearchView
-import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.users_fragment.*
-import java.util.*
 import kotlin.collections.ArrayList
 
 class UsersFragment : MPBaseFragment(), UsersAdapterCallbacks {

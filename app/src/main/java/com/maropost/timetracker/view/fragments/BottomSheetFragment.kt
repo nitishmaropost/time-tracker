@@ -9,7 +9,7 @@ import android.view.LayoutInflater
 import android.widget.CalendarView
 import android.widget.TextView
 import com.maropost.timetracker.R
-import com.maropost.timetracker.utils.Utility
+import com.maropost.commons.utils.Utility
 import kotlinx.android.synthetic.main.fragment_bottom_sheet_dialog.*
 import java.text.SimpleDateFormat
 import java.util.*

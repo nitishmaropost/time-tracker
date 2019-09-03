@@ -6,7 +6,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.text.TextUtils
 import android.util.Patterns
-import com.maropost.timetracker.application.MyApplication
+import com.maropost.commons.application.MyApplication
 import junit.framework.Assert.assertEquals
 import org.junit.Test
 import android.content.pm.PackageManager
