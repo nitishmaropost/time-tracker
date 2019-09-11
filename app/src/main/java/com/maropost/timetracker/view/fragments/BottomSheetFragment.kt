@@ -31,7 +31,7 @@ class BottomSheetFragment() : BottomSheetDialogFragment() {
     }
 
     @SuppressLint("RestrictedApi")
-    override fun setupDialog(dialog: Dialog?, style: Int) {
+    override fun setupDialog(dialog: Dialog, style: Int) {
         super.setupDialog(dialog, style)
         val view = LayoutInflater.from(context).inflate(R.layout.fragment_bottom_sheet_dialog, null);
         dialog?.setContentView(view)

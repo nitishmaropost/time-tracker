@@ -3,6 +3,7 @@ package com.maropost.commons.activities
 import android.os.Bundle
 import com.maropost.timetracker.R
 import com.maropost.commons.application.MyApplication
+import com.maropost.commons.fragments.RamotionFragment
 import com.maropost.commons.utils.SharedPreferenceHelper
 import com.maropost.maps.view.fragments.MapFragment
 import com.maropost.timetracker.view.fragments.LoginFragment
@@ -23,7 +24,8 @@ class MainActivity : MPBaseActivity() {
      */
     private fun launchInitialView() {
         //replaceFragment(SplashFragment(),false)
-        replaceFragment(MapFragment(),true)
+        //replaceFragment(MapFragment(),true)
+        replaceFragment(RamotionFragment(),true)
     }
 
     /**
