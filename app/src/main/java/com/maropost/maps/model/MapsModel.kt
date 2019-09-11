@@ -67,12 +67,10 @@ class MapsModel(private val mapModelCallback: MapModelCallback) {
                             // and check the result in onActivityResult().
                             resolvable.startResolutionForResult(activity,REQUEST_CHECK_SETTINGS);
                         }
-                        catch (e: IntentSender.SendIntentException) {
+                        catch (e:Exception) {
                             // Ignore the error.
                         }
-                        catch (e: Exception) {
-                            // Ignore, should be an impossible error.
-                        }
+
                     }
                 }
             }
