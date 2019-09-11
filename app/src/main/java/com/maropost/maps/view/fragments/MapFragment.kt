@@ -9,8 +9,6 @@ import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.GeofencingClient
 import com.google.android.gms.location.LocationServices
@@ -21,9 +19,12 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.kotlinpermissions.KotlinPermissions
 import com.maropost.commons.fragments.MPBaseFragment
-import com.maropost.commons.utils.Utility
 import com.maropost.maps.viewmodel.MapsViewModel
 import com.maropost.timetracker.R
+import com.google.android.gms.maps.model.MarkerOptions
+import com.maropost.maps.utils.LatLngInterpolator
+import com.maropost.maps.utils.MarkerAnimation
+
 
 class MapFragment : MPBaseFragment(), OnMapReadyCallback {
 
@@ -86,39 +87,46 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
         mGoogleMap = googleMap
         mGoogleMap?.mapType = GoogleMap.MAP_TYPE_NORMAL
         checkForLocationPermission()
+
+        mGoogleMap?.setOnMapClickListener {
+            mapsViewModel.endRippleAnimation()
+            MarkerAnimation.animateMarkerToGB(mCurrLocationMarker!!, it, LatLngInterpolator.Spherical())
+             //animateCamera(it!!)
+           // displayRippleAnimation(it)
+        }
     }
 
     private fun observeLiveDataChanges(){
         mapsViewModel.currentLocation.observe(this, Observer { location ->
             if (firstTimeFlag && mGoogleMap != null) {
-
                 firstTimeFlag = false
                 originLatLng = LatLng(location!!.latitude, location.longitude)
                 showMarker(originLatLng!!)
+                displayRippleAnimation(originLatLng!!)
                 animateCamera(originLatLng!!)
                 removeLocationUpdates()
             }
         })
 
-       /* mapsViewModel.mLineOptions.observe(this, Observer { lineOptions ->
-            if(mGoogleMap != null)
-                mGoogleMap?.addPolyline(lineOptions)
-        })*/
+        /* mapsViewModel.mLineOptions.observe(this, Observer { lineOptions ->
+             if(mGoogleMap != null)
+                 mGoogleMap?.addPolyline(lineOptions)
+         })*/
     }
 
     private fun initialiseListeners() {
-      /*  lnrPickup.setOnClickListener{
-            openSearchFragment(REQUEST_TYPE.PICKUP)
-        }
-        lnrDrop.setOnClickListener{
-            openSearchFragment(REQUEST_TYPE.DROP)
-        }
-        btnRideNow?.setOnClickListener{
-            btnRideNow?.visibility = View.INVISIBLE
-            mapsViewModel.getDirectionsUrl(originLatLng, destLatLng)
-        }*/
-    }
+        /*  lnrPickup.setOnClickListener{
+              openSearchFragment(REQUEST_TYPE.PICKUP)
+          }
+          lnrDrop.setOnClickListener{
+              openSearchFragment(REQUEST_TYPE.DROP)
+          }
+          btnRideNow?.setOnClickListener{
+              btnRideNow?.visibility = View.INVISIBLE
+              mapsViewModel.getDirectionsUrl(originLatLng, destLatLng)
+          }*/
 
+    }
 
     private fun checkForLocationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -140,6 +148,9 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
         }
     }
 
+    /**
+     * Get current location
+     */
     private fun requestLocationUpdates(){
         if(mGoogleMap != null)
             mapsViewModel.requestLocationUpdates(activity!!,mFusedLocationClient,mGoogleMap!!,REQUEST_CHECK_SETTINGS)
@@ -157,35 +168,27 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
         return CameraPosition.Builder().target(latLng).zoom(16f).build()
     }
 
+    /**
+     * Set marker on specific location
+     */
     private fun showMarker(latLng: LatLng) {
-        //val latLng = LatLng(currentLocation.latitude, currentLocation.longitude)
         if (mCurrLocationMarker == null)
-            mCurrLocationMarker = mGoogleMap?.addMarker(MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker()).position(latLng))
+            mCurrLocationMarker = mGoogleMap?.addMarker(MarkerOptions().
+                icon(BitmapDescriptorFactory.defaultMarker()).position(latLng)
+                .title("Driver")
+                .snippet("Manjeet Singh"))
 //        else
 //            MarkerAnimation.animateMarkerToGB(mCurrLocationMarker!!, latLng, LatLngInterpolator.Spherical())
     }
 
+    private fun displayRippleAnimation(latLng: LatLng){
+        mapsViewModel.displayRippleAnimation(mGoogleMap!!, latLng, activity!!)
+
+    }
 
     private fun removeLocationUpdates() {
         if (mFusedLocationClient != null)
             mapsViewModel.removeLocationUpdates(mFusedLocationClient!!)
     }
-
- /*   override fun onPickupLocationSelected(place: Place, placeName: String) {
-        originLatLng = place.latLng
-        showMarker(originLatLng!!)
-        animateCamera(originLatLng!!)
-        mTxtPickUp?.text= placeName
-        validatePickupAndDropDetails()
-    }
-
-    override fun onDropLocationSelected(place: Place, placeName: String) {
-        destLatLng = place.latLng
-        mCurrLocationMarker = mGoogleMap?.addMarker(MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker()).position(destLatLng!!))
-        animateCamera(destLatLng!!)
-        validatePickupAndDropDetails()
-        txtDropAt?.visibility = View.VISIBLE
-        txtDrop?.text = placeName
-    }*/
 
 }

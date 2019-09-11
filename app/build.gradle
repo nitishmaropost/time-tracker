@@ -67,4 +67,6 @@ dependencies {
 
     // Runtime Permission
     implementation 'ru.superjob:kotlin-permissions:1.0.2'
+
+    implementation 'com.github.aarsy.googlemapsanimations:googlemapsanimations:1.0.5'
 }

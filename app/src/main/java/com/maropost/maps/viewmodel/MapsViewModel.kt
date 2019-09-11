@@ -2,11 +2,11 @@ package com.maropost.maps.viewmodel
 
 import android.app.Activity
 import android.arch.lifecycle.MutableLiveData
+import android.content.Context
 import android.location.Location
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.PolylineOptions
 import com.maropost.maps.model.MapsModel
 
 class MapsViewModel: MapsModel.MapModelCallback {
@@ -14,6 +14,9 @@ class MapsViewModel: MapsModel.MapModelCallback {
     private var mapsModel:MapsModel = MapsModel(this)
     var currentLocation = MutableLiveData<Location>()
 
+    /**
+     * Get current location
+     */
     fun requestLocationUpdates(activity: Activity,
                                mFusedLocationClient: FusedLocationProviderClient?,
                                mGoogleMap: GoogleMap,
@@ -28,6 +31,17 @@ class MapsViewModel: MapsModel.MapModelCallback {
 
     fun removeLocationUpdates(mFusedLocationClient: FusedLocationProviderClient) {
         mapsModel.removeLocationUpdates(mFusedLocationClient)
+    }
+
+    /**
+     * Display an animation effect on location
+     */
+    fun displayRippleAnimation(mGoogleMap: GoogleMap, latLng: LatLng, context: Context) {
+        mapsModel.displayRippleAnimation(mGoogleMap,latLng,context)
+    }
+
+    fun endRippleAnimation(){
+        mapsModel.endRippleAnimation()
     }
 
 }
