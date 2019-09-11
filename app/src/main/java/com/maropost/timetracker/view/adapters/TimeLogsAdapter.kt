@@ -2,8 +2,8 @@ package com.maropost.timetracker.view.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.RecyclerView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.item_attendance_detail.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class TimeLogsAdapter(private var arrayList: ArrayList<Rows>, val context: Context) : RecyclerView.Adapter<TimeLogsViewHolder>() {
+class TimeLogsAdapter(private var arrayList: ArrayList<Rows>, val context: Context) : androidx.recyclerview.widget.RecyclerView.Adapter<TimeLogsViewHolder>() {
 
     private var formatter :  SimpleDateFormat ?= null
     private var attendanceDetails: TimeLogs ? = null
@@ -89,7 +89,7 @@ class TimeLogsAdapter(private var arrayList: ArrayList<Rows>, val context: Conte
     }
 }
 
-class TimeLogsViewHolder(view: View): RecyclerView.ViewHolder(view) {
+class TimeLogsViewHolder(view: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
     var txtTimeOfPunch: TextView? = view.txtTimeOfPunch
     var txtPunchType: TextView? = view.txtPunchType
     var txtDateHeader : TextView? = view.txtDateHeader

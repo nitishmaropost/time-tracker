@@ -2,7 +2,7 @@ package com.maropost.timetracker.view.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +21,7 @@ import android.widget.LinearLayout
 
 
 class UsersAdapter(private var arrayList: ArrayList<RowShifts>, val context: Context,
-                   private val attendanceAdapterCallbacks: UsersAdapterCallbacks) : RecyclerView.Adapter<UsersViewHolder>(){
+                   private val attendanceAdapterCallbacks: UsersAdapterCallbacks) : androidx.recyclerview.widget.RecyclerView.Adapter<UsersViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UsersViewHolder {
         return UsersViewHolder(LayoutInflater.from(context).inflate(R.layout.item_users_fragment, parent, false))
@@ -76,7 +76,7 @@ interface UsersAdapterCallbacks {
     fun onItemClick(rowShifts: RowShifts)
 }
 
-class UsersViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class UsersViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
     var txtEmpName: TextView? = view.txtEmpName
     var txtPosition: TextView? = view.txtPosition
     var txtDepartment: TextView? = view.txtDepartment

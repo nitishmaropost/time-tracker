@@ -6,12 +6,12 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
-import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.view.ViewCompat
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.core.view.ViewCompat
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.View
 import android.widget.Button
@@ -81,7 +81,7 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
         itemList.add(navigationItem5)
 
 
-        recyclerNavigation.layoutManager = LinearLayoutManager(this)
+        recyclerNavigation.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         navigationAdapter = NavigationAdapter(itemList, this,this)
         recyclerNavigation.adapter = navigationAdapter
     }
@@ -237,7 +237,7 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
     /**
      * Get the current displaying fragment
      */
-    fun getCurrentFragment(): Fragment {
+    fun getCurrentFragment(): androidx.fragment.app.Fragment {
         return supportFragmentManager.findFragmentById(R.id.mainContainer)!!
     }
     /**
@@ -276,7 +276,7 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
      * Replace current fragment with new one
      * addToBackStack - true/false keep it in back stack or not
      */
-    fun replaceFragment(fragment: Fragment, addToBackStack: Boolean) {
+    fun replaceFragment(fragment: androidx.fragment.app.Fragment, addToBackStack: Boolean) {
         inflateFragment(fragment, addToBackStack, TransactionType.REPLACE)
     }
 
@@ -284,14 +284,14 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
      * Replace current fragment with new one along with Shared Element Transaction
      * addToBackStack - true/false keep it in back stack or not
      */
-    fun replaceFragment(fragment: Fragment, addToBackStack: Boolean, view: View) {
+    fun replaceFragment(fragment: androidx.fragment.app.Fragment, addToBackStack: Boolean, view: View) {
         inflateFragment(fragment, addToBackStack, TransactionType.REPLACE, view)
     }
 
     /**
      * Set your fragment layout in the container
      */
-    private fun inflateFragment(fragment: Fragment, addToBackStack: Boolean, transactionType: TransactionType) {
+    private fun inflateFragment(fragment: androidx.fragment.app.Fragment, addToBackStack: Boolean, transactionType: TransactionType) {
         val transaction = supportFragmentManager.beginTransaction()
         val tag = fragment.javaClass.simpleName
         if (addToBackStack)
@@ -308,7 +308,7 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
      * Set your fragment layout in the container - this method used for transition element animation
      * Could also be used if any other animation needs to be implemented. Apply check based on animation enum type
      */
-    private fun inflateFragment(fragment: Fragment, addToBackStack: Boolean, transactionType: TransactionType, view: View?) {
+    private fun inflateFragment(fragment: androidx.fragment.app.Fragment, addToBackStack: Boolean, transactionType: TransactionType, view: View?) {
         val transaction = supportFragmentManager.beginTransaction()
         val tag = fragment.javaClass.simpleName
         if (view != null)
@@ -353,7 +353,7 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
      */
     fun popFragmentByTag(tag: String) {
         try {
-            supportFragmentManager.popBackStack(tag, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            supportFragmentManager.popBackStack(tag, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
         } catch (e: Exception) {
             e.printStackTrace()
         }

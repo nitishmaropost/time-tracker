@@ -3,8 +3,8 @@ package com.maropost.timetracker.view.adapters
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Typeface
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.RecyclerView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.item_shifts_fragment.view.*
 import java.util.*
 
 class ShiftsAdapter(private var arrayList: ArrayList<Shifts>, val context: Context,
-                    private val shiftsAdapterCallbacks: ShiftsAdapterCallbacks) : RecyclerView.Adapter<ShiftsViewHolder>() {
+                    private val shiftsAdapterCallbacks: ShiftsAdapterCallbacks) : androidx.recyclerview.widget.RecyclerView.Adapter<ShiftsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShiftsViewHolder {
         return ShiftsViewHolder(LayoutInflater.from(context).inflate(R.layout.item_shifts_fragment, parent, false))
@@ -88,7 +88,7 @@ interface ShiftsAdapterCallbacks{
     fun onItemClick(shifts: Shifts)
 }
 
-class ShiftsViewHolder(view: View): RecyclerView.ViewHolder(view) {
+class ShiftsViewHolder(view: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
     var txtDate: TextView? = view.txtDate
     var txtDay: TextView? = view.txtDay
     var txtWorkTime : TextView? = view.txtWorkTime

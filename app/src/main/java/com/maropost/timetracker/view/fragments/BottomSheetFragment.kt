@@ -2,8 +2,8 @@ package com.maropost.timetracker.view.fragments
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.support.design.widget.BottomSheetDialogFragment
-import android.support.v4.content.ContextCompat
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import androidx.core.content.ContextCompat
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.widget.CalendarView

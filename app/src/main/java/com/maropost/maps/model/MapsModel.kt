@@ -70,7 +70,7 @@ class MapsModel(private val mapModelCallback: MapModelCallback) {
                         catch (e: IntentSender.SendIntentException) {
                             // Ignore the error.
                         }
-                        catch (e: ClassCastException) {
+                        catch (e: Exception) {
                             // Ignore, should be an impossible error.
                         }
                     }

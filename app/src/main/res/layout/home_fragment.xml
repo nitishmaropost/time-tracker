@@ -28,7 +28,7 @@
                 android:maxLines="1"
                 android:maxLength="40"/>
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="@dimen/_5sdp"
@@ -95,7 +95,7 @@
 
                 </LinearLayout>
             </LinearLayout>
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
 
         <RelativeLayout
@@ -140,7 +140,7 @@
                 android:weightSum="3"
                 android:layout_marginTop="@dimen/_3sdp">
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="@dimen/_5sdp"
@@ -176,9 +176,9 @@
                             android:textColor="@color/colorWhite"
                             android:padding="@dimen/_5sdp"/>
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="@dimen/_5sdp"
@@ -212,9 +212,9 @@
                             android:textColor="@color/colorWhite"
                             android:padding="@dimen/_5sdp"/>
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="@dimen/_5sdp"
@@ -248,7 +248,7 @@
                             android:textColor="@color/colorWhite"
                             android:padding="@dimen/_5sdp"/>
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 

@@ -1,7 +1,7 @@
 package com.maropost.timetracker.view.adapters
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.list_item.view.*
 class NavigationAdapter(
     private val arrayList: ArrayList<NavigationItem>, private val context: Context,
     private val callback: NavigationAdapterCallbacks
-) : RecyclerView.Adapter<ViewHolder>() {
+) : androidx.recyclerview.widget.RecyclerView.Adapter<ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.list_item, parent, false))
@@ -34,4 +34,4 @@ interface NavigationAdapterCallbacks {
     fun onItemClick(menuItem: String)
 }
 
-class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
+class ViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view)

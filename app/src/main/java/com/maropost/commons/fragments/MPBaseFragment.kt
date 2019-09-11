@@ -1,10 +1,10 @@
 package com.maropost.commons.fragments
 
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.View
 import com.maropost.commons.activities.MPBaseActivity
 
-open class MPBaseFragment : Fragment() {
+open class MPBaseFragment : androidx.fragment.app.Fragment() {
 
     /**
      * Replace current fragment with new one
@@ -18,7 +18,7 @@ open class MPBaseFragment : Fragment() {
      * Replace current fragment with new one along with Shared Element Transaction
      * addToBackStack - true/false keep it in back stack or not
      */
-    fun replaceFragment(fragment: Fragment,addToBackStack: Boolean,view: View) {
+    fun replaceFragment(fragment: androidx.fragment.app.Fragment, addToBackStack: Boolean, view: View) {
         (activity as MPBaseActivity).replaceFragment(fragment,addToBackStack,view)
     }
 

@@ -1,7 +1,7 @@
 package com.maropost.timetracker.viewmodel
 
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import android.text.TextUtils
 import com.maropost.timetracker.model.LoginModel
 import com.maropost.commons.utils.Utility
