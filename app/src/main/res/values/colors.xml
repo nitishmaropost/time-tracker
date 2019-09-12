@@ -50,6 +50,8 @@
     <color name="placeholder_bg">#dddddd</color>
     <color name="blue">#0000ff</color>
 
+    <color name="lightBlack">#0D101D</color>
+
 
     <color name="colorWhite">#FFFFFF</color>
 </resources>

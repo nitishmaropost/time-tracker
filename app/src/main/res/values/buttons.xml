@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="icons">
-        <item>@drawable/ic_car</item>
+        <item>@drawable/ic_local_taxi</item>
         <item>@drawable/ic_clock_o</item>
-        <item>@drawable/ic_desktop</item>
-        <item>@drawable/ic_search</item>
+        <item>@drawable/ic_keyboard</item>
+        <item>@drawable/ic_audit</item>
         <item>@drawable/ic_users</item>
     </array>
     <array name="colors">

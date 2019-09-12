@@ -25,7 +25,7 @@ class MainActivity : MPBaseActivity() {
     private fun launchInitialView() {
         //replaceFragment(SplashFragment(),false)
         //replaceFragment(MapFragment(),true)
-        replaceFragment(RamotionFragment(),true)
+        replaceFragment(RamotionFragment(),false)
     }
 
     /**

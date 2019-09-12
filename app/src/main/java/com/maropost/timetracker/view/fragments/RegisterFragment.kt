@@ -8,6 +8,7 @@ import com.maropost.commons.fragments.MPBaseFragment
 import com.maropost.timetracker.R
 import kotlinx.android.synthetic.main.register_fragment.*
 
+
 class RegisterFragment : MPBaseFragment() {
 
     private var mView : View?= null

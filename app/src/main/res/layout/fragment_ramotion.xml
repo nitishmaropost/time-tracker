@@ -1,18 +1,42 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:gravity="center"
-    tools:context="com.maropost.commons.fragments.RamotionFragment">
+    android:background="@color/lightBlack">
+
+
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:textSize="@dimen/_35sdp"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:textColor="@color/colorWhite"
+        android:text="@string/maropost"/>
+
 
     <com.ramotion.circlemenu.CircleMenuView
         android:id="@+id/circle_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+      android:layout_centerInParent="true"
         app:button_colors="@array/colors"
-        app:button_icons="@array/icons"/>
+        app:button_icons="@array/icons" />
 
-</LinearLayout>
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/imgHand"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_150sdp"
+        app:lottie_fileName="hand_click_gesture.json"
+        app:lottie_loop="true"
+        android:layout_marginTop="-150dp"
+        android:layout_below="@id/circle_menu"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        app:lottie_autoPlay="true" />
+
+</RelativeLayout>
