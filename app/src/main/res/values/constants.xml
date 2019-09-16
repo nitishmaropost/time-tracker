@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="simple_fragment_transition">simple_fragment_transition</string>
-    <string name="login_token">LOGIN_TOKEN</string>
-    <string name="user_role">USER_ROLE</string>
-    <string name="holiday">holiday</string>
-    <string name="absent">absent</string>
-    <string name="present">present</string>
-    <string name="application_key">AIzaSyCn2caN7B99-S1AUPZ4PI1-yDnDPtWIJk4</string>
+<string name="simple_fragment_transition">simple_fragment_transition</string>
+<string name="login_token">LOGIN_TOKEN</string>
+<string name="user_role">USER_ROLE</string>
+<string name="holiday">holiday</string>
+<string name="absent">absent</string>
+<string name="present">present</string>
+<string name="application_key">AIzaSyCn2caN7B99-S1AUPZ4PI1-yDnDPtWIJk4</string>
 
 </resources>
