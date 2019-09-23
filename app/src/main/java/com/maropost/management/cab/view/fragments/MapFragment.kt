@@ -1,14 +1,18 @@
 package com.maropost.management.cab.view.fragments
 
 import android.Manifest
+import android.content.Context
 import androidx.lifecycle.Observer
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.os.Build
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.GeofencingClient
 import com.google.android.gms.location.LocationServices
@@ -40,10 +44,13 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
     //private var mapCircle : Circle ? = null
     //private var yourLocationMarker : MarkerOptions ?= null
     private lateinit var points : ArrayList<LatLng>
+    private var latlngPoints : ArrayList<LatLng>?= null
     private var firstTimeFlag: Boolean = true
     private val mapsViewModel = MapsViewModel()
     private var originLatLng : LatLng ?= null
     private var destLatLng : LatLng ?= null
+
+
 
     enum class REQUEST_TYPE{
         PICKUP,
@@ -54,6 +61,7 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
         if(mView == null) {
             mView = inflater.inflate(R.layout.maps_fragment, container, false)
             points = ArrayList()
+            latlngPoints= ArrayList()
             mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
             mFusedLocationClient = LocationServices.getFusedLocationProviderClient(activity!!)
             geofencingClient = LocationServices.getGeofencingClient(activity!!)
@@ -90,13 +98,15 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
         mGoogleMap = googleMap
         mGoogleMap?.mapType = GoogleMap.MAP_TYPE_NORMAL
         checkForLocationPermission()
+        displayMultipleMarkers()
 
-        mGoogleMap?.setOnMapClickListener {
+        /*mGoogleMap?.setOnMapClickListener {
             mapsViewModel.endRippleAnimation()
-            MarkerAnimation.animateMarkerToGB(mCurrLocationMarker!!, it, LatLngInterpolator.Spherical())
+
+            //MarkerAnimation.animateMarkerToGB(mCurrLocationMarker!!, it, LatLngInterpolator.Spherical())
              //animateCamera(it!!)
            // displayRippleAnimation(it)
-        }
+        }*/
     }
 
     private fun observeLiveDataChanges(){
@@ -180,8 +190,8 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
      */
     private fun showMarker(latLng: LatLng) {
         if (mCurrLocationMarker == null)
-            mCurrLocationMarker = mGoogleMap?.addMarker(MarkerOptions().
-                icon(BitmapDescriptorFactory.defaultMarker()).position(latLng)
+            mCurrLocationMarker = mGoogleMap?.addMarker(MarkerOptions()
+                .icon(bitmapDescriptorFromVector(context!!, R.drawable.ic_place_black_24dp)).position(latLng)
                 .title("Driver")
                 .snippet("Manjeet Singh"))
 //        else
@@ -198,4 +208,26 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
             mapsViewModel.removeLocationUpdates(mFusedLocationClient!!)
     }
 
+    private fun displayMultipleMarkers(){
+        if (latlngPoints!!.isEmpty()){
+            latlngPoints?.add(LatLng(30.70815713765104,76.69360466301441))
+            latlngPoints?.add(LatLng(30.707398424959905,76.68989852070808))
+            latlngPoints?.add(LatLng(30.704590098331227,76.69539369642735))
+
+            for(i in 0 until latlngPoints!!.size){
+                mGoogleMap?.addMarker(MarkerOptions()
+                    .icon(BitmapDescriptorFactory.defaultMarker())
+                    .position(latlngPoints!![i]))
+            }
+        }
+    }
+
+    private fun bitmapDescriptorFromVector(context: Context, vectorResId: Int): BitmapDescriptor? {
+        return ContextCompat.getDrawable(context, vectorResId)?.run {
+            setBounds(0, 0, intrinsicWidth, intrinsicHeight)
+            val bitmap = Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888)
+            draw(Canvas(bitmap))
+            BitmapDescriptorFactory.fromBitmap(bitmap)
+        }
+    }
 }
