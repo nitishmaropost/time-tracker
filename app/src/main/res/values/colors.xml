@@ -51,7 +51,7 @@
     <color name="blue">#0000ff</color>
 
     <color name="lightBlack">#0D101D</color>
-
+    <color name="status_bar_color">#D7D7D7</color>
 
     <color name="colorWhite">#FFFFFF</color>
 </resources>

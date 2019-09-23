@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
+    <style name="MyStyle" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="windowActionBar">true</item>
         <item name="windowNoTitle">true</item>
        <!-- <item name="android:statusBarColor">@color/colorOrangeLight</item>-->
-        <item name="android:statusBarColor">@color/lightBlack</item>
+        <item name="android:statusBarColor">@color/status_bar_color</item>
     </style>
 </resources>

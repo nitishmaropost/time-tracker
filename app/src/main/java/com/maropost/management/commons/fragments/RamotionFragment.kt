@@ -1,12 +1,17 @@
 package com.maropost.management.commons.fragments
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import com.maropost.management.R
+import com.maropost.management.cab.view.fragments.MapFragment
+import com.maropost.management.commons.application.MyApplication
+import com.maropost.management.time.view.fragments.HomeFragment
+import com.maropost.management.time.view.fragments.LoginFragment
 import com.ramotion.circlemenu.CircleMenuView
 import kotlinx.android.synthetic.main.fragment_ramotion.*
 
@@ -51,7 +56,15 @@ class RamotionFragment : MPBaseFragment() {
             }
 
             override fun onButtonClickAnimationEnd(view: CircleMenuView, index: Int) {
-                Log.d("D", "onButtonClickAnimationEnd| index: $index")
+               /* Log.d("D", "onButtonClickAnimationEnd| index: $index")
+                if(TextUtils.isEmpty(MyApplication.getInstance().accessToken))
+                    replaceFragment(LoginFragment(),true)
+                else {*/
+                    when (index) {
+                        0 -> replaceFragment(MapFragment(), true)
+                        1 -> replaceFragment(HomeFragment(), true)
+                    }
+               // }
             }
 
         }

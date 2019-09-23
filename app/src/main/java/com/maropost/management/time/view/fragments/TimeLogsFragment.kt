@@ -1,5 +1,6 @@
 package com.maropost.management.time.view.fragments
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -191,6 +192,7 @@ class TimeLogsFragment : MPBaseFragment(), BottomSheetFragment.BottomSheetCallba
     /*
     * Initialize recycler view and set adapter
     */
+    @SuppressLint("WrongConstant")
     private fun initializeRecyclerView() {
         val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
             activity!!,

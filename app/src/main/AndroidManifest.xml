@@ -24,7 +24,7 @@
         tools:targetApi="m">
 
         <activity android:name="com.maropost.management.commons.activities.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/MyStyle"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

@@ -2,6 +2,7 @@ package com.maropost.management.commons.activities
 
 import android.os.Bundle
 import com.maropost.management.R
+import com.maropost.management.cab.view.fragments.MapFragment
 import com.maropost.management.commons.application.MyApplication
 import com.maropost.management.commons.fragments.RamotionFragment
 import com.maropost.management.commons.utils.SharedPreferenceHelper
@@ -23,8 +24,8 @@ class MainActivity : MPBaseActivity() {
      */
     private fun launchInitialView() {
         //replaceFragment(SplashFragment(),false)
-        //replaceFragment(MapFragment(),true)
-        replaceFragment(RamotionFragment(),false)
+        replaceFragment(MapFragment(),false)
+        //replaceFragment(RamotionFragment(),false)
     }
 
     /**
@@ -57,7 +58,7 @@ class MainActivity : MPBaseActivity() {
             getString(R.string.attendance)-> {
                 lockNavigationMenu(false)
                 replaceFragment(UsersFragment(), true)
-            }
+            }       
         }
     }
 

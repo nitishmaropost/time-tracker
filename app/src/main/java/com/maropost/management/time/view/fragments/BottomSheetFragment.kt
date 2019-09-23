@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_bottom_sheet_dialog.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class BottomSheetFragment() : BottomSheetDialogFragment() {
+class BottomSheetFragment : BottomSheetDialogFragment() {
 
     private var selectedDate = ""
     private lateinit var dateType : DATETYPE
@@ -34,7 +34,7 @@ class BottomSheetFragment() : BottomSheetDialogFragment() {
     override fun setupDialog(dialog: Dialog, style: Int) {
         super.setupDialog(dialog, style)
         val view = LayoutInflater.from(context).inflate(R.layout.fragment_bottom_sheet_dialog, null);
-        dialog?.setContentView(view)
+        dialog.setContentView(view)
         txtStartDate = view.findViewById(R.id.txtStartDate)
         txtEndDate = view.findViewById(R.id.txtEndDate)
         calendarView = view.findViewById(R.id.calendarView)

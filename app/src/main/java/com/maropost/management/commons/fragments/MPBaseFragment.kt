@@ -2,6 +2,7 @@ package com.maropost.management.commons.fragments
 
 import android.view.View
 import com.maropost.management.commons.activities.MPBaseActivity
+import kotlinx.android.synthetic.main.app_bar_main.*
 
 open class MPBaseFragment : androidx.fragment.app.Fragment() {
 
@@ -23,6 +24,10 @@ open class MPBaseFragment : androidx.fragment.app.Fragment() {
 
     fun setToolbarIconVisibility(allow: Boolean){
         (activity as MPBaseActivity).setToolbarIconVisibility(allow)
+    }
+
+    fun getToolbar(): androidx.appcompat.widget.Toolbar? {
+        return (activity as MPBaseActivity).getToolbar()
     }
 
     /**

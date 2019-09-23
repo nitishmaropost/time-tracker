@@ -24,6 +24,7 @@ import com.maropost.management.R
 import com.google.android.gms.maps.model.MarkerOptions
 import com.maropost.management.cab.utils.LatLngInterpolator
 import com.maropost.management.cab.utils.MarkerAnimation
+import kotlinx.android.synthetic.main.maps_fragment.*
 
 
 class MapFragment : MPBaseFragment(), OnMapReadyCallback {
@@ -66,6 +67,8 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
         setTitle("")
         lockNavigationDrawer(false)
         showToolbar(true)
+
+        getToolbar()?.setBackgroundColor(ContextCompat.getColor(activity!!, R.color.transparent))
         removeToolbarIconLayout()
         observeLiveDataChanges()
         initialiseListeners()
@@ -105,6 +108,8 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
                 displayRippleAnimation(originLatLng!!)
                 animateCamera(originLatLng!!)
                 removeLocationUpdates()
+                //mGoogleMap?.isMyLocationEnabled = true
+                mGoogleMap?.uiSettings?.isMyLocationButtonEnabled = false
             }
         })
 
@@ -123,8 +128,10 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
           }
           btnRideNow?.setOnClickListener{
               btnRideNow?.visibility = View.INVISIBLE
-              mapsViewModel.getDirectionsUrl(originLatLng, destLatLng)
+              mapsViewModel.getDirectionsUrl(originLatLng, destLatLn0g)
           }*/
+
+        img_loc_button.setOnClickListener{ animateCamera(originLatLng!!)}
 
     }
 

@@ -29,14 +29,24 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/imgHand"
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="@dimen/_150sdp"
+        android:layout_width="@dimen/_130sdp"
+        android:layout_height="@dimen/_130sdp"
         app:lottie_fileName="hand_click_gesture.json"
         app:lottie_loop="true"
-        android:layout_marginTop="-150dp"
+        android:layout_marginTop="-120dp"
         android:layout_below="@id/circle_menu"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
         app:lottie_autoPlay="true" />
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgHand"
+        android:text="Select a suitable option"
+        android:textSize="@dimen/_13ssp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/colorWhite"/>
 
 </RelativeLayout>

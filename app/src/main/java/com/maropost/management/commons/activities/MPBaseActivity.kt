@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.View
 import android.widget.Button
+import android.widget.Toolbar
 import com.maropost.management.R
 import com.maropost.management.commons.application.MyApplication
 import com.maropost.management.time.pojomodels.NavigationItem
@@ -203,6 +204,10 @@ open class MPBaseActivity : AppCompatActivity(), NavigationAdapterCallbacks {
             toolbarFrame.visibility = View.VISIBLE
         else
             toolbarFrame.visibility = View.GONE
+    }
+
+    fun getToolbar(): androidx.appcompat.widget.Toolbar? {
+        return toolbar
     }
 
     /**

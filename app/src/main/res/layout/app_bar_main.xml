@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@android:color/white"
               android:orientation="vertical">
+
+    <!--Container to inflate fragments-->
+    <include layout="@layout/content_main" />
+
 
     <FrameLayout
             android:id="@+id/toolbarFrame"
@@ -47,6 +51,5 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </FrameLayout>
-    <!--Container to inflate fragments-->
-    <include layout="@layout/content_main" />
-</LinearLayout>
+
+</FrameLayout>
