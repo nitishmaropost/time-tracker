@@ -2,17 +2,17 @@ package com.maropost.management.cab.view.fragments
 
 import android.Manifest
 import android.content.Context
-import androidx.lifecycle.Observer
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.os.Build
 import android.os.Bundle
-import androidx.core.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.view.animation.TranslateAnimation
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.GeofencingClient
 import com.google.android.gms.location.LocationServices
@@ -22,12 +22,10 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.kotlinpermissions.KotlinPermissions
-import com.maropost.management.commons.fragments.MPBaseFragment
-import com.maropost.management.cab.viewmodel.MapsViewModel
 import com.maropost.management.R
-import com.google.android.gms.maps.model.MarkerOptions
-import com.maropost.management.cab.utils.LatLngInterpolator
-import com.maropost.management.cab.utils.MarkerAnimation
+import com.maropost.management.cab.viewmodel.MapsViewModel
+import com.maropost.management.commons.fragments.MPBaseFragment
+import com.maropost.management.commons.utils.Utility
 import kotlinx.android.synthetic.main.maps_fragment.*
 
 
@@ -49,8 +47,7 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
     private val mapsViewModel = MapsViewModel()
     private var originLatLng : LatLng ?= null
     private var destLatLng : LatLng ?= null
-
-
+    private var isGesture: Boolean = false
 
     enum class REQUEST_TYPE{
         PICKUP,
@@ -75,7 +72,7 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
         setTitle("")
         lockNavigationDrawer(false)
         showToolbar(true)
-
+        // Make toolbar transparent to allow map below to be displayed in full screen
         getToolbar()?.setBackgroundColor(ContextCompat.getColor(activity!!, R.color.transparent))
         removeToolbarIconLayout()
         observeLiveDataChanges()
@@ -107,8 +104,12 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
              //animateCamera(it!!)
            // displayRippleAnimation(it)
         }*/
+
     }
 
+    /**
+     * Observe live data updated from view model
+     */
     private fun observeLiveDataChanges(){
         mapsViewModel.currentLocation.observe(this, Observer { location ->
             if (firstTimeFlag && mGoogleMap != null) {
@@ -120,6 +121,29 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
                 removeLocationUpdates()
                 //mGoogleMap?.isMyLocationEnabled = true
                 mGoogleMap?.uiSettings?.isMyLocationButtonEnabled = false
+                //showBottomView()
+                mGoogleMap?.setOnCameraMoveStartedListener {
+                    when (it) {
+                        GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE -> {
+                            isGesture = true
+                            Utility.getInstance().printLog("Map Gesture","The user gestured on the map")
+                            hideBottomView()
+                        }
+                        GoogleMap.OnCameraMoveStartedListener.REASON_API_ANIMATION -> {
+                            isGesture = false
+                            Utility.getInstance().printLog("Map Gesture","The user tapped something on the map")
+                        }
+                        GoogleMap.OnCameraMoveStartedListener.REASON_DEVELOPER_ANIMATION -> {
+                            isGesture = false
+                            Utility.getInstance().printLog("Map Gesture","The app moved the camera")
+                        }
+                    }
+                }
+                mGoogleMap?.setOnCameraIdleListener(GoogleMap.OnCameraIdleListener {
+                    Utility.getInstance().printLog("Map Gesture","==camera idle==")
+                    if(isGesture)
+                        showBottomView()
+                })
             }
         })
 
@@ -129,22 +153,18 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
          })*/
     }
 
+    /**
+     * Setup listeners
+     */
     private fun initialiseListeners() {
-        /*  lnrPickup.setOnClickListener{
-              openSearchFragment(REQUEST_TYPE.PICKUP)
-          }
-          lnrDrop.setOnClickListener{
-              openSearchFragment(REQUEST_TYPE.DROP)
-          }
-          btnRideNow?.setOnClickListener{
-              btnRideNow?.visibility = View.INVISIBLE
-              mapsViewModel.getDirectionsUrl(originLatLng, destLatLn0g)
-          }*/
-
+        bottom_sheet.setOnTouchListener { v, event -> true }
+        btnSubmit.setOnClickListener{Utility.getInstance().printLog("Submit","Submit")}
         img_loc_button.setOnClickListener{ animateCamera(originLatLng!!)}
-
     }
 
+    /**
+     * Check location permission granted
+     */
     private fun checkForLocationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(activity!!,
@@ -173,7 +193,9 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
             mapsViewModel.requestLocationUpdates(activity!!,mFusedLocationClient,mGoogleMap!!,REQUEST_CHECK_SETTINGS)
     }
 
-
+    /**
+     * Move camera to specific lat lng
+     */
     private fun animateCamera(latLng: LatLng) {
         if(mGoogleMap != null) {
             //val latLng = LatLng(location.latitude, location.longitude)
@@ -198,15 +220,22 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
 //            MarkerAnimation.animateMarkerToGB(mCurrLocationMarker!!, latLng, LatLngInterpolator.Spherical())
     }
 
+    /**
+     * Show circle animation around driver position
+     */
     private fun displayRippleAnimation(latLng: LatLng){
         mapsViewModel.displayRippleAnimation(mGoogleMap!!, latLng, activity!!)
 
     }
 
+    /**
+     * Stop sending location updates
+     */
     private fun removeLocationUpdates() {
         if (mFusedLocationClient != null)
             mapsViewModel.removeLocationUpdates(mFusedLocationClient!!)
     }
+
 
     private fun displayMultipleMarkers(){
         if (latlngPoints!!.isEmpty()){
@@ -229,5 +258,42 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
             draw(Canvas(bitmap))
             BitmapDescriptorFactory.fromBitmap(bitmap)
         }
+    }
+
+    /**
+     * When swipe gesture not enabled, show bottom sheet view
+     */
+    private fun showBottomView(){
+        img_loc_button.visibility = View.VISIBLE
+        slideUp(bottom_sheet)
+    }
+
+    /**
+     * When swipe gesture enabled, hide bottom sheet view
+     */
+    private fun hideBottomView(){
+        img_loc_button.visibility = View.INVISIBLE
+        slideDown(bottom_sheet)
+    }
+
+    /**
+     * Show the bottom sheet when swipe not in progress
+     */
+    private fun slideUp( view: View){
+        view.visibility = View.VISIBLE
+        val animate =  TranslateAnimation(0f,0f,view.height.toFloat(),0f)
+        animate.duration = 100;
+        animate.fillAfter = true;
+        view.startAnimation(animate)
+    }
+
+    /**
+     * Hide the bottom sheet when swipe in progress
+     */
+    private fun slideDown( view: View){
+        val animate =  TranslateAnimation(0f, 0f, 0f, view.height.toFloat());
+        animate.duration = 100;
+        animate.fillAfter = true;
+        view.startAnimation(animate);
     }
 }
