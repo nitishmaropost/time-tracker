@@ -97,13 +97,14 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
         checkForLocationPermission()
         displayMultipleMarkers()
 
-        /*mGoogleMap?.setOnMapClickListener {
-            mapsViewModel.endRippleAnimation()
+        mGoogleMap?.setOnMapClickListener {
+           // mapsViewModel.endRippleAnimation()
 
             //MarkerAnimation.animateMarkerToGB(mCurrLocationMarker!!, it, LatLngInterpolator.Spherical())
              //animateCamera(it!!)
            // displayRippleAnimation(it)
-        }*/
+            fab_reveal_layout.revealMainView()
+        }
 
     }
 
@@ -265,7 +266,7 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
      */
     private fun showBottomView(){
         img_loc_button.visibility = View.VISIBLE
-        slideUp(bottom_sheet)
+        slideUp(fab_reveal_layout)
     }
 
     /**
@@ -273,7 +274,7 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
      */
     private fun hideBottomView(){
         img_loc_button.visibility = View.INVISIBLE
-        slideDown(bottom_sheet)
+        slideDown(fab_reveal_layout)
     }
 
     /**
@@ -282,8 +283,8 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
     private fun slideUp( view: View){
         view.visibility = View.VISIBLE
         val animate =  TranslateAnimation(0f,0f,view.height.toFloat(),0f)
-        animate.duration = 100;
-        animate.fillAfter = true;
+        animate.duration = 100
+        animate.fillAfter = true
         view.startAnimation(animate)
     }
 
@@ -292,8 +293,8 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
      */
     private fun slideDown( view: View){
         val animate =  TranslateAnimation(0f, 0f, 0f, view.height.toFloat());
-        animate.duration = 100;
-        animate.fillAfter = true;
-        view.startAnimation(animate);
+        animate.duration = 100
+        animate.fillAfter = true
+        view.startAnimation(animate)
     }
 }
