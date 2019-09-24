@@ -159,7 +159,7 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
      */
     private fun initialiseListeners() {
         bottom_sheet.setOnTouchListener { v, event -> true }
-        btnSubmit.setOnClickListener{Utility.getInstance().printLog("Submit","Submit")}
+        //btnSubmit.setOnClickListener{Utility.getInstance().printLog("Submit","Submit")}
         img_loc_button.setOnClickListener{ animateCamera(originLatLng!!)}
     }
 
