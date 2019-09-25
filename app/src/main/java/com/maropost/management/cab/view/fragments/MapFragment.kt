@@ -98,11 +98,11 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
         displayMultipleMarkers()
 
         mGoogleMap?.setOnMapClickListener {
-           // mapsViewModel.endRippleAnimation()
+            // mapsViewModel.endRippleAnimation()
 
             //MarkerAnimation.animateMarkerToGB(mCurrLocationMarker!!, it, LatLngInterpolator.Spherical())
-             //animateCamera(it!!)
-           // displayRippleAnimation(it)
+            //animateCamera(it!!)
+            // displayRippleAnimation(it)
             fab_reveal_layout.revealMainView()
         }
 
@@ -159,8 +159,10 @@ class MapFragment : MPBaseFragment(), OnMapReadyCallback {
      */
     private fun initialiseListeners() {
         bottom_sheet.setOnTouchListener { v, event -> true }
-        //btnSubmit.setOnClickListener{Utility.getInstance().printLog("Submit","Submit")}
-        img_loc_button.setOnClickListener{ animateCamera(originLatLng!!)}
+        img_loc_button.setOnClickListener{
+            if(originLatLng != null)
+                animateCamera(originLatLng!!)
+        }
     }
 
     /**
